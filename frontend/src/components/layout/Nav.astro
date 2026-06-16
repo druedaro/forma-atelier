@@ -1,0 +1,65 @@
+---
+// Nav.astro
+---
+
+<header id="main-nav" class="fixed top-0 left-0 w-full z-[100] transition-all duration-400 ease-smooth">
+  <div class="max-w-[1920px] mx-auto px-gutter py-6 flex items-center justify-between">
+    <!-- Desktop Links (Left) -->
+    <nav class="hidden md:flex items-center gap-8 font-body text-sm tracking-wider">
+      <a href="/collections" class="hover:text-stone transition-colors duration-200" data-cursor="expand">Colecciones</a>
+      <a href="/lookbook" class="hover:text-stone transition-colors duration-200" data-cursor="expand">Lookbook</a>
+      <a href="/atelier" class="hover:text-stone transition-colors duration-200" data-cursor="expand">Atelier</a>
+    </nav>
+
+    <!-- Mobile Menu Button (Left) -->
+    <button class="md:hidden flex flex-col gap-[4px] p-2" aria-label="Open Menu">
+      <span class="block w-5 h-[1px] bg-noir"></span>
+      <span class="block w-5 h-[1px] bg-noir"></span>
+    </button>
+
+    <!-- Logo (Center) -->
+    <div class="absolute left-1/2 -translate-x-1/2">
+      <a href="/" class="font-body text-[13px] tracking-widest uppercase font-medium" data-cursor="expand">
+        Forma
+      </a>
+    </div>
+
+    <!-- Actions (Right) -->
+    <div class="flex items-center gap-6">
+      <button aria-label="Wishlist" class="hover:text-stone transition-colors duration-200" data-cursor="expand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </button>
+      <button aria-label="Account" class="hover:text-stone transition-colors duration-200" data-cursor="expand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  #main-nav.scrolled {
+    background-color: rgba(245, 240, 234, 0.85); /* var(--color-ivory) with opacity */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--color-linen);
+  }
+</style>
+
+<script>
+  function handleScroll() {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 50) {
+      nav?.classList.add('scrolled');
+    } else {
+      nav?.classList.remove('scrolled');
+    }
+  }
+
+  // Use passive listener for better scroll performance
+  window.addEventListener('scroll', handleScroll, { passive: true });
+</script>

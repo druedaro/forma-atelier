@@ -1,0 +1,44 @@
+---
+import { Divider } from '../ui/Divider';
+---
+
+<footer class="bg-ivory pt-32 pb-16 px-gutter text-stone font-body">
+  <div class="max-w-[1920px] mx-auto">
+    <Divider className="mb-16" />
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-24">
+      <div class="md:col-span-2">
+        <h3 class="font-display text-2xl text-noir mb-6 uppercase tracking-widest font-light">Forma</h3>
+        <p class="max-w-sm text-sm leading-relaxed">
+          Atelier de moda de lujo fundado en Barcelona. La moda como arquitectura del cuerpo: cada prenda, una construcción. Cada colección, un poema.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-xs uppercase tracking-widest text-noir font-medium mb-6">Explorar</h4>
+        <ul class="flex flex-col gap-4 text-sm">
+          <li><a href="/collections" class="hover:text-noir transition-colors duration-200">Colecciones</a></li>
+          <li><a href="/lookbook" class="hover:text-noir transition-colors duration-200">Lookbook</a></li>
+          <li><a href="/atelier" class="hover:text-noir transition-colors duration-200">El Atelier</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs uppercase tracking-widest text-noir font-medium mb-6">Asistencia</h4>
+        <ul class="flex flex-col gap-4 text-sm">
+          <li><a href="/contact" class="hover:text-noir transition-colors duration-200">Contacto</a></li>
+          <li><a href="/shipping" class="hover:text-noir transition-colors duration-200">Envíos y devoluciones</a></li>
+          <li><a href="/care" class="hover:text-noir transition-colors duration-200">Cuidado de prendas</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center justify-between text-xs tracking-wider border-t-[0.5px] border-linen pt-8">
+      <p>&copy; {new Date().getFullYear()} Forma Atelier. Todos los derechos reservados.</p>
+      <div class="flex gap-6 mt-4 md:mt-0">
+        <a href="/privacy" class="hover:text-noir transition-colors">Privacidad</a>
+        <a href="/terms" class="hover:text-noir transition-colors">Términos</a>
+      </div>
+    </div>
+  </div>
+</footer>
