@@ -6,7 +6,6 @@ export default function CursorFollower() {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    // Only activate on desktop
     if (window.innerWidth <= 1024) return;
     setIsActive(true);
 
@@ -24,7 +23,6 @@ export default function CursorFollower() {
       mouseX = e.clientX;
       mouseY = e.clientY;
 
-      // Find hovered elements that have data-cursor attributes
       const target = e.target as HTMLElement;
       const expandEl = target.closest('[data-cursor="expand"]');
       const textEl = target.closest('[data-cursor="text"]') as HTMLElement | null;
@@ -43,7 +41,6 @@ export default function CursorFollower() {
     };
 
     const render = () => {
-      // Lerp
       cursorX += (mouseX - cursorX) * 0.12;
       cursorY += (mouseY - cursorY) * 0.12;
 
@@ -54,7 +51,7 @@ export default function CursorFollower() {
           cursor.style.width = 'var(--cursor-size-hover, 48px)';
           cursor.style.height = 'var(--cursor-size-hover, 48px)';
           cursor.style.mixBlendMode = 'difference';
-          cursor.style.backgroundColor = 'var(--color-ivory)'; // so difference with ivory makes it black/white inversion
+          cursor.style.backgroundColor = 'var(--color-ivory)';
         } else {
           cursor.style.width = 'var(--cursor-size-default, 12px)';
           cursor.style.height = 'var(--cursor-size-default, 12px)';
@@ -93,7 +90,7 @@ export default function CursorFollower() {
         height: 'var(--cursor-size-default, 12px)',
         backgroundColor: 'var(--color-noir)',
         transform: 'translate(-50%, -50%)',
-        marginLeft: '-6px', // Offset by half the default size
+        marginLeft: '-6px',
         marginTop: '-6px',
       }}
     >
