@@ -2,7 +2,7 @@
 
 <p align="center">
   <strong>FORMA</strong><br/>
-  <em>Atelier de Barcelona · Est. 2025</em>
+  <em>Atelier de Barcelona · Est. 2026</em>
 </p>
 
 <p align="center">

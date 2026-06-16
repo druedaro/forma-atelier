@@ -1,0 +1,10 @@
+/* Utilities */
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-noir);
+  z-index: var(--z-overlay);
+  transform: scaleY(0);
+  transform-origin: top;
+  pointer-events: none;
+}
