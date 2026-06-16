@@ -6,6 +6,10 @@ interface Props {
 
 const { title, description = 'Forma Atelier - Barcelona' } = Astro.props;
 import '../styles/global.css';
+
+import Nav from '../components/layout/Nav.astro';
+import Footer from '../components/layout/Footer.astro';
+import CursorFollower from '../components/layout/CursorFollower';
 ---
 
 <!doctype html>
@@ -24,9 +28,9 @@ import '../styles/global.css';
   </head>
   <body>
     <div class="page-overlay"></div>
-    <!-- <CursorFollower client:load /> -->
-    <!-- <Nav /> -->
+    <CursorFollower client:load />
+    <Nav />
     <slot />
-    <!-- <Footer /> -->
+    <Footer />
   </body>
 </html>
