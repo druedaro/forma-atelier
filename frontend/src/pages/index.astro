@@ -1,8 +1,30 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CollectionHero } from '../components/lookbook/CollectionHero';
+import { LookbookScroll } from '../components/lookbook/LookbookScroll';
+import { LookCard } from '../components/lookbook/LookCard';
+import { getCollections } from '../lib/api/collections';
+import { mockCollections, mockLooks } from '../lib/mock/data';
+
+let collections = await getCollections();
+if (collections.length === 0) {
+  collections = mockCollections;
+}
+
+const mainCollection = collections[0];
+const collectionLooks = mainCollection?.looks?.map(id => mockLooks.find(l => l.id === id) || mockLooks[0]) || mockLooks;
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title={`FORMA ATELIER | ${mainCollection?.name || 'Lookbook'}`}>
+  <main>
+    <CollectionHero collection={mainCollection as any} client:load />
+    
+    <LookbookScroll client:load>
+      {collectionLooks.map((look) => (
+        <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 md:p-16">
+          <LookCard look={look as any} client:visible />
+        </div>
+      ))}
+    </LookbookScroll>
+  </main>
+</BaseLayout>
