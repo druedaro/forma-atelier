@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Divider } from '../components/ui/Divider';
+---
+
+<BaseLayout title="FORMA ATELIER | Cuidado de Prendas">
+  <main class="pt-32 pb-24 px-8 md:px-16 min-h-screen bg-ivory">
+    <div class="max-w-[800px] mx-auto">
+      <header class="mb-16">
+        <h1 class="font-display text-4xl md:text-5xl text-noir uppercase font-light tracking-widest mb-6">
+          Cuidado de Prendas
+        </h1>
+        <p class="font-body text-sm text-stone leading-relaxed">
+          Guía de preservación para los materiales naturales de Forma Atelier.
+        </p>
+      </header>
+
+      <Divider className="mb-16" />
+
+      <article class="prose prose-stone max-w-none font-body text-sm text-noir leading-loose space-y-12">
+        <section>
+          <h2 class="font-display text-2xl uppercase tracking-widest font-light mb-6">Seda Natural</h2>
+          <p>
+            La seda es una fibra proteica natural de gran resistencia pero muy sensible a la fricción húmeda. Recomendamos exclusivamente limpieza en seco profesional. Evite rociar perfume directamente sobre la prenda y planchar siempre a baja temperatura y del revés.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl uppercase tracking-widest font-light mb-6">Lana y Cashmere</h2>
+          <p>
+            Nuestros abrigos y prendas de punto estructurado requieren descanso entre puestas. Cuelgue los abrigos en perchas anchas de madera para mantener la arquitectura de los hombros. Limpieza en seco al final de la temporada antes de guardar.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl uppercase tracking-widest font-light mb-6">Lino Orgánico</h2>
+          <p>
+            El lino desarrolla su carácter con el uso. Puede lavarse a mano en agua fría con detergente suave, secarse extendido a la sombra y plancharse ligeramente húmedo para recuperar su nitidez.
+          </p>
+        </section>
+      </article>
+    </div>
+  </main>
+</BaseLayout>
