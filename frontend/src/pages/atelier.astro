@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Divider } from '../components/ui/Divider';
+---
+
+<BaseLayout title="FORMA ATELIER | El Atelier">
+  <main class="pt-32 pb-24 px-8 md:px-16 min-h-screen bg-ivory">
+    <div class="max-w-[1200px] mx-auto">
+      <header class="mb-24 text-center">
+        <h1 class="font-display text-5xl md:text-7xl text-noir uppercase font-light tracking-widest mb-6">
+          El Atelier
+        </h1>
+        <p class="font-body text-sm text-stone max-w-2xl mx-auto leading-relaxed">
+          Ubicado en el corazón de Barcelona, Forma es más que una firma de moda; es un estudio arquitectónico del cuerpo humano.
+        </p>
+      </header>
+
+      <div class="w-full h-[60vh] md:h-[80vh] overflow-hidden mb-24 bg-smoke">
+        <img 
+          src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=2070&auto=format&fit=crop" 
+          alt="Interior del taller de Forma Atelier"
+          class="w-full h-full object-cover grayscale opacity-80"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 mb-24">
+        <div>
+          <h2 class="font-display text-3xl uppercase tracking-widest text-noir font-light mb-8">Nuestra Filosofía</h2>
+          <Divider className="mb-8" />
+          <p class="font-body text-sm text-noir leading-loose mb-6">
+            Creemos que la prenda es una extensión de la estructura corporal. Cada pieza que diseñamos comienza no como un patrón bidimensional, sino como un concepto espacial. Tratamos la seda, el lino y la lana como si fueran hormigón, cristal o acero: materiales puros que requieren respeto y precisión.
+          </p>
+          <p class="font-body text-sm text-noir leading-loose">
+            Nuestro proceso es lento e intencional. Nos alejamos de las tendencias efímeras para buscar una atemporalidad basada en la proporción, el equilibrio y la elegancia austera.
+          </p>
+        </div>
+        <div class="mt-8 md:mt-24">
+          <h2 class="font-display text-3xl uppercase tracking-widest text-noir font-light mb-8">Artesanía Textil</h2>
+          <Divider className="mb-8" />
+          <p class="font-body text-sm text-noir leading-loose mb-6">
+            Todas nuestras prendas son ensambladas a mano en Barcelona. Trabajamos en estrecha colaboración con molinos europeos tradicionales que comparten nuestra obsesión por la calidad y la trazabilidad del material.
+          </p>
+          <p class="font-body text-sm text-noir leading-loose">
+            Una prenda de Forma Atelier no está hecha para durar una temporada, sino para heredar su estructura a la siguiente generación.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
