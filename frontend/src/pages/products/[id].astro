@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ProductDetail } from '../../components/product/ProductDetail';
+import { getProducts } from '../../lib/api/products';
+import { mockProducts } from '../../lib/mock/data';
+
+export async function getStaticPaths() {
+  let products = await getProducts();
+  if (products.length === 0) {
+    products = mockProducts;
+  }
+  
+  return products.map((product) => ({
+    params: { id: product.slug }, // Using slug as the URL parameter
+    props: { product },
+  }));
+}
+
+const { id } = Astro.params;
+const { product } = Astro.props;
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+---
+
+<BaseLayout title={`FORMA ATELIER | ${product.name}`}>
+  <main class="min-h-screen pt-24 bg-ivory">
+    <ProductDetail product={product as any} client:load />
+  </main>
+</BaseLayout>
