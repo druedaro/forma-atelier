@@ -8,7 +8,6 @@ export async function getProducts(): Promise<Product[]> {
     });
     return records as unknown as Product[];
   } catch (error) {
-    console.error('Error fetching products:', error);
     return [];
   }
 }
@@ -18,7 +17,6 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     const record = await pb.collection('products').getFirstListItem(`slug="${slug}"`);
     return record as unknown as Product;
   } catch (error) {
-    console.error(`Error fetching product ${slug}:`, error);
     return null;
   }
 }
