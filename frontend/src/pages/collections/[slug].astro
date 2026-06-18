@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CollectionHero } from '../../components/lookbook/CollectionHero';
+import { LookbookScroll } from '../../components/lookbook/LookbookScroll';
+import { LookCard } from '../../components/lookbook/LookCard';
+import { getCollections } from '../../lib/api/collections';
+import { mockCollections, mockLooks } from '../../lib/mock/data';
+
+export async function getStaticPaths() {
+  let collections = await getCollections();
+  if (collections.length === 0) {
+    collections = mockCollections;
+  }
+  
+  return collections.map((collection) => ({
+    params: { slug: collection.slug },
+    props: { collection },
+  }));
+}
+
+const { slug } = Astro.params;
+const { collection } = Astro.props;
+
+// Mock data integration for looks. In a real PB setup with expands, we'd use collection.expand?.looks
+const collectionLooks = collection?.looks?.map(id => mockLooks.find(l => l.id === id) || mockLooks[0]) || [];
+
+if (!collection) {
+  return Astro.redirect('/404');
+}
+---
+
+<BaseLayout title={`FORMA ATELIER | ${collection.name}`}>
+  <main>
+    <CollectionHero collection={collection as any} client:load />
+    
+    <LookbookScroll client:load>
+      {collectionLooks.map((look) => (
+        <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 md:p-16">
+          <LookCard look={look as any} client:visible />
+        </div>
+      ))}
+    </LookbookScroll>
+  </main>
+</BaseLayout>
