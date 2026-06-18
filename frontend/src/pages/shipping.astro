@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Divider } from '../components/ui/Divider';
+---
+
+<BaseLayout title="FORMA ATELIER | Envíos y Devoluciones">
+  <main class="pt-32 pb-24 px-8 md:px-16 min-h-screen bg-ivory">
+    <div class="max-w-[800px] mx-auto">
+      <header class="mb-16">
+        <h1 class="font-display text-4xl md:text-5xl text-noir uppercase font-light tracking-widest mb-6">
+          Envíos y Devoluciones
+        </h1>
+      </header>
+
+      <Divider className="mb-16" />
+
+      <article class="prose prose-stone max-w-none font-body text-sm text-noir leading-loose space-y-12">
+        <section>
+          <h2 class="font-display text-2xl uppercase tracking-widest font-light mb-6">Política de Envíos</h2>
+          <p>
+            En Forma Atelier entendemos la importancia de que sus prendas lleguen en perfectas condiciones. Todos nuestros envíos se realizan a través de servicios de mensajería premium (DHL Express o UPS) con un embalaje estructural que protege la integridad de la pieza.
+          </p>
+          <ul class="list-disc pl-5 mt-4 space-y-2">
+            <li><strong>España (Península y Baleares):</strong> 1-2 días laborables (Envío gratuito).</li>
+            <li><strong>Europa (UE):</strong> 2-4 días laborables (25€).</li>
+            <li><strong>Internacional:</strong> 3-7 días laborables (45€).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl uppercase tracking-widest font-light mb-6">Devoluciones y Cambios</h2>
+          <p>
+            Aceptamos devoluciones dentro de los 14 días posteriores a la recepción de su pedido. La prenda debe encontrarse en su estado original, sin usar y con todas las etiquetas y precintos arquitectónicos intactos.
+          </p>
+          <p class="mt-4">
+            Para iniciar una devolución, por favor acceda a su cuenta o contacte con nuestro equipo de atención al cliente a través del formulario de contacto.
+          </p>
+        </section>
+      </article>
+    </div>
+  </main>
+</BaseLayout>
