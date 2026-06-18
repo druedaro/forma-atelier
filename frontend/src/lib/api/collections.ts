@@ -8,7 +8,7 @@ export async function getCollections(): Promise<Collection[]> {
     });
     return records as unknown as Collection[];
   } catch (error) {
-    console.error('Error fetching collections:', error);
+    // Silently fallback to mock data if pocketbase is not running
     return [];
   }
 }
@@ -20,7 +20,6 @@ export async function getCollectionBySlug(slug: string): Promise<Collection | nu
     });
     return record as unknown as Collection;
   } catch (error) {
-    console.error(`Error fetching collection ${slug}:`, error);
     return null;
   }
 }

@@ -8,7 +8,6 @@ export async function getUserWishlist(userId: string): Promise<Wishlist | null> 
     });
     return record as unknown as Wishlist;
   } catch (error) {
-    console.error(`Error fetching wishlist for user ${userId}:`, error);
     return null;
   }
 }
@@ -20,7 +19,6 @@ export async function updateWishlist(wishlistId: string, products: string[]): Pr
     }, { expand: 'products' });
     return record as unknown as Wishlist;
   } catch (error) {
-    console.error(`Error updating wishlist ${wishlistId}:`, error);
     return null;
   }
 }
@@ -33,7 +31,6 @@ export async function createWishlist(userId: string, products: string[]): Promis
     }, { expand: 'products' });
     return record as unknown as Wishlist;
   } catch (error) {
-    console.error(`Error creating wishlist for user ${userId}:`, error);
     return null;
   }
 }
