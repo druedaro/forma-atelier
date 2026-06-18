@@ -1,5 +1,4 @@
 :root {
-  /* Color */
   --color-noir: #0A0A0A;
   --color-ivory: #F5F0EA;
   --color-gold: #C9A96E;
@@ -8,12 +7,10 @@
   --color-linen: #E8DDD0;
   --color-smoke: #F0EBE3;
 
-  /* Tipografía — familias */
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-body: 'Jost', 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Tipografía — tamaños */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -24,19 +21,16 @@
   --text-4xl: 3.052rem;
   --text-5xl: clamp(3rem, 8vw, 6rem);
 
-  /* Tipografía — pesos */
   --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;
 
-  /* Tracking */
   --tracking-tight: -0.02em;
   --tracking-normal: 0em;
   --tracking-wide: 0.08em;
   --tracking-wider: 0.12em;
   --tracking-widest: 0.2em;
 
-  /* Espaciado */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
@@ -45,7 +39,6 @@
   --spacing-2xl: 7.5rem;
   --spacing-gutter: clamp(1.5rem, 5vw, 4rem);
 
-  /* Bordes */
   --radius-sm: 2px;
   --radius-md: 6px;
   --radius-lg: 12px;
@@ -53,17 +46,14 @@
   --border-thin: 0.5px solid var(--color-linen);
   --border-gold: 0.5px solid var(--color-gold);
 
-  /* Transiciones */
   --transition-fast: 0.2s ease;
   --transition-base: 0.4s ease;
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Cursor */
   --cursor-size-default: 12px;
   --cursor-size-hover: 48px;
 
-  /* Z-index */
   --z-base: 0;
   --z-card: 10;
   --z-overlay: 50;
