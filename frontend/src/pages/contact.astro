@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Divider } from '../components/ui/Divider';
+import { Button } from '../components/ui/Button';
+---
+
+<BaseLayout title="FORMA ATELIER | Contacto">
+  <main class="pt-32 pb-24 px-8 md:px-16 min-h-screen bg-ivory">
+    <div class="max-w-[800px] mx-auto">
+      <header class="mb-16 text-center">
+        <h1 class="font-display text-4xl md:text-5xl text-noir uppercase font-light tracking-widest mb-6">
+          Contacto
+        </h1>
+        <p class="font-body text-sm text-stone leading-relaxed">
+          Para consultas sobre nuestras colecciones, citas en el atelier o asistencia con tu pedido.
+        </p>
+      </header>
+
+      <Divider className="mb-16" />
+
+      <form class="flex flex-col gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="flex flex-col gap-2">
+            <label class="font-body text-[10px] uppercase tracking-widest text-stone">Nombre completo</label>
+            <input 
+              type="text" 
+              required
+              class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="font-body text-[10px] uppercase tracking-widest text-stone">Email</label>
+            <input 
+              type="email" 
+              required
+              class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
+            />
+          </div>
+        </div>
+        
+        <div class="flex flex-col gap-2">
+          <label class="font-body text-[10px] uppercase tracking-widest text-stone">Asunto</label>
+          <input 
+            type="text" 
+            required
+            class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="font-body text-[10px] uppercase tracking-widest text-stone">Mensaje</label>
+          <textarea 
+            required
+            rows={5}
+            class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none resize-none"
+          ></textarea>
+        </div>
+
+        <div class="mt-8 text-center">
+          <Button type="button" variant="primary">Enviar Mensaje</Button>
+        </div>
+      </form>
+    </div>
+  </main>
+</BaseLayout>
