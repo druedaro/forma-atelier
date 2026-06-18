@@ -8,7 +8,7 @@ export function LoginForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    login(email, password);
+    login({ id: '1', email, name: 'Guest' });
     window.location.href = '/';
   };
 
