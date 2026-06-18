@@ -49,3 +49,13 @@ export interface WishlistItem {
     product: Product
   }
 }
+
+export interface Wishlist {
+  id: string
+  user: string
+  products: string[]
+  created: string
+  expand?: {
+    products: Product[]
+  }
+}
