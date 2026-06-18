@@ -8,7 +8,7 @@ describe('Divider', () => {
     const { container } = render(<Divider />);
     const hr = container.querySelector('hr');
     expect(hr).toBeInTheDocument();
-    expect(hr).toHaveClass('w-full', 'border-t-[0.5px]', 'border-linen');
+    expect(hr).toHaveClass('border-0', 'bg-linen', 'h-[0.5px]', 'w-full');
   });
 
   it('accepts custom classes', () => {

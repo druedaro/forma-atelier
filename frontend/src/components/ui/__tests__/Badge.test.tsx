@@ -13,7 +13,7 @@ describe('Badge', () => {
   it('applies the correct default classes', () => {
     render(<Badge>Test</Badge>);
     const badge = screen.getByText(/Test/i);
-    expect(badge).toHaveClass('inline-flex', 'items-center', 'px-3', 'py-1', 'border', 'border-noir', 'text-noir', 'bg-transparent', 'font-body', 'text-[10px]', 'uppercase', 'tracking-widest', 'rounded-full');
+    expect(badge).toHaveClass('inline-flex', 'items-center', 'px-2', 'py-0.5', 'rounded-sm', 'font-body', 'text-[10px]', 'font-medium', 'tracking-widest', 'uppercase', 'bg-smoke', 'text-stone', 'border-[0.5px]', 'border-linen');
   });
 
   it('accepts additional class names', () => {
