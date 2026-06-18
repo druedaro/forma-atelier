@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { mockLooks } from '../../lib/mock/data';
+import { Divider } from '../../components/ui/Divider';
+import { LookCard } from '../../components/lookbook/LookCard';
+
+const allLooks = mockLooks;
+---
+
+<BaseLayout title="FORMA ATELIER | Lookbook General">
+  <main class="pt-32 pb-24 px-8 md:px-16 min-h-screen bg-ivory">
+    <div class="max-w-[1920px] mx-auto">
+      <header class="mb-16">
+        <h1 class="font-display text-5xl md:text-7xl text-noir uppercase font-light tracking-widest mb-6">
+          Lookbook
+        </h1>
+        <p class="font-body text-sm text-stone max-w-xl leading-relaxed">
+          Explora la totalidad de nuestros looks y campañas visuales. Una ventana hacia el universo de Forma Atelier.
+        </p>
+      </header>
+
+      <Divider className="mb-16" />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        {allLooks.map((look) => (
+          <div class="w-full h-[60vh] md:h-[70vh]">
+            <LookCard look={look as any} client:visible />
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
