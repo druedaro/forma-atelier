@@ -93,7 +93,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_2',
     title: 'Midday Structure',
-    image: 'https://images.unsplash.com/photo-1485230895905-ef31ba2078af?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_1',
     products: ['prod_2'],
     order: 2,
