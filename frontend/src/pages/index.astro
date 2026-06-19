@@ -1,13 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { HomeHero } from '../components/home/HomeHero';
+import { CreativeHero } from '../components/home/CreativeHero';
 import { HomeManifesto } from '../components/home/HomeManifesto';
 import { HomeFeatured } from '../components/home/HomeFeatured';
 ---
 
 <BaseLayout title="FORMA ATELIER | Redefiniendo la silueta moderna">
   <main>
-    <HomeHero client:load />
+    <CreativeHero client:load />
     <HomeManifesto client:load />
     <HomeFeatured client:load />
   </main>

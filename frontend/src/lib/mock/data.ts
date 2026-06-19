@@ -47,8 +47,8 @@ export const mockProducts: Product[] = [
     material: '100% Seda Natural',
     origin: 'Hecho a mano en Barcelona',
     images: [
-      'https://images.unsplash.com/photo-1566206091558-f6229900ecfa?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1200&auto=format&fit=crop'
     ],
     collection: 'col_1',
     sizes: ['XS', 'S', 'M', 'L'],
