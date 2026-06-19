@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import './tokens.css';
+@import './typography.css';
+@import './animations.css';
+@import './utilities.css';
 
 @theme {
   --color-noir: var(--color-noir);
@@ -26,11 +30,6 @@
   --spacing-gutter: var(--spacing-gutter);
 }
 
-
-@import './tokens.css';
-@import './typography.css';
-@import './animations.css';
-@import './utilities.css';
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
