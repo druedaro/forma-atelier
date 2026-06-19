@@ -3,8 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { CollectionHero } from '../../components/lookbook/CollectionHero';
 import { LookbookScroll } from '../../components/lookbook/LookbookScroll';
 import { LookCard } from '../../components/lookbook/LookCard';
+import { ProductCard } from '../../components/product/ProductCard';
 import { getCollections } from '../../lib/api/collections';
-import { mockCollections, mockLooks } from '../../lib/mock/data';
+import { mockCollections, mockLooks, mockProducts } from '../../lib/mock/data';
 
 export async function getStaticPaths() {
   let collections = await getCollections();
@@ -28,6 +29,9 @@ if (collectionLooks.length === 0) {
   collectionLooks = mockLooks;
 }
 
+// Fetch products for this collection
+const collectionProducts = mockProducts.filter(p => p.collection === collection.id);
+
 if (!collection) {
   return Astro.redirect('/404');
 }
@@ -44,5 +48,22 @@ if (!collection) {
         </div>
       ))}
     </LookbookScroll>
+
+    {collectionProducts.length > 0 && (
+      <section class="py-24 px-8 md:px-16 bg-smoke">
+        <div class="max-w-[1920px] mx-auto">
+          <header class="mb-16">
+            <h2 class="font-display text-4xl text-noir uppercase font-light tracking-widest">
+              Prendas
+            </h2>
+          </header>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+            {collectionProducts.map(product => (
+              <ProductCard product={product as any} client:visible />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
   </main>
 </BaseLayout>
