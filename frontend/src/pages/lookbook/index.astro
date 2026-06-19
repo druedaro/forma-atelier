@@ -1,13 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { HorizontalGallery } from '../../components/lookbook/HorizontalGallery';
-import { getLooks } from '../../lib/api/looks';
 import { mockLooks, mockCollections } from '../../lib/mock/data';
 
-let allLooks = await getLooks();
-if (allLooks.length === 0) {
-  allLooks = mockLooks;
-}
+const allLooks = mockLooks;
 
 // Create a map of collection id to slug
 const collectionSlugs = mockCollections.reduce((acc, col) => {
