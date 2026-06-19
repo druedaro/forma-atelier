@@ -21,8 +21,12 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const { collection } = Astro.props;
 
-// Mock data integration for looks. In a real PB setup with expands, we'd use collection.expand?.looks
-const collectionLooks = collection?.looks?.map(id => mockLooks.find(l => l.id === id) || mockLooks[0]) || [];
+// Mock data integration for looks. In a real PB setup with expands, we'd fetch looks by collection id.
+let collectionLooks = mockLooks.filter(l => l.collection === collection.id);
+if (collectionLooks.length === 0) {
+  // Fallback to show something if the collection has no specific looks assigned in mockData
+  collectionLooks = mockLooks;
+}
 
 if (!collection) {
   return Astro.redirect('/404');
