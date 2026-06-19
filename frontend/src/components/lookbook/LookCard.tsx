@@ -4,10 +4,11 @@ import { initImageParallax } from '../../animations/imageParallax';
 
 export interface LookCardProps {
   look: Look;
+  href?: string;
   onClick?: () => void;
 }
 
-export function LookCard({ look, onClick }: LookCardProps) {
+export function LookCard({ look, href, onClick }: LookCardProps) {
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -16,14 +17,16 @@ export function LookCard({ look, onClick }: LookCardProps) {
     }
   }, []);
 
+  const Container = href ? 'a' : 'div';
+  const linkProps = href ? { href } : {};
+
   return (
-    <div 
-      className="relative flex-shrink-0 w-[80vw] md:w-[45vw] lg:w-[35vw] h-[70vh] group cursor-none"
+    <Container 
+      className="relative flex-shrink-0 w-[80vw] md:w-[45vw] lg:w-[35vw] h-[70vh] group block"
       onClick={onClick}
-      data-cursor="text"
-      data-cursor-text="Ver"
+      {...linkProps}
     >
-      <div className="w-full h-full overflow-hidden">
+      <div className="w-full h-full overflow-hidden bg-noir">
         <img
           ref={imageRef}
           src={look.image}
@@ -32,14 +35,17 @@ export function LookCard({ look, onClick }: LookCardProps) {
         />
       </div>
       
-      <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-noir/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-        <h3 className="font-display text-3xl text-ivory tracking-widest uppercase font-light mb-2">
+      <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+        <h3 
+          className="font-display text-3xl text-[#F5F0EA] tracking-widest uppercase font-light mb-2"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
           {look.title}
         </h3>
-        <p className="font-body text-[10px] text-linen uppercase tracking-widest">
+        <p className="font-body text-[10px] text-[#E8DDD0] uppercase tracking-widest">
           {look.expand?.products?.length || look.products.length} prendas
         </p>
       </div>
-    </div>
+    </Container>
   );
 }
