@@ -18,7 +18,7 @@ export const mockCollections: Collection[] = [
     slug: 'ombra',
     season: 'AW25',
     description: 'La elegancia de la sombra. Carbones profundos, negros austeros y burdeos oscuros para las silenciosas noches de invierno.',
-    hero_image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop',
+    hero_image: 'https://images.unsplash.com/photo-1485230895905-ef0e1236873c?q=80&w=1920&auto=format&fit=crop',
     palette: ['#0A0A0A', '#8C7B6B', '#1A1A1A'],
     active: true,
     order: 2
@@ -129,7 +129,7 @@ export const mockProducts: Product[] = [
     material: '80% Lana, 20% Cashmere',
     origin: 'Hecho en Barcelona',
     images: [
-      'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1200&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=1200&auto=format&fit=crop'
     ],
     collection: 'col_2',
     sizes: ['S', 'M', 'L'],
@@ -279,7 +279,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_4',
     title: 'Campaña: Contrastes oscuros',
-    image: 'https://images.unsplash.com/photo-1553531384-cc64ac80f931?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1550614000-4b95d466bc0b?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_2',
     products: ['prod_2_2', 'prod_2_4'],
     order: 4,
@@ -298,7 +298,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_6',
     title: 'Campaña: Texturas orgánicas',
-    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_3',
     products: ['prod_3_3', 'prod_3_4'],
     order: 6,
