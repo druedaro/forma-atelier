@@ -279,7 +279,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_4',
     title: 'Campaña: Contrastes oscuros',
-    image: 'https://images.unsplash.com/photo-1550614000-4b95d466bc0b?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_2',
     products: ['prod_2_2', 'prod_2_4'],
     order: 4,
