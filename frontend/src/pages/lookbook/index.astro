@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { mockLooks } from '../../lib/mock/data';
+import { mockLooks, mockCollections } from '../../lib/mock/data';
 import { Divider } from '../../components/ui/Divider';
 import { LookCard } from '../../components/lookbook/LookCard';
 
@@ -22,11 +22,17 @@ const allLooks = mockLooks;
       <Divider className="mb-16" />
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-        {allLooks.map((look) => (
-          <div class="w-full h-[60vh] md:h-[70vh]">
-            <LookCard look={look as any} client:visible />
-          </div>
-        ))}
+        {allLooks.map((look) => {
+          // Find the parent collection to get its slug for the link
+          const parentCollection = mockCollections.find(c => c.id === look.collection);
+          const href = parentCollection ? `/collections/${parentCollection.slug}` : '#';
+
+          return (
+            <div class="w-full h-[60vh] md:h-[70vh]">
+              <LookCard look={look as any} href={href} client:visible />
+            </div>
+          );
+        })}
       </div>
     </div>
   </main>
