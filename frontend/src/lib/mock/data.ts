@@ -48,7 +48,7 @@ export const mockProducts: Product[] = [
     origin: 'Hecho a mano en Barcelona',
     images: [
       'https://images.unsplash.com/photo-1566206091558-f6229900ecfa?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1200&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop'
     ],
     collection: 'col_1',
     sizes: ['XS', 'S', 'M', 'L'],
@@ -111,7 +111,7 @@ export const mockProducts: Product[] = [
     price: 320,
     material: '100% Algodón Egipcio',
     origin: 'Hecho en Italia',
-    images: ['https://images.unsplash.com/photo-1434389678232-04ce6ca10b65?q=80&w=1200&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_1',
     sizes: ['S', 'M', 'L'],
     available: true,
