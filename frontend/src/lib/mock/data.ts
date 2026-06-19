@@ -18,7 +18,7 @@ export const mockCollections: Collection[] = [
     slug: 'ombra',
     season: 'AW25',
     description: 'La elegancia de la sombra. Carbones profundos, negros austeros y burdeos oscuros para las silenciosas noches de invierno.',
-    hero_image: 'https://images.unsplash.com/photo-1485230895905-ef0e1236873c?q=80&w=1920&auto=format&fit=crop',
+    hero_image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1920&auto=format&fit=crop',
     palette: ['#0A0A0A', '#8C7B6B', '#1A1A1A'],
     active: true,
     order: 2
