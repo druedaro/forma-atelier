@@ -7,7 +7,7 @@ export const mockCollections: Collection[] = [
     slug: 'lumiere',
     season: 'SS25',
     description: 'Un estudio de luz y estructura. Blancos, beiges y dorados suaves que definen el sol de la mañana rozando la piedra.',
-    hero_image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-lumi-re-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=545',
+    hero_image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop',
     palette: ['#F5F0EA', '#C9A96E', '#E8DDD0'],
     active: true,
     order: 1
@@ -18,7 +18,7 @@ export const mockCollections: Collection[] = [
     slug: 'ombra',
     season: 'AW25',
     description: 'La elegancia de la sombra. Carbones profundos, negros austeros y burdeos oscuros para las silenciosas noches de invierno.',
-    hero_image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-ombra-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=370',
+    hero_image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1920&auto=format&fit=crop',
     palette: ['#0A0A0A', '#8C7B6B', '#1A1A1A'],
     active: true,
     order: 2
@@ -29,7 +29,7 @@ export const mockCollections: Collection[] = [
     slug: 'terra',
     season: 'RE25',
     description: 'Un retorno al origen. Tonos tierra, siluetas fluidas y texturas orgánicas inspiradas en la costa del Mediterráneo.',
-    hero_image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-terra-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=425',
+    hero_image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop',
     palette: ['#8C7B6B', '#E8DDD0', '#C9A96E'],
     active: true,
     order: 3
@@ -47,8 +47,8 @@ export const mockProducts: Product[] = [
     material: '100% Seda Natural',
     origin: 'Hecho a mano en Barcelona',
     images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-lumi-re-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=14',
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-lumi-re-view-2-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=757'
+      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1200&auto=format&fit=crop'
     ],
     collection: 'col_1',
     sizes: ['XS', 'S', 'M', 'L'],
@@ -65,7 +65,7 @@ export const mockProducts: Product[] = [
     material: '100% Lino Orgánico',
     origin: 'Tejido en Italia, Hecho en España',
     images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-pantal-n-lino-sartorial-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=595'
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop'
     ],
     collection: 'col_1',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -81,9 +81,7 @@ export const mockProducts: Product[] = [
     price: 950,
     material: '100% Algodón Orgánico',
     origin: 'Hecho en Barcelona',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-blazer-algod-n-estructurado-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=753'
-    ],
+    images: ['https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_1',
     sizes: ['S', 'M', 'L'],
     available: true,
@@ -98,9 +96,7 @@ export const mockProducts: Product[] = [
     price: 450,
     material: '100% Satén de Seda',
     origin: 'Hecho en España',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-falda-satin-slip-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=642'
-    ],
+    images: ['https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_1',
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
@@ -115,9 +111,7 @@ export const mockProducts: Product[] = [
     price: 320,
     material: '100% Algodón Egipcio',
     origin: 'Hecho en Italia',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-top-punto-acanalado-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=352'
-    ],
+    images: ['https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_1',
     sizes: ['S', 'M', 'L'],
     available: true,
@@ -135,7 +129,7 @@ export const mockProducts: Product[] = [
     material: '80% Lana, 20% Cashmere',
     origin: 'Hecho en Barcelona',
     images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-abrigo-lana-cashmere-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=190'
+      'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1200&auto=format&fit=crop'
     ],
     collection: 'col_2',
     sizes: ['S', 'M', 'L'],
@@ -151,9 +145,7 @@ export const mockProducts: Product[] = [
     price: 590,
     material: '100% Seda',
     origin: 'Hecho en Italia',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-camisa-seda-medianoche-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=300'
-    ],
+    images: ['https://images.unsplash.com/photo-1604644401890-0bd678c83788?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_2',
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
@@ -168,9 +160,7 @@ export const mockProducts: Product[] = [
     price: 720,
     material: '100% Lana Virgen',
     origin: 'Hecho en España',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-pantal-n-lana-plisado-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=95'
-    ],
+    images: ['https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_2',
     sizes: ['S', 'M', 'L', 'XL'],
     available: true,
@@ -185,9 +175,7 @@ export const mockProducts: Product[] = [
     price: 450,
     material: '100% Piel de Becerro',
     origin: 'Hecho en España',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-cors-cintur-n-piel-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=915'
-    ],
+    images: ['https://images.unsplash.com/photo-1553531384-cc64ac80f931?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_2',
     sizes: ['S', 'M'],
     available: true,
@@ -204,9 +192,7 @@ export const mockProducts: Product[] = [
     price: 850,
     material: '100% Lino',
     origin: 'Hecho en España',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-vestido-lino-arena-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=828'
-    ],
+    images: ['https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_3',
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
@@ -221,9 +207,7 @@ export const mockProducts: Product[] = [
     price: 600,
     material: '100% Rafia Natural',
     origin: 'Hecho a mano en España',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-bolso-tote-rafia-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=875'
-    ],
+    images: ['https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_3',
     sizes: ['TALLA ÚNICA'],
     available: true,
@@ -238,9 +222,7 @@ export const mockProducts: Product[] = [
     price: 520,
     material: '50% Algodón, 50% Lino',
     origin: 'Hecho en Italia',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-jersey-punto-tierra-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=423'
-    ],
+    images: ['https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_3',
     sizes: ['S', 'M', 'L'],
     available: true,
@@ -255,9 +237,7 @@ export const mockProducts: Product[] = [
     price: 650,
     material: '100% Cupro',
     origin: 'Hecho en España',
-    images: [
-      'https://image.pollinations.ai/prompt/high-fashion-editorial-pantal-n-palazzo-fluido-view-1-luxury-atelier-studio-lighting-minimalist?width=1200&height=1800&nologo=true&seed=53'
-    ],
+    images: ['https://images.unsplash.com/photo-1582552938357-32b906df40cb?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_3',
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
@@ -271,7 +251,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_1',
     title: 'Campaña: La luz del alba',
-    image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-campa-a-la-luz-del-alba-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=810',
+    image: 'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_1',
     products: ['prod_1', 'prod_2'],
     order: 1,
@@ -280,7 +260,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_2',
     title: 'Campaña: Simetría matutina',
-    image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-campa-a-simetr-a-matutina-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=195',
+    image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_1',
     products: ['prod_1_3', 'prod_1_4'],
     order: 2,
@@ -290,7 +270,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_3',
     title: 'Campaña: El eco de la noche',
-    image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-campa-a-el-eco-de-la-noche-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=205',
+    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_2',
     products: ['prod_3', 'prod_2_3'],
     order: 3,
@@ -299,7 +279,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_4',
     title: 'Campaña: Contrastes oscuros',
-    image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-campa-a-contrastes-oscuros-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=680',
+    image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_2',
     products: ['prod_2_2', 'prod_2_4'],
     order: 4,
@@ -309,7 +289,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_5',
     title: 'Campaña: Retorno al origen',
-    image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-campa-a-retorno-al-origen-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=935',
+    image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_3',
     products: ['prod_3_1', 'prod_3_2'],
     order: 5,
@@ -318,7 +298,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_6',
     title: 'Campaña: Texturas orgánicas',
-    image: 'https://image.pollinations.ai/prompt/high-fashion-editorial-campa-a-texturas-org-nicas-luxury-atelier-studio-lighting-minimalist?width=2000&height=1200&nologo=true&seed=282',
+    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_3',
     products: ['prod_3_3', 'prod_3_4'],
     order: 6,
