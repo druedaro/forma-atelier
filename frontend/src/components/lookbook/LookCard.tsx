@@ -35,7 +35,7 @@ export function LookCard({ look, href, onClick }: LookCardProps) {
         />
       </div>
       
-      <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+      <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/50 to-transparent opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-400">
         <h3 
           className="font-display text-3xl text-[#F5F0EA] tracking-widest uppercase font-light mb-2"
           style={{ fontFamily: 'var(--font-display)' }}

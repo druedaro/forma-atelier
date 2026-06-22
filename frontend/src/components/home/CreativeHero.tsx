@@ -63,13 +63,21 @@ export function CreativeHero() {
           scrub: true
         }
       });
-
-      return () => {
-        window.removeEventListener("mousemove", onMouseMove);
-      };
     }, containerRef);
+    
+    // Add event listener outside gsap context to ensure cleanup
+    const onMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      gsap.to(imageRef.current, { x, y, duration: 1, ease: "power2.out" });
+    };
 
-    return () => ctx.revert();
+    window.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("mousemove", onMouseMove);
+    };
   }, []);
 
   return (

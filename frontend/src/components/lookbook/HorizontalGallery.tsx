@@ -19,16 +19,17 @@ export function HorizontalGallery({ looks, collectionSlugs }: HorizontalGalleryP
     const ctx = gsap.context(() => {
       if (!sectionRef.current || !scrollContainerRef.current) return;
 
-      const scrollWidth = scrollContainerRef.current.offsetWidth - window.innerWidth;
+      const getScrollWidth = () => scrollContainerRef.current!.offsetWidth - window.innerWidth;
 
       gsap.to(scrollContainerRef.current, {
-        x: -scrollWidth,
+        x: () => -getScrollWidth(),
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
           scrub: 1, // Smooth scrub
-          end: () => `+=${scrollWidth}`
+          end: () => `+=${getScrollWidth()}`,
+          invalidateOnRefresh: true
         }
       });
     }, sectionRef);
