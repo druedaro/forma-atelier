@@ -30,8 +30,8 @@ import SmoothScroll from '../components/layout/SmoothScroll';
   </head>
   <body>
     <div class="page-overlay"></div>
-    <SmoothScroll client:load />
-    <CursorFollower client:load />
+    <SmoothScroll client:load transition:persist="smooth-scroll" />
+    <CursorFollower client:load transition:persist="cursor-follower" />
     <Nav />
     <slot />
     <Footer />
