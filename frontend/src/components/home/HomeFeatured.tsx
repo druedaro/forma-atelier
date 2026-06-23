@@ -12,7 +12,6 @@ export function HomeFeatured() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade in sequence
       gsap.fromTo([card1Ref.current, card2Ref.current, card3Ref.current],
         { y: 100, opacity: 0 },
         {
@@ -29,7 +28,6 @@ export function HomeFeatured() {
         }
       );
 
-      // Parallax effects
       if (window.innerWidth > 768) {
         gsap.to(card1Ref.current, {
           y: -80,

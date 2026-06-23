@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll() {
   useEffect(() => {
-    // Force native scroll top
     window.scrollTo(0, 0);
 
     const lenis = new Lenis({
@@ -20,20 +19,16 @@ export default function SmoothScroll() {
       touchMultiplier: 2,
     });
 
-    // Force lenis to top
     lenis.scrollTo(0, { immediate: true });
 
-    // Handle view transitions
     const handlePageLoad = () => {
       window.scrollTo(0, 0);
       lenis.scrollTo(0, { immediate: true });
     };
     document.addEventListener('astro:page-load', handlePageLoad);
 
-    // Update ScrollTrigger on lenis scroll
     lenis.on('scroll', ScrollTrigger.update);
 
-    // Sync GSAP ticker with Lenis requestAnimationFrame
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });

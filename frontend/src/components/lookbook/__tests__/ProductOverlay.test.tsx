@@ -35,8 +35,6 @@ describe('ProductOverlay', () => {
     
     const closeBtn = screen.getByLabelText('Close overlay');
     fireEvent.click(closeBtn);
-    // GSAP is mocked, so the timeline won't automatically trigger onComplete.
-    // We just verify it doesn't crash and the button is wired up.
     expect(closeBtn).toBeInTheDocument();
   });
 });

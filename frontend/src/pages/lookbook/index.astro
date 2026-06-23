@@ -5,7 +5,6 @@ import { mockLooks, mockCollections } from '../../lib/mock/data';
 
 const allLooks = mockLooks;
 
-// Create a map of collection id to slug
 const collectionSlugs = mockCollections.reduce((acc, col) => {
   acc[col.id] = col.slug;
   return acc;

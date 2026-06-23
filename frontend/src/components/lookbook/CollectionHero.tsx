@@ -12,7 +12,6 @@ export function CollectionHero({ collection }: CollectionHeroProps) {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Adding a slight delay so it works well with page transitions
     const timer = setTimeout(() => {
       if (titleRef.current) initTextReveal(titleRef.current);
       if (subtitleRef.current) initTextReveal(subtitleRef.current);

@@ -35,7 +35,6 @@ import SmoothScroll from '../components/layout/SmoothScroll';
       }
       window.scrollTo(0, 0);
       
-      // Ensure it stays at top after layout calculation
       window.addEventListener('load', () => window.scrollTo(0, 0));
       document.addEventListener('astro:page-load', () => window.scrollTo(0, 0));
     </script>

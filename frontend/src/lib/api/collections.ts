@@ -8,7 +8,6 @@ export async function getCollections(): Promise<Collection[]> {
     });
     return records as unknown as Collection[];
   } catch (error) {
-    // Silently fallback to mock data if pocketbase is not running
     return [];
   }
 }

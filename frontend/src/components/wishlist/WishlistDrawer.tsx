@@ -9,7 +9,6 @@ export function WishlistDrawer() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  // In a real implementation we would fetch products by their IDs from the API
   const wishlistProducts = mockProducts.filter(p => items.includes(p.id));
 
   useEffect(() => {

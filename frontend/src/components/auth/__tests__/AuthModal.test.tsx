@@ -12,7 +12,6 @@ describe('AuthModal', () => {
   it('renders correctly when open', () => {
     render(<AuthModal />);
     expect(screen.getByText('Acceder')).toBeInTheDocument();
-    // Use getByText to find labels, because we didn't use htmlFor in the implementation, so getByLabelText might fail
     expect(screen.getByText('Email')).toBeInTheDocument();
     expect(screen.getByText('Contraseña')).toBeInTheDocument();
   });
@@ -26,8 +25,7 @@ describe('AuthModal', () => {
   it('calls login on submit', () => {
     render(<AuthModal />);
     
-    // In actual app we would need to find by role or displayValue since label isn't connected
-    const inputs = screen.getAllByRole('textbox'); // actually email is not a text box in standard ARIA sometimes, but it is an input
+    const inputs = screen.getAllByRole('textbox'); 
     const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
     const passwordInput = document.querySelector('input[type="password"]') as HTMLInputElement;
     const submitButton = screen.getByRole('button', { name: 'Iniciar sesión' });
