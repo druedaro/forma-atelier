@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ProductCard } from '../../components/product/ProductCard';
+import { Divider } from '../../components/ui/Divider';
+import { mockLooks, mockProducts } from '../../lib/mock/data';
+
+export async function getStaticPaths() {
+  const looks = mockLooks;
+  
+  return looks.map((look) => ({
+    params: { id: look.id },
+    props: { look },
+  }));
+}
+
+const { id } = Astro.params;
+const { look } = Astro.props;
+
+if (!look) {
+  return Astro.redirect('/404');
+}
+
+// Get the products associated with this campaign
+// Assuming look.products contains the IDs of the products
+const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
+---
+
+<BaseLayout title={`FORMA ATELIER | ${look.title}`}>
+  <main class="min-h-screen bg-ivory">
+    {/* Campaign Hero Image */}
+    <section class="relative w-full h-screen overflow-hidden bg-noir">
+      <img 
+        src={look.image} 
+        alt={look.title}
+        class="w-full h-full object-cover object-center opacity-80"
+        fetchpriority="high"
+      />
+      
+      {/* Title Overlay */}
+      <div class="absolute inset-0 flex flex-col items-center justify-end pb-32 px-8 bg-gradient-to-t from-noir/90 via-noir/20 to-transparent">
+        <p class="font-body text-xs md:text-sm uppercase tracking-widest text-stone mb-6 font-medium">
+          Campaña
+        </p>
+        <h1 class="font-display text-5xl md:text-8xl text-ivory tracking-widest uppercase font-light text-center max-w-5xl">
+          {look.title.replace('Campaña: ', '')}
+        </h1>
+        
+        <div class="mt-16 text-ivory">
+          <button 
+            onclick="window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })"
+            class="flex flex-col items-center gap-6 hover:text-stone transition-colors duration-400 group"
+          >
+            <span class="font-body text-[10px] uppercase tracking-widest">Ver Prendas</span>
+            <span class="block w-[1px] h-12 bg-ivory group-hover:h-20 transition-all duration-400"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    {/* Products Section */}
+    {campaignProducts.length > 0 && (
+      <section class="py-24 px-8 md:px-16 bg-smoke">
+        <div class="max-w-[1920px] mx-auto">
+          <header class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div>
+              <h2 class="font-display text-4xl text-noir uppercase font-light tracking-widest mb-4">
+                Prendas en esta Campaña
+              </h2>
+              <p class="font-body text-sm text-stone uppercase tracking-widest">
+                {campaignProducts.length} artículos
+              </p>
+            </div>
+            <a href={`/collections`} class="font-body text-xs uppercase tracking-widest text-noir hover:text-stone transition-colors underline underline-offset-4">
+              Ver todas las colecciones
+            </a>
+          </header>
+          
+          <Divider className="mb-16" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+            {campaignProducts.map(product => (
+              <ProductCard product={product as any} client:visible />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+</BaseLayout>

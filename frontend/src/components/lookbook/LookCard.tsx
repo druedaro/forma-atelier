@@ -22,16 +22,18 @@ export function LookCard({ look, href, onClick, priority }: LookCardProps) {
   const Container = href ? 'a' : 'div';
   const linkProps = href 
     ? { href } 
-    : { 
-        role: "button", 
-        tabIndex: 0, 
-        onKeyDown: (e: React.KeyboardEvent) => { 
-          if (e.key === 'Enter' || e.key === ' ') { 
-            e.preventDefault(); 
-            onClick?.(); 
+    : onClick 
+      ? { 
+          role: "button", 
+          tabIndex: 0, 
+          onKeyDown: (e: React.KeyboardEvent) => { 
+            if (e.key === 'Enter' || e.key === ' ') { 
+              e.preventDefault(); 
+              onClick(); 
+            } 
           } 
-        } 
-      };
+        }
+      : {};
 
   return (
     <Container 

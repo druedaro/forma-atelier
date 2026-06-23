@@ -11,7 +11,8 @@ import '../styles/global.css';
 
 import Nav from '../components/layout/Nav.astro';
 import Footer from '../components/layout/Footer.astro';
-import CursorFollower from '../components/layout/CursorFollower';
+
+import { BackToTop } from '../components/ui/BackToTop';
 import SmoothScroll from '../components/layout/SmoothScroll';
 ---
 
@@ -28,12 +29,22 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+    <script is:inline>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      
+      // Ensure it stays at top after layout calculation
+      window.addEventListener('load', () => window.scrollTo(0, 0));
+      document.addEventListener('astro:page-load', () => window.scrollTo(0, 0));
+    </script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <div class="page-overlay"></div>
     <SmoothScroll client:load transition:persist="smooth-scroll" />
-    <CursorFollower client:load transition:persist="cursor-follower" />
+    <BackToTop client:load transition:persist="back-to-top" />
     <Nav theme={theme} />
     <div id="main-content" tabindex="-1">
       <slot />
