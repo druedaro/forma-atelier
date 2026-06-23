@@ -63,10 +63,9 @@ export function HorizontalGallery({ looks, collectionSlugs }: HorizontalGalleryP
         </div>
 
         {looks.map((look, idx) => {
-          const slug = collectionSlugs[look.collection] || '#';
           return (
             <div key={look.id} className="flex-shrink-0 mr-[10vw]">
-              <LookCard look={look} href={`/collections/${slug}`} priority={idx === 0} />
+              <LookCard look={look} href={`/campaigns/${look.id}`} priority={idx === 0} />
             </div>
           );
         })}
