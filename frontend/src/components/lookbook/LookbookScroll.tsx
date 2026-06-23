@@ -15,17 +15,22 @@ export function LookbookScroll({ children }: LookbookScrollProps) {
 
     if (!wrapperRef.current || !containerRef.current) return;
 
-    // Small delay to ensure DOM is fully painted
+    let tl: gsap.core.Timeline | null = null;
+
     const timer = setTimeout(() => {
-      if (wrapperRef.current && containerRef.current) {
-        const tl = initLookbookScroll(wrapperRef.current, containerRef.current);
-        return () => {
-          tl.kill();
-        };
-      }
+      if (!wrapperRef.current || !containerRef.current) return;
+      tl = initLookbookScroll(wrapperRef.current, containerRef.current);
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (tl) {
+        // Kill the ScrollTrigger before killing the timeline to avoid DOM conflicts
+        const st = tl.scrollTrigger;
+        if (st) st.kill(false);
+        tl.kill();
+      }
+    };
   }, []);
 
   return (

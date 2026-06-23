@@ -18,7 +18,7 @@ export const mockCollections: Collection[] = [
     slug: 'ombra',
     season: 'AW25',
     description: 'La elegancia de la sombra. Carbones profundos, negros austeros y burdeos oscuros para las silenciosas noches de invierno.',
-    hero_image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop',
+    hero_image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1920&auto=format&fit=crop',
     palette: ['#0A0A0A', '#8C7B6B', '#1A1A1A'],
     active: true,
     order: 2
@@ -47,8 +47,8 @@ export const mockProducts: Product[] = [
     material: '100% Seda Natural',
     origin: 'Hecho a mano en Barcelona',
     images: [
-      'https://images.unsplash.com/photo-1566206091558-f6229900ecfa?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop'
+      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1200&auto=format&fit=crop'
     ],
     collection: 'col_1',
     sizes: ['XS', 'S', 'M', 'L'],
@@ -111,7 +111,7 @@ export const mockProducts: Product[] = [
     price: 320,
     material: '100% Algodón Egipcio',
     origin: 'Hecho en Italia',
-    images: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop'],
+    images: ['https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1200&auto=format&fit=crop'],
     collection: 'col_1',
     sizes: ['S', 'M', 'L'],
     available: true,
@@ -279,7 +279,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_4',
     title: 'Campaña: Contrastes oscuros',
-    image: 'https://images.unsplash.com/photo-1553531384-cc64ac80f931?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_2',
     products: ['prod_2_2', 'prod_2_4'],
     order: 4,
@@ -298,7 +298,7 @@ export const mockLooks: Look[] = [
   {
     id: 'look_6',
     title: 'Campaña: Texturas orgánicas',
-    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000&auto=format&fit=crop',
     collection: 'col_3',
     products: ['prod_3_3', 'prod_3_4'],
     order: 6,

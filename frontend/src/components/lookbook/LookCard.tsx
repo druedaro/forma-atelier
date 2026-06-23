@@ -18,7 +18,18 @@ export function LookCard({ look, href, onClick }: LookCardProps) {
   }, []);
 
   const Container = href ? 'a' : 'div';
-  const linkProps = href ? { href } : {};
+  const linkProps = href 
+    ? { href } 
+    : { 
+        role: "button", 
+        tabIndex: 0, 
+        onKeyDown: (e: React.KeyboardEvent) => { 
+          if (e.key === 'Enter' || e.key === ' ') { 
+            e.preventDefault(); 
+            onClick?.(); 
+          } 
+        } 
+      };
 
   return (
     <Container 
@@ -35,14 +46,30 @@ export function LookCard({ look, href, onClick }: LookCardProps) {
         />
       </div>
       
-      <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+      <div 
+        className="absolute bottom-0 left-0 w-full p-8 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-[400ms]"
+        style={{
+          background: 'linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.55) 50%, transparent 100%)',
+        }}
+      >
         <h3 
-          className="font-display text-3xl text-[#F5F0EA] tracking-widest uppercase font-light mb-2"
-          style={{ fontFamily: 'var(--font-display)' }}
+          className="text-3xl tracking-widest uppercase font-light mb-2"
+          style={{ 
+            fontFamily: 'var(--font-display)', 
+            color: '#F5F0EA',
+            letterSpacing: '0.2em',
+          }}
         >
           {look.title}
         </h3>
-        <p className="font-body text-[10px] text-[#E8DDD0] uppercase tracking-widest">
+        <p 
+          className="text-[10px] uppercase tracking-widest"
+          style={{ 
+            fontFamily: 'var(--font-body)', 
+            color: '#E8DDD0',
+            letterSpacing: '0.2em',
+          }}
+        >
           {look.expand?.products?.length || look.products.length} prendas
         </p>
       </div>

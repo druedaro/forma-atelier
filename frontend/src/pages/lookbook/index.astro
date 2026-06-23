@@ -1,39 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { HorizontalGallery } from '../../components/lookbook/HorizontalGallery';
 import { mockLooks, mockCollections } from '../../lib/mock/data';
-import { Divider } from '../../components/ui/Divider';
-import { LookCard } from '../../components/lookbook/LookCard';
 
 const allLooks = mockLooks;
+
+// Create a map of collection id to slug
+const collectionSlugs = mockCollections.reduce((acc, col) => {
+  acc[col.id] = col.slug;
+  return acc;
+}, {} as Record<string, string>);
 ---
 
-<BaseLayout title="FORMA ATELIER | Lookbook General">
-  <main class="pt-32 pb-24 px-8 md:px-16 min-h-screen bg-ivory">
-    <div class="max-w-[1920px] mx-auto">
-      <header class="mb-16">
-        <h1 class="font-display text-5xl md:text-7xl text-noir uppercase font-light tracking-widest mb-6">
-          Lookbook
-        </h1>
-        <p class="font-body text-sm text-stone max-w-xl leading-relaxed">
-          Explora la totalidad de nuestros looks y campañas visuales. Una ventana hacia el universo de Forma Atelier.
-        </p>
-      </header>
-
-      <Divider className="mb-16" />
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-        {allLooks.map((look) => {
-          // Find the parent collection to get its slug for the link
-          const parentCollection = mockCollections.find(c => c.id === look.collection);
-          const href = parentCollection ? `/collections/${parentCollection.slug}` : '#';
-
-          return (
-            <div class="w-full h-[60vh] md:h-[70vh]">
-              <LookCard look={look as any} href={href} client:visible />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+<BaseLayout title="FORMA ATELIER | Lookbook" theme="dark">
+  <main class="bg-noir min-h-screen">
+    <HorizontalGallery looks={allLooks as any} collectionSlugs={collectionSlugs} client:load />
   </main>
 </BaseLayout>
