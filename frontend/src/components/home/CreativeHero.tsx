@@ -88,6 +88,7 @@ export function CreativeHero() {
             alt=""
             role="presentation"
             className="w-full h-full object-cover"
+            fetchPriority="high"
           />
         </div>
       </div>
@@ -115,7 +116,7 @@ export function CreativeHero() {
       </div>
       
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 font-body text-xs tracking-widest uppercase text-[#0A0A0A] mix-blend-difference text-white">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 font-body text-xs tracking-widest uppercase text-[#0A0A0A]">
         Scroll para explorar
       </div>
     </section>

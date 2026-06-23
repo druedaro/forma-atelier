@@ -42,9 +42,9 @@ if (!collection) {
     <CollectionHero collection={collection as any} client:load />
     
     <LookbookScroll client:load>
-      {collectionLooks.map((look) => (
+      {collectionLooks.map((look, idx) => (
         <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 md:p-16">
-          <LookCard look={look as any} client:visible />
+          <LookCard look={look as any} priority={idx === 0} client:visible />
         </div>
       ))}
     </LookbookScroll>
