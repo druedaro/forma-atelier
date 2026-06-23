@@ -91,7 +91,7 @@ export function HomeFeatured() {
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-linen mb-6">
               <img 
-                src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop" 
+                src="/assets/photo-1512436991641-6745cdb1723f.avif" 
                 alt="Vestido Silk Georgette" 
                 className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />
@@ -109,7 +109,7 @@ export function HomeFeatured() {
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-linen mb-6">
               <img 
-                src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1200&auto=format&fit=crop" 
+                src="/assets/photo-1539533018447-63fcce2678e3.avif" 
                 alt="Abrigo Lana Cashmere" 
                 className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />
@@ -127,7 +127,7 @@ export function HomeFeatured() {
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-linen mb-6">
               <img 
-                src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1200&auto=format&fit=crop" 
+                src="/assets/photo-1509631179647-0177331693ae.avif" 
                 alt="Pantalón Lana Plisado" 
                 className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />

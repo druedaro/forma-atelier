@@ -84,7 +84,7 @@ export function CreativeHero() {
           className="w-[80%] h-[80%] md:w-[60%] md:h-[90%] relative overflow-hidden"
         >
           <img 
-            src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" 
+            src="/assets/photo-1469334031218-e382a71b716b.avif" 
             alt=""
             role="presentation"
             className="w-full h-full object-cover"
