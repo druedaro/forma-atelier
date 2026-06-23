@@ -28,7 +28,6 @@ export function CreativeHero() {
         .to(text1Ref.current, { y: '0%', opacity: 1, duration: 1.2, ease: 'power4.out' }, '-=1.8')
         .to(text2Ref.current, { y: '0%', opacity: 1, duration: 1.2, ease: 'power4.out' }, '-=1.0');
 
-      // Scroll parallax — only if container exists
       if (containerRef.current && text1Ref.current) {
         gsap.to(text1Ref.current, {
           y: -100,
@@ -66,7 +65,6 @@ export function CreativeHero() {
     return () => {
       ctx.revert();
       window.removeEventListener('mousemove', onMouseMove);
-      // Kill any lingering ScrollTriggers tied to this component
       ScrollTrigger.getAll()
         .filter(st => st.trigger === containerRef.current)
         .forEach(st => st.kill());

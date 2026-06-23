@@ -25,7 +25,6 @@ export function LookbookScroll({ children }: LookbookScrollProps) {
     return () => {
       clearTimeout(timer);
       if (tl) {
-        // Kill the ScrollTrigger before killing the timeline to avoid DOM conflicts
         const st = tl.scrollTrigger;
         if (st) st.kill(false);
         tl.kill();

@@ -18,7 +18,6 @@ export function HorizontalGallery({ looks, collectionSlugs }: HorizontalGalleryP
   useEffect(() => {
     if (!sectionRef.current || !scrollContainerRef.current) return;
 
-    // Kill any existing ScrollTriggers from previous navigations
     ScrollTrigger.getAll().forEach(st => st.kill());
 
     const ctx = gsap.context(() => {
@@ -44,7 +43,6 @@ export function HorizontalGallery({ looks, collectionSlugs }: HorizontalGalleryP
 
     return () => {
       ctx.revert();
-      // Explicitly kill all ScrollTriggers to avoid DOM conflicts on page transition
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, [looks]);
