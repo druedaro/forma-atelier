@@ -32,6 +32,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 src={img} 
                 alt={`${product.name} detail ${idx + 1}`} 
                 className="w-full h-full object-cover"
+                fetchPriority={idx === 0 ? "high" : "auto"}
+                loading={idx === 0 ? "eager" : "lazy"}
               />
             </div>
           ))}

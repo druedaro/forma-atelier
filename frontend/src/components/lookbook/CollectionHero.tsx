@@ -28,6 +28,7 @@ export function CollectionHero({ collection }: CollectionHeroProps) {
           src={collection.hero_image} 
           alt={collection.name} 
           className="w-full h-full object-cover opacity-40 mix-blend-multiply"
+          fetchPriority="high"
         />
       </div>
       

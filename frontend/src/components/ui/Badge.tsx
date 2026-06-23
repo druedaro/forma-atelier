@@ -14,7 +14,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
         style={{
           fontFamily: 'var(--font-body)',
           backgroundColor: '#F0EBE3',
-          color: '#8C7B6B',
+          color: '#0A0A0A',
           border: '0.5px solid #E8DDD0',
           letterSpacing: '0.15em',
         }}

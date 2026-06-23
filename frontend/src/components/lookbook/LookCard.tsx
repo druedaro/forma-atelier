@@ -5,10 +5,12 @@ import { initImageParallax } from '../../animations/imageParallax';
 export interface LookCardProps {
   look: Look;
   href?: string;
+  href?: string;
   onClick?: () => void;
+  priority?: boolean;
 }
 
-export function LookCard({ look, href, onClick }: LookCardProps) {
+export function LookCard({ look, href, onClick, priority }: LookCardProps) {
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
@@ -43,6 +45,8 @@ export function LookCard({ look, href, onClick }: LookCardProps) {
           src={look.image}
           alt={look.title}
           className="w-full h-[120%] object-cover object-center"
+          fetchPriority={priority ? "high" : "auto"}
+          loading={priority ? "eager" : "lazy"}
         />
       </div>
       
@@ -52,7 +56,7 @@ export function LookCard({ look, href, onClick }: LookCardProps) {
           background: 'linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.55) 50%, transparent 100%)',
         }}
       >
-        <h3 
+        <h2 
           className="text-3xl tracking-widest uppercase font-light mb-2"
           style={{ 
             fontFamily: 'var(--font-display)', 
@@ -61,7 +65,7 @@ export function LookCard({ look, href, onClick }: LookCardProps) {
           }}
         >
           {look.title}
-        </h3>
+        </h2>
         <p 
           className="text-[10px] uppercase tracking-widest"
           style={{ 

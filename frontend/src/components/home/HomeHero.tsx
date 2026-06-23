@@ -57,6 +57,7 @@ export function HomeHero() {
           src="/assets/photo-1469334031218-e382a71b716b.avif" 
           alt="Forma Atelier Home"
           className="w-full h-full object-cover opacity-60"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-noir/80 via-transparent to-transparent"></div>
       </div>
