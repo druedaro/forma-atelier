@@ -25,7 +25,7 @@ export function HomeManifesto() {
             ease: "power3.out",
             scrollTrigger: {
               trigger: text,
-              start: "top 85%", // Starts when the top of the element hits 85% of the viewport height
+              start: "top 85%", 
               toggleActions: "play none none reverse"
             }
           }

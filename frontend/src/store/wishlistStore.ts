@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 interface WishlistState {
-  items: string[]; // Array of product IDs
+  items: string[]; 
   addItem: (productId: string) => void;
   removeItem: (productId: string) => void;
   hasItem: (productId: string) => boolean;

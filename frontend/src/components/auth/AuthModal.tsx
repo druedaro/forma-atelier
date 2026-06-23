@@ -33,7 +33,6 @@ export function AuthModal() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login
     login({ id: '1', email, name: 'Guest' });
     handleClose();
   };

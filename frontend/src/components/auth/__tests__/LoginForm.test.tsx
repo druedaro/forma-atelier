@@ -7,7 +7,6 @@ import { useAuthStore } from '../../../store/authStore';
 describe('LoginForm', () => {
   beforeEach(() => {
     useAuthStore.setState({ isAuthenticated: false, user: null });
-    // Mock window.location
     Object.defineProperty(window, 'location', {
       writable: true,
       value: { href: 'http://localhost/login' },

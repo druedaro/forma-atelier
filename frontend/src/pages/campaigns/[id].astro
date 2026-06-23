@@ -20,14 +20,11 @@ if (!look) {
   return Astro.redirect('/404');
 }
 
-// Get the products associated with this campaign
-// Assuming look.products contains the IDs of the products
 const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
 ---
 
 <BaseLayout title={`FORMA ATELIER | ${look.title}`}>
   <main class="min-h-screen bg-ivory">
-    {/* Campaign Hero Image */}
     <section class="relative w-full h-screen overflow-hidden bg-noir">
       <img 
         src={look.image} 
@@ -36,7 +33,6 @@ const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
         fetchpriority="high"
       />
       
-      {/* Title Overlay */}
       <div class="absolute inset-0 flex flex-col items-center justify-end pb-32 px-8 bg-gradient-to-t from-noir/90 via-noir/20 to-transparent">
         <p class="font-body text-xs md:text-sm uppercase tracking-widest text-stone mb-6 font-medium">
           Campaña
@@ -57,7 +53,6 @@ const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
       </div>
     </section>
 
-    {/* Products Section */}
     {campaignProducts.length > 0 && (
       <section class="py-24 px-8 md:px-16 bg-smoke">
         <div class="max-w-[1920px] mx-auto">

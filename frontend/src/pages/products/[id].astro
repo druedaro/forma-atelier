@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   }
   
   return products.map((product) => ({
-    params: { id: product.slug }, // Using slug as the URL parameter
+    params: { id: product.slug }, 
     props: { product },
   }));
 }

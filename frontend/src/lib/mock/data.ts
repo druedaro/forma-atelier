@@ -37,7 +37,6 @@ export const mockCollections: Collection[] = [
 ];
 
 export const mockProducts: Product[] = [
-  // --- LUMIERE PRODUCTS ---
   {
     id: 'prod_1',
     name: 'Vestido Silk Georgette',
@@ -119,7 +118,6 @@ export const mockProducts: Product[] = [
     expand: { collection: mockCollections[0] }
   },
 
-  // --- OMBRA PRODUCTS ---
   {
     id: 'prod_3',
     name: 'Abrigo Lana Cashmere',
@@ -183,7 +181,6 @@ export const mockProducts: Product[] = [
     expand: { collection: mockCollections[1] }
   },
 
-  // --- TERRA PRODUCTS ---
   {
     id: 'prod_3_1',
     name: 'Vestido Lino Arena',
@@ -247,7 +244,6 @@ export const mockProducts: Product[] = [
 ];
 
 export const mockLooks: Look[] = [
-  // --- LUMIERE LOOKS ---
   {
     id: 'look_1',
     title: 'Campaña: La luz del alba',
@@ -266,7 +262,6 @@ export const mockLooks: Look[] = [
     order: 2,
     expand: { products: [mockProducts[2], mockProducts[3]] }
   },
-  // --- OMBRA LOOKS ---
   {
     id: 'look_3',
     title: 'Campaña: El eco de la noche',
@@ -285,7 +280,6 @@ export const mockLooks: Look[] = [
     order: 4,
     expand: { products: [mockProducts[6], mockProducts[8]] }
   },
-  // --- TERRA LOOKS ---
   {
     id: 'look_5',
     title: 'Campaña: Retorno al origen',

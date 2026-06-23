@@ -10,7 +10,6 @@ export function HomeHero() {
   useEffect(() => {
     const tl = gsap.timeline();
 
-    // Reset initial states
     gsap.set([titleRef.current, subtitleRef.current], { 
       y: 100, 
       opacity: 0 
@@ -20,7 +19,6 @@ export function HomeHero() {
       scale: 1.1 
     });
 
-    // Animation sequence
     tl.to(imageRef.current, {
       scale: 1,
       duration: 2.5,

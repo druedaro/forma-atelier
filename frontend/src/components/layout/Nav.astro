@@ -15,14 +15,12 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
 >
   <div class="max-w-[1920px] mx-auto px-8 md:px-16 py-6 flex items-center justify-between">
 
-    {/* Desktop nav */}
     <nav class="hidden md:flex items-center gap-8 font-body text-sm tracking-wider">
       <a href="/collections" class="hover:opacity-60 transition-opacity duration-200" data-cursor="expand">Colecciones</a>
       <a href="/lookbook" class="hover:opacity-60 transition-opacity duration-200" data-cursor="expand">Lookbook</a>
       <a href="/atelier" class="hover:opacity-60 transition-opacity duration-200" data-cursor="expand">Atelier</a>
     </nav>
 
-    {/* Hamburger button */}
     <button
       id="mobile-menu-btn"
       class="md:hidden flex flex-col justify-center gap-[5px] w-10 h-10 p-2 z-[200] relative"
@@ -38,14 +36,12 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
       ></span>
     </button>
 
-    {/* Logo */}
     <div class="absolute left-1/2 -translate-x-1/2">
       <a href="/" class="font-body text-[13px] tracking-widest uppercase font-medium hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
         Forma
       </a>
     </div>
 
-    {/* Right icons */}
     <div class="flex items-center gap-4">
       <a href="/cart" aria-label="Cart" class="p-2 hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -65,7 +61,6 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
   </div>
 </header>
 
-{/* Mobile Menu — All styles inline to guarantee rendering */}
 <div
   id="mobile-menu"
   style="
@@ -81,7 +76,6 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
     transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   "
 >
-  {/* Top bar with close button */}
   <div style="display:flex; justify-content:space-between; align-items:center; padding: 1.5rem 2rem;">
     <span style="font-family: var(--font-body); font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: #0A0A0A; font-weight: 500;">Forma</span>
     <button
@@ -94,10 +88,8 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
     </button>
   </div>
 
-  {/* Divider */}
   <div style="height:0.5px; background:#E8DDD0; margin: 0 2rem;"></div>
 
-  {/* Main nav links */}
   <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:2.5rem; padding: 2rem;">
     <a
       href="/collections"
@@ -119,14 +111,12 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
     >Atelier</a>
   </div>
 
-  {/* Secondary links */}
   <div style="display:flex; justify-content:center; gap:2rem; padding: 1.5rem 2rem;">
     <a href="/contact" style="font-family: var(--font-body); font-size:11px; color:#8C7B6B; text-transform:uppercase; letter-spacing:0.2em; text-decoration:none;">Contacto</a>
     <a href="/cart" style="font-family: var(--font-body); font-size:11px; color:#8C7B6B; text-transform:uppercase; letter-spacing:0.2em; text-decoration:none;">Carrito</a>
     <a href="/login" style="font-family: var(--font-body); font-size:11px; color:#8C7B6B; text-transform:uppercase; letter-spacing:0.2em; text-decoration:none;">Cuenta</a>
   </div>
 
-  {/* Footer */}
   <div style="border-top:0.5px solid #E8DDD0; padding: 1.25rem 2rem; text-align:center;">
     <p style="font-family: var(--font-body); font-size:10px; color:#8C7B6B; letter-spacing:0.2em; text-transform:uppercase;">© 2025 Forma Atelier · Barcelona</p>
   </div>

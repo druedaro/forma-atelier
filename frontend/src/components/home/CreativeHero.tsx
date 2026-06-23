@@ -77,7 +77,6 @@ export function CreativeHero() {
       ref={containerRef} 
       className="relative w-full h-screen overflow-hidden bg-[#F5F0EA] flex flex-col justify-center"
     >
-      {/* Background Image Container */}
       <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none z-10 overflow-hidden">
         <div 
           ref={imageRef} 
@@ -93,7 +92,6 @@ export function CreativeHero() {
         </div>
       </div>
 
-      {/* Massive Typography Z-20 (Difference blending to pop out) */}
       <div className="relative z-20 flex flex-col items-center justify-center h-full pointer-events-none mix-blend-difference text-white">
         <div className="overflow-hidden">
           <h1 
@@ -115,7 +113,6 @@ export function CreativeHero() {
         </div>
       </div>
       
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 font-body text-xs tracking-widest uppercase text-[#0A0A0A]">
         Scroll para explorar
       </div>
