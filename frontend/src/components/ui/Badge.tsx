@@ -10,10 +10,14 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     return (
       <span
         ref={ref}
-        className={cn(
-          'inline-flex items-center px-2 py-0.5 rounded-sm font-body text-[10px] font-medium tracking-widest uppercase bg-smoke text-stone border-[0.5px] border-linen',
-          className
-        )}
+        className={cn('inline-flex items-center px-2 py-0.5 rounded-sm text-[10px] font-medium tracking-widest uppercase', className)}
+        style={{
+          fontFamily: 'var(--font-body)',
+          backgroundColor: '#F0EBE3', // smoke
+          color: '#8C7B6B',           // stone
+          border: '0.5px solid #E8DDD0', // linen
+          letterSpacing: '0.15em',
+        }}
         {...props}
       >
         {children}
@@ -22,3 +26,4 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   }
 );
 Badge.displayName = 'Badge';
+

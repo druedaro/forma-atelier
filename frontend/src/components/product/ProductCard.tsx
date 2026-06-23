@@ -17,6 +17,8 @@ export function ProductCard({ product }: ProductCardProps) {
       className="group flex flex-col gap-4 block"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
       data-cursor="text"
       data-cursor-text="Ver"
     >

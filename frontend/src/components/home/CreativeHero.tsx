@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function CreativeHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -8,77 +11,68 @@ export function CreativeHero() {
   const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!containerRef.current || !text1Ref.current || !text2Ref.current || !imageRef.current) return;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      // Initial state
-      gsap.set([text1Ref.current, text2Ref.current], { y: "100%", opacity: 0 });
+      gsap.set([text1Ref.current, text2Ref.current], { y: '100%', opacity: 0 });
       gsap.set(imageRef.current, { scale: 1.2, filter: 'blur(10px)' });
 
       tl.to(imageRef.current, {
         scale: 1,
         filter: 'blur(0px)',
         duration: 2.5,
-        ease: "power3.out"
+        ease: 'power3.out',
       })
-      .to(text1Ref.current, {
-        y: "0%",
-        opacity: 1,
-        duration: 1.2,
-        ease: "power4.out"
-      }, "-=1.8")
-      .to(text2Ref.current, {
-        y: "0%",
-        opacity: 1,
-        duration: 1.2,
-        ease: "power4.out"
-      }, "-=1.0");
+        .to(text1Ref.current, { y: '0%', opacity: 1, duration: 1.2, ease: 'power4.out' }, '-=1.8')
+        .to(text2Ref.current, { y: '0%', opacity: 1, duration: 1.2, ease: 'power4.out' }, '-=1.0');
 
-      // Mouse parallax for the image
-      const onMouseMove = (e: MouseEvent) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 20;
-        const y = (e.clientY / window.innerHeight - 0.5) * 20;
-        gsap.to(imageRef.current, { x, y, duration: 1, ease: "power2.out" });
-      };
+      // Scroll parallax — only if container exists
+      if (containerRef.current && text1Ref.current) {
+        gsap.to(text1Ref.current, {
+          y: -100,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
 
-      window.addEventListener("mousemove", onMouseMove);
-
-      // Scroll parallax
-      gsap.to(text1Ref.current, {
-        y: -100,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true
-        }
-      });
-
-      gsap.to(text2Ref.current, {
-        y: -200,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true
-        }
-      });
+      if (containerRef.current && text2Ref.current) {
+        gsap.to(text2Ref.current, {
+          y: -200,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
     }, containerRef);
-    
-    // Add event listener outside gsap context to ensure cleanup
+
     const onMouseMove = (e: MouseEvent) => {
+      if (!imageRef.current) return;
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      gsap.to(imageRef.current, { x, y, duration: 1, ease: "power2.out" });
+      gsap.to(imageRef.current, { x, y, duration: 1, ease: 'power2.out' });
     };
 
-    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener('mousemove', onMouseMove);
 
     return () => {
       ctx.revert();
-      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener('mousemove', onMouseMove);
+      // Kill any lingering ScrollTriggers tied to this component
+      ScrollTrigger.getAll()
+        .filter(st => st.trigger === containerRef.current)
+        .forEach(st => st.kill());
     };
   }, []);
+
 
   return (
     <section 
@@ -93,7 +87,8 @@ export function CreativeHero() {
         >
           <img 
             src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop" 
-            alt="Forma Atelier"
+            alt=""
+            role="presentation"
             className="w-full h-full object-cover"
           />
         </div>

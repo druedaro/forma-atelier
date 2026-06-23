@@ -1,53 +1,188 @@
 ---
+interface Props {
+  theme?: 'light' | 'dark';
+}
+const { theme = 'light' } = Astro.props;
+
+const isDark = theme === 'dark';
+// Inline color values for guaranteed rendering
+const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
 ---
 
-<header id="main-nav" class="fixed top-0 left-0 w-full z-[100] transition-all duration-400 ease-smooth">
+<header
+  id="main-nav"
+  style={`color: ${isDark ? '#F5F0EA' : '#0A0A0A'};`}
+  class="fixed top-0 left-0 w-full z-[100] transition-all duration-500"
+>
   <div class="max-w-[1920px] mx-auto px-8 md:px-16 py-6 flex items-center justify-between">
+
+    {/* Desktop nav */}
     <nav class="hidden md:flex items-center gap-8 font-body text-sm tracking-wider">
-      <a href="/collections" class="hover:text-stone transition-colors duration-200" data-cursor="expand">Colecciones</a>
-      <a href="/lookbook" class="hover:text-stone transition-colors duration-200" data-cursor="expand">Lookbook</a>
-      <a href="/atelier" class="hover:text-stone transition-colors duration-200" data-cursor="expand">Atelier</a>
+      <a href="/collections" class="hover:opacity-60 transition-opacity duration-200" data-cursor="expand">Colecciones</a>
+      <a href="/lookbook" class="hover:opacity-60 transition-opacity duration-200" data-cursor="expand">Lookbook</a>
+      <a href="/atelier" class="hover:opacity-60 transition-opacity duration-200" data-cursor="expand">Atelier</a>
     </nav>
 
-    <button class="md:hidden flex flex-col gap-[4px] p-2" aria-label="Open Menu">
-      <span class="block w-5 h-[1px] bg-noir"></span>
-      <span class="block w-5 h-[1px] bg-noir"></span>
+    {/* Hamburger button */}
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden flex flex-col justify-center gap-[5px] w-10 h-10 p-2 z-[200] relative"
+      aria-label="Toggle Menu"
+    >
+      <span
+        id="ham-line-1"
+        style={`background-color: ${lineColor}; display:block; width:20px; height:1.5px; transition: all 0.3s; transform-origin: center;`}
+      ></span>
+      <span
+        id="ham-line-2"
+        style={`background-color: ${lineColor}; display:block; width:20px; height:1.5px; transition: all 0.3s; transform-origin: center;`}
+      ></span>
     </button>
 
+    {/* Logo */}
     <div class="absolute left-1/2 -translate-x-1/2">
-      <a href="/" class="font-body text-[13px] tracking-widest uppercase font-medium" data-cursor="expand">
+      <a href="/" class="font-body text-[13px] tracking-widest uppercase font-medium hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
         Forma
       </a>
     </div>
 
-    <div className="flex items-center gap-4">
-      <a href="/cart" aria-label="Cart" class="p-2 hover:text-stone transition-colors duration-200" data-cursor="expand">
+    {/* Right icons */}
+    <div class="flex items-center gap-4">
+      <a href="/cart" aria-label="Cart" class="p-2 hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
       </a>
-      <a href="/login" aria-label="Account" class="p-2 hover:text-stone transition-colors duration-200" data-cursor="expand">
+      <a href="/login" aria-label="Account" class="p-2 hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </a>
     </div>
+
   </div>
 </header>
 
-<style>
+{/* Mobile Menu — All styles inline to guarantee rendering */}
+<div
+  id="mobile-menu"
+  style="
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F0EA;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+    transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  "
+>
+  {/* Top bar with close button */}
+  <div style="display:flex; justify-content:space-between; align-items:center; padding: 1.5rem 2rem;">
+    <span style="font-family: var(--font-body); font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: #0A0A0A; font-weight: 500;">Forma</span>
+    <button
+      id="mobile-close-btn"
+      aria-label="Close Menu"
+      style="width:40px; height:40px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:0; background:none; border:none; cursor:pointer; padding:8px;"
+    >
+      <span style="display:block; width:20px; height:1.5px; background:#0A0A0A; transform: rotate(45deg) translateY(0.75px); transform-origin:center;"></span>
+      <span style="display:block; width:20px; height:1.5px; background:#0A0A0A; transform: rotate(-45deg) translateY(-0.75px); transform-origin:center;"></span>
+    </button>
+  </div>
+
+  {/* Divider */}
+  <div style="height:0.5px; background:#E8DDD0; margin: 0 2rem;"></div>
+
+  {/* Main nav links */}
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:2.5rem; padding: 2rem;">
+    <a
+      href="/collections"
+      style="font-family: var(--font-display); font-size: clamp(2rem, 8vw, 3.5rem); color:#0A0A0A; text-transform:uppercase; letter-spacing:0.15em; font-weight:300; text-decoration:none; transition: color 0.2s;"
+      onmouseover="this.style.color='#C9A96E'"
+      onmouseout="this.style.color='#0A0A0A'"
+    >Colecciones</a>
+    <a
+      href="/lookbook"
+      style="font-family: var(--font-display); font-size: clamp(2rem, 8vw, 3.5rem); color:#0A0A0A; text-transform:uppercase; letter-spacing:0.15em; font-weight:300; text-decoration:none; transition: color 0.2s;"
+      onmouseover="this.style.color='#C9A96E'"
+      onmouseout="this.style.color='#0A0A0A'"
+    >Lookbook</a>
+    <a
+      href="/atelier"
+      style="font-family: var(--font-display); font-size: clamp(2rem, 8vw, 3.5rem); color:#0A0A0A; text-transform:uppercase; letter-spacing:0.15em; font-weight:300; text-decoration:none; transition: color 0.2s;"
+      onmouseover="this.style.color='#C9A96E'"
+      onmouseout="this.style.color='#0A0A0A'"
+    >Atelier</a>
+  </div>
+
+  {/* Secondary links */}
+  <div style="display:flex; justify-content:center; gap:2rem; padding: 1.5rem 2rem;">
+    <a href="/contact" style="font-family: var(--font-body); font-size:11px; color:#8C7B6B; text-transform:uppercase; letter-spacing:0.2em; text-decoration:none;">Contacto</a>
+    <a href="/cart" style="font-family: var(--font-body); font-size:11px; color:#8C7B6B; text-transform:uppercase; letter-spacing:0.2em; text-decoration:none;">Carrito</a>
+    <a href="/login" style="font-family: var(--font-body); font-size:11px; color:#8C7B6B; text-transform:uppercase; letter-spacing:0.2em; text-decoration:none;">Cuenta</a>
+  </div>
+
+  {/* Footer */}
+  <div style="border-top:0.5px solid #E8DDD0; padding: 1.25rem 2rem; text-align:center;">
+    <p style="font-family: var(--font-body); font-size:10px; color:#8C7B6B; letter-spacing:0.2em; text-transform:uppercase;">© 2025 Forma Atelier · Barcelona</p>
+  </div>
+</div>
+
+<style is:global>
   #main-nav.scrolled {
-    background-color: rgba(245, 240, 234, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 0.5px solid var(--color-linen);
+    background-color: rgba(245, 240, 234, 0.92) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid #E8DDD0;
+    color: #0A0A0A !important;
+  }
+  #main-nav.scrolled #ham-line-1,
+  #main-nav.scrolled #ham-line-2 {
+    background-color: #0A0A0A !important;
   }
 </style>
 
 <script>
+  declare global {
+    interface Window {
+      hasNavScrollListener?: boolean;
+    }
+  }
+
+  function initNav() {
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('mobile-close-btn');
+    const mobileMenu = document.getElementById('mobile-menu') as HTMLElement | null;
+
+    function openMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.style.opacity = '1';
+      mobileMenu.style.pointerEvents = 'auto';
+      mobileMenu.style.transform = 'translateX(0)';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.style.opacity = '0';
+      mobileMenu.style.pointerEvents = 'none';
+      mobileMenu.style.transform = 'translateX(100%)';
+      document.body.style.overflow = '';
+    }
+
+    mobileBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+
   function handleScroll() {
     const nav = document.getElementById('main-nav');
     if (window.scrollY > 50) {
@@ -57,5 +192,11 @@
     }
   }
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  if (!window.hasNavScrollListener) {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.hasNavScrollListener = true;
+  }
+
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
 </script>

@@ -2,9 +2,10 @@
 interface Props {
   title: string;
   description?: string;
+  theme?: 'light' | 'dark';
 }
 
-const { title, description = 'Forma Atelier - Barcelona' } = Astro.props;
+const { title, description = 'Forma Atelier - Barcelona', theme = 'light' } = Astro.props;
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
@@ -29,11 +30,14 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <div class="page-overlay"></div>
     <SmoothScroll client:load transition:persist="smooth-scroll" />
     <CursorFollower client:load transition:persist="cursor-follower" />
-    <Nav />
-    <slot />
+    <Nav theme={theme} />
+    <div id="main-content" tabindex="-1">
+      <slot />
+    </div>
     <Footer />
   </body>
 </html>
