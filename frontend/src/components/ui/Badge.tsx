@@ -13,9 +13,9 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
         className={cn('inline-flex items-center px-2 py-0.5 rounded-sm text-[10px] font-medium tracking-widest uppercase', className)}
         style={{
           fontFamily: 'var(--font-body)',
-          backgroundColor: '#F0EBE3', // smoke
-          color: '#8C7B6B',           // stone
-          border: '0.5px solid #E8DDD0', // linen
+          backgroundColor: '#F0EBE3',
+          color: '#8C7B6B',
+          border: '0.5px solid #E8DDD0',
           letterSpacing: '0.15em',
         }}
         {...props}
