@@ -11,7 +11,7 @@ const collectionSlugs = mockCollections.reduce((acc, col) => {
 }, {} as Record<string, string>);
 ---
 
-<BaseLayout title="FORMA ATELIER | Lookbook" theme="dark">
+<BaseLayout title="FORMA ATELIER | Lookbook" theme="dark" fixedNav={true} forceScrolled={true}>
   <main class="bg-noir min-h-screen">
     <HorizontalGallery looks={allLooks as any} collectionSlugs={collectionSlugs} client:load />
   </main>
