@@ -1,10 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import type { Look } from '../../lib/types';
 import { LookCard } from './LookCard';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export interface HorizontalGalleryProps {
   looks: Look[];
@@ -12,64 +8,61 @@ export interface HorizontalGalleryProps {
 }
 
 export function HorizontalGallery({ looks, collectionSlugs }: HorizontalGalleryProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !scrollContainerRef.current) return;
+    const outer = outerRef.current;
+    const inner = innerRef.current;
+    if (!outer || !inner) return;
 
-    ScrollTrigger.getAll().forEach(st => st.kill());
+    const getScrollWidth = () => inner.scrollWidth - window.innerWidth;
 
-    const ctx = gsap.context(() => {
-      const getScrollWidth = () => {
-        if (!scrollContainerRef.current) return 0;
-        return scrollContainerRef.current.offsetWidth - window.innerWidth;
-      };
+    const setHeight = () => {
+      outer.style.height = `${getScrollWidth() + window.innerHeight}px`;
+    };
+    setHeight();
 
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        pin: true,
-        scrub: 1,
-        end: () => `+=${getScrollWidth()}`,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          if (!scrollContainerRef.current) return;
-          gsap.set(scrollContainerRef.current, {
-            x: -getScrollWidth() * self.progress
-          });
-        }
-      });
-    }, sectionRef);
+    const onScroll = () => {
+      const outerRect = outer.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, -outerRect.top / getScrollWidth()));
+      inner.style.transform = `translateX(${-getScrollWidth() * progress}px)`;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', setHeight, { passive: true });
 
     return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', setHeight);
+      outer.style.height = '';
+      inner.style.transform = '';
     };
   }, [looks]);
 
   return (
-    <section ref={sectionRef} className="h-screen w-full overflow-hidden bg-noir relative">
-      <div 
-        ref={scrollContainerRef} 
-        className="h-full flex flex-nowrap items-center px-[10vw] w-max"
-      >
-        <div className="flex-shrink-0 w-[40vw] mr-[10vw]">
-          <h1 className="font-display text-5xl md:text-8xl text-ivory font-light leading-none mb-6">
-            L'Édition
-          </h1>
-          <p className="font-body text-sm md:text-base tracking-widest uppercase text-linen max-w-sm">
-            Nuestra colección completa, estructurada a través de narrativas visuales y contrastes texturales.
-          </p>
-        </div>
+    <div ref={outerRef} className="relative w-full">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-noir">
+        <div
+          ref={innerRef}
+          className="h-full flex flex-nowrap items-center px-[10vw] w-max will-change-transform"
+        >
+          <div className="flex-shrink-0 w-[40vw] mr-[10vw]">
+            <h1 className="font-display text-5xl md:text-8xl text-ivory font-light leading-none mb-6">
+              L'Édition
+            </h1>
+            <p className="font-body text-sm md:text-base tracking-widest uppercase text-linen max-w-sm">
+              Nuestra colección completa, estructurada a través de narrativas visuales y contrastes texturales.
+            </p>
+          </div>
 
-        {looks.map((look, idx) => {
-          return (
+          {looks.map((look, idx) => (
             <div key={look.id} className="flex-shrink-0 mr-[10vw]">
               <LookCard look={look} href={`/campaigns/${look.id}`} priority={idx === 0} />
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
