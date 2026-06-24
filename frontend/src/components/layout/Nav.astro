@@ -1,8 +1,10 @@
 ---
 interface Props {
   theme?: 'light' | 'dark';
+  fixedNav?: boolean;
+  forceScrolled?: boolean;
 }
-const { theme = 'light' } = Astro.props;
+const { theme = 'light', fixedNav = false, forceScrolled = false } = Astro.props;
 
 const isDark = theme === 'dark';
 const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
@@ -11,7 +13,8 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
 <header
   id="main-nav"
   style={`color: ${isDark ? '#F5F0EA' : '#0A0A0A'};`}
-  class="fixed top-0 left-0 w-full z-[100] transition-all duration-500"
+  class={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${forceScrolled ? 'scrolled' : ''}`}
+  data-fixed={fixedNav ? 'true' : 'false'}
 >
   <div class="max-w-[1920px] mx-auto px-8 md:px-16 py-6 flex items-center justify-between">
 
@@ -37,8 +40,11 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
     </button>
 
     <div class="absolute left-1/2 -translate-x-1/2">
-      <a href="/" class="font-body text-[13px] tracking-widest uppercase font-medium hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
-        Forma
+      <a href="/" class="flex items-center gap-[6px] hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
+        <span class="font-display italic text-2xl font-light leading-none">F</span>
+        <span class="font-body text-[13px] tracking-widest uppercase font-medium leading-none">
+          Forma
+        </span>
       </a>
     </div>
 
@@ -174,6 +180,8 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
 
   function handleScroll() {
     const nav = document.getElementById('main-nav');
+    if (nav?.dataset.fixed === 'true') return;
+
     if (window.scrollY > 50) {
       nav?.classList.add('scrolled');
     } else {

@@ -3,9 +3,11 @@ interface Props {
   title: string;
   description?: string;
   theme?: 'light' | 'dark';
+  fixedNav?: boolean;
+  forceScrolled?: boolean;
 }
 
-const { title, description = 'Forma Atelier - Barcelona', theme = 'light' } = Astro.props;
+const { title, description = 'Forma Atelier - Barcelona', theme = 'light', fixedNav = false, forceScrolled = false } = Astro.props;
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
@@ -44,7 +46,7 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <div class="page-overlay"></div>
     <SmoothScroll client:load transition:persist="smooth-scroll" />
     <BackToTop client:load transition:persist="back-to-top" />
-    <Nav theme={theme} />
+    <Nav theme={theme} fixedNav={fixedNav} forceScrolled={forceScrolled} />
     <div id="main-content" tabindex="-1">
       <slot />
     </div>
