@@ -68,9 +68,9 @@ export function HomeFeatured() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-32 px-8 md:px-16 bg-smoke overflow-hidden">
+    <section ref={containerRef} className="py-20 px-8 md:px-16 bg-smoke overflow-hidden">
       <div className="max-w-[1920px] mx-auto">
-        <header className="mb-24 flex justify-between items-end">
+        <header className="mb-16 flex justify-between items-end">
           <h2 className="font-display text-4xl md:text-5xl text-noir uppercase tracking-widest font-light">
             Selección<br/>Exclusiva
           </h2>
@@ -83,7 +83,7 @@ export function HomeFeatured() {
           <a 
             ref={card1Ref}
             href="/products/vestido-silk-georgette" 
-            className="group block mt-0 md:mt-24"
+            className="group block mt-0 md:mt-16"
             data-cursor="text"
             data-cursor-text="Ver prenda"
           >
@@ -101,7 +101,7 @@ export function HomeFeatured() {
           <a 
             ref={card2Ref}
             href="/products/abrigo-lana-cashmere" 
-            className="group block mt-0 md:-mt-12"
+            className="group block mt-0 md:-mt-8"
             data-cursor="text"
             data-cursor-text="Ver prenda"
           >
@@ -119,7 +119,7 @@ export function HomeFeatured() {
           <a 
             ref={card3Ref}
             href="/products/pantalon-lana-plisado" 
-            className="group block mt-0 md:mt-48"
+            className="group block mt-0 md:mt-32"
             data-cursor="text"
             data-cursor-text="Ver prenda"
           >
