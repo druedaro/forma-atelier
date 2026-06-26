@@ -12,11 +12,3 @@ export async function getProducts(): Promise<Product[]> {
   }
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | null> {
-  try {
-    const record = await pb.collection('products').getFirstListItem(`slug="${slug}"`);
-    return record as unknown as Product;
-  } catch (error) {
-    return null;
-  }
-}

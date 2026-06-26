@@ -40,22 +40,3 @@ export interface Look {
   }
 }
 
-export interface WishlistItem {
-  id: string
-  user: string
-  product: string
-  created: string
-  expand?: {
-    product: Product
-  }
-}
-
-export interface Wishlist {
-  id: string
-  user: string
-  products: string[]
-  created: string
-  expand?: {
-    products: Product[]
-  }
-}
