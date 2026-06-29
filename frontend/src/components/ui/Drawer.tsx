@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
+import { useFocusTrap } from '../../lib/hooks/useFocusTrap';
 
 export interface DrawerProps {
   isOpen: boolean;
@@ -11,9 +12,10 @@ export interface DrawerProps {
 
 export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
   const [mounted, setMounted] = useState(false);
+  
+  const panelRef = useFocusTrap(isOpen);
 
   useEffect(() => {
     setMounted(true);
