@@ -1,4 +1,6 @@
 ---
+import { CartButton } from './CartButton';
+
 interface Props {
   theme?: 'light' | 'dark';
   fixedNav?: boolean;
@@ -49,13 +51,7 @@ const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
     </div>
 
     <div class="flex items-center gap-4">
-      <a href="/cart" aria-label="Cart" class="p-2 hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-      </a>
+      <CartButton client:load />
       <a href="/login" aria-label="Account" class="p-2 hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>

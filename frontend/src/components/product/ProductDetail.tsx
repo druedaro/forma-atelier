@@ -5,6 +5,7 @@ import { Divider } from '../ui/Divider';
 import { Drawer } from '../ui/Drawer';
 import { SizeGuide } from './SizeGuide';
 import { initTextReveal } from '../../animations/textReveal';
+import { useCartStore } from '../../lib/store/cartStore';
 
 export interface ProductDetailProps {
   product: Product;
@@ -14,6 +15,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
+  const addItem = useCartStore((state) => state.addItem);
 
   useEffect(() => {
     if (infoRef.current) {
@@ -107,6 +109,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 size="lg" 
                 className="flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none"
                 disabled={!product.available || !selectedSize}
+                onClick={() => addItem(product, selectedSize)}
               >
                 {!product.available ? 'Agotado' : selectedSize ? 'Añadir a la cesta' : 'Selecciona una talla'}
               </Button>
