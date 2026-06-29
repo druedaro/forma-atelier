@@ -1,14 +1,6 @@
-import { pb } from '../pocketbase';
 import type { Collection } from '../types';
+import { mockCollections } from '../mock/data';
 
 export async function getCollections(): Promise<Collection[]> {
-  try {
-    const records = await pb.collection('collections').getFullList({
-      sort: '-created',
-    });
-    return records as unknown as Collection[];
-  } catch (error) {
-    return [];
-  }
+  return mockCollections;
 }
-
