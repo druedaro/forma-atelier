@@ -4,6 +4,8 @@ export interface Collection {
   slug: string
   season: string
   description: string
+  manifesto?: string
+  manifesto_image?: string
   hero_image: string
   palette: string[]
   active: boolean
@@ -33,6 +35,8 @@ export interface Look {
   title: string
   image: string
   collection: string
+  manifesto?: string
+  manifesto_image?: string
   products: string[]
   order: number
   expand?: {
