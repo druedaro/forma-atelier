@@ -39,7 +39,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           ))}
         </div>
 
-        <div className="w-full lg:w-[450px] flex-shrink-0">
+        <div className="w-full lg:w-[400px] xl:w-[500px] 2xl:w-[600px] flex-shrink-0 xl:pr-16 2xl:pr-32">
           <div ref={infoRef} className="sticky top-32 flex flex-col gap-10">
             <div className="flex flex-col gap-4 reveal">
               <h1 className="font-display text-4xl uppercase tracking-widest text-noir font-light">
@@ -65,42 +65,52 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <Divider className="reveal" />
 
             <div className="flex flex-col gap-4 reveal">
-              <div className="flex justify-between items-center font-body text-xs uppercase tracking-widest text-noir">
+              <div className="flex justify-between items-center font-body text-xs uppercase tracking-widest text-noir border-b border-linen pb-3">
                 <span>Talla</span>
                 <button className="underline hover:text-stone transition-colors" data-cursor="expand">
                   Guía de tallas
                 </button>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-0 border-b border-linen">
                 {product.sizes.map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`h-10 px-4 font-body text-xs tracking-widest border transition-all duration-300 ${
+                    className={`h-12 flex justify-between items-center px-2 font-body text-xs tracking-widest transition-all duration-300 border-t border-linen first:border-t-0 ${
                       selectedSize === size 
-                        ? 'border-noir bg-noir text-ivory' 
-                        : 'border-linen text-noir hover:border-noir'
+                        ? 'font-bold bg-smoke/50 text-noir' 
+                        : 'text-stone hover:text-noir hover:bg-smoke/30'
                     }`}
                     data-cursor="expand"
                   >
-                    {size}
+                    <span>{size}</span>
+                    {selectedSize === size && (
+                      <svg className="w-4 h-4 text-noir" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 mt-4 reveal">
+            <div className="flex gap-3 mt-4 reveal">
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="w-full"
+                className="flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none"
                 disabled={!product.available || !selectedSize}
               >
                 {!product.available ? 'Agotado' : selectedSize ? 'Añadir a la cesta' : 'Selecciona una talla'}
               </Button>
-              <Button variant="outline" size="lg" className="w-full">
-                Añadir a Wishlist
-              </Button>
+              <button 
+                className="w-[50px] h-[50px] flex-shrink-0 flex items-center justify-center border border-linen hover:border-noir transition-colors bg-white text-noir rounded-none"
+                aria-label="Añadir a Wishlist"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </button>
             </div>
 
           </div>
