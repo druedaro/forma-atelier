@@ -57,10 +57,10 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
       />
       <div 
         ref={panelRef}
-        className="fixed top-0 right-0 h-[100dvh] w-full max-w-md bg-ivory translate-x-full shadow-2xl flex flex-col"
+        className="fixed top-0 right-0 h-[100dvh] w-full max-w-md bg-white translate-x-full shadow-2xl flex flex-col"
         style={{ zIndex: 100000 }}
       >
-        <div className="flex items-center justify-between p-6 md:p-8 border-b border-linen shrink-0 bg-ivory">
+        <div className="flex items-center justify-between p-6 md:p-8 border-b border-linen shrink-0 bg-white">
           <h2 className="font-display text-xl uppercase tracking-widest text-noir">{title}</h2>
           <button 
             onClick={onClose}
@@ -72,7 +72,7 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
             </svg>
           </button>
         </div>
-        <div className="p-6 md:p-8 overflow-y-auto flex-1 bg-ivory">
+        <div className="p-6 md:p-8 overflow-y-auto flex-1 bg-white">
           {children}
         </div>
       </div>
