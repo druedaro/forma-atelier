@@ -10,9 +10,13 @@ export function HomeFeatured() {
   const card2Ref = useRef<HTMLAnchorElement>(null);
   const card3Ref = useRef<HTMLAnchorElement>(null);
 
+  const wrap1Ref = useRef<HTMLDivElement>(null);
+  const wrap2Ref = useRef<HTMLDivElement>(null);
+  const wrap3Ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo([card1Ref.current, card2Ref.current, card3Ref.current],
+      gsap.fromTo([wrap1Ref.current, wrap2Ref.current, wrap3Ref.current],
         { y: 100, opacity: 0 },
         {
           y: 0,
@@ -80,59 +84,65 @@ export function HomeFeatured() {
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
-          <a 
-            ref={card1Ref}
-            href="/products/vestido-silk-georgette" 
-            className="group block mt-0 md:mt-16"
-            data-cursor="text"
-            data-cursor-text="Ver prenda"
-          >
-            <div className="relative aspect-[3/4] overflow-hidden bg-linen mb-6">
-              <img 
-                src="/assets/photo-1512436991641-6745cdb1723f.avif" 
-                alt="Vestido Silk Georgette" 
-                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
-              />
-            </div>
-            <h3 className="font-body text-sm text-noir uppercase tracking-widest">Vestido Silk Georgette</h3>
-            <p className="font-body text-xs text-stone mt-2">1.850 €</p>
-          </a>
+          <div ref={wrap1Ref} className="mt-0 md:mt-16">
+            <a 
+              ref={card1Ref}
+              href="/products/vestido-silk-georgette" 
+              className="group block"
+              data-cursor="text"
+              data-cursor-text="Ver prenda"
+            >
+              <div className="relative aspect-[3/4] overflow-hidden bg-linen mb-6">
+                <img 
+                  src="/assets/photo-1512436991641-6745cdb1723f.avif" 
+                  alt="Vestido Silk Georgette" 
+                  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+                />
+              </div>
+              <h3 className="font-body text-sm text-noir uppercase tracking-widest">Vestido Silk Georgette</h3>
+              <p className="font-body text-xs text-stone mt-2">1.850 €</p>
+            </a>
+          </div>
 
-          <a 
-            ref={card2Ref}
-            href="/products/abrigo-lana-cashmere" 
-            className="group block mt-0 md:-mt-8"
-            data-cursor="text"
-            data-cursor-text="Ver prenda"
-          >
-            <div className="relative aspect-[3/4] overflow-hidden bg-linen mb-6">
-              <img 
-                src="/assets/photo-1539533018447-63fcce2678e3.avif" 
-                alt="Abrigo Lana Cashmere" 
-                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
-              />
-            </div>
-            <h3 className="font-body text-sm text-noir uppercase tracking-widest">Abrigo Lana Cashmere</h3>
-            <p className="font-body text-xs text-stone mt-2">2.400 €</p>
-          </a>
+          <div ref={wrap2Ref} className="mt-0 md:-mt-8">
+            <a 
+              ref={card2Ref}
+              href="/products/abrigo-lana-cashmere" 
+              className="group block"
+              data-cursor="text"
+              data-cursor-text="Ver prenda"
+            >
+              <div className="relative aspect-[3/4] overflow-hidden bg-linen mb-6">
+                <img 
+                  src="/assets/photo-1539533018447-63fcce2678e3.avif" 
+                  alt="Abrigo Lana Cashmere" 
+                  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+                />
+              </div>
+              <h3 className="font-body text-sm text-noir uppercase tracking-widest">Abrigo Lana Cashmere</h3>
+              <p className="font-body text-xs text-stone mt-2">2.400 €</p>
+            </a>
+          </div>
 
-          <a 
-            ref={card3Ref}
-            href="/products/pantalon-lana-plisado" 
-            className="group block mt-0 md:mt-32"
-            data-cursor="text"
-            data-cursor-text="Ver prenda"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden bg-linen mb-6">
-              <img 
-                src="/assets/photo-1509631179647-0177331693ae.avif" 
-                alt="Pantalón Lana Plisado" 
-                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
-              />
-            </div>
-            <h3 className="font-body text-sm text-noir uppercase tracking-widest">Pantalón Lana Plisado</h3>
-            <p className="font-body text-xs text-stone mt-2">720 €</p>
-          </a>
+          <div ref={wrap3Ref} className="mt-0 md:mt-32">
+            <a 
+              ref={card3Ref}
+              href="/products/pantalon-lana-plisado" 
+              className="group block"
+              data-cursor="text"
+              data-cursor-text="Ver prenda"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden bg-linen mb-6">
+                <img 
+                  src="/assets/photo-1509631179647-0177331693ae.avif" 
+                  alt="Pantalón Lana Plisado" 
+                  className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+                />
+              </div>
+              <h3 className="font-body text-sm text-noir uppercase tracking-widest">Pantalón Lana Plisado</h3>
+              <p className="font-body text-xs text-stone mt-2">720 €</p>
+            </a>
+          </div>
         </div>
       </div>
     </section>
