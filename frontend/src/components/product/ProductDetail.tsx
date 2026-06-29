@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { Product } from '../../lib/types';
 import { Button } from '../ui/Button';
 import { Divider } from '../ui/Divider';
+import { Drawer } from '../ui/Drawer';
+import { SizeGuide } from './SizeGuide';
 import { initTextReveal } from '../../animations/textReveal';
 
 export interface ProductDetailProps {
@@ -10,6 +12,7 @@ export interface ProductDetailProps {
 
 export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,7 +70,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <div className="flex flex-col gap-4 reveal">
               <div className="flex justify-between items-center font-body text-xs uppercase tracking-widest text-noir border-b border-linen pb-3">
                 <span>Talla</span>
-                <button className="underline hover:text-stone transition-colors" data-cursor="expand">
+                <button 
+                  onClick={() => setIsSizeGuideOpen(true)}
+                  className="underline hover:text-stone transition-colors" 
+                  data-cursor="expand"
+                >
                   Guía de tallas
                 </button>
               </div>
@@ -117,6 +124,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
         </div>
 
       </div>
+
+      <Drawer 
+        isOpen={isSizeGuideOpen} 
+        onClose={() => setIsSizeGuideOpen(false)} 
+        title="Guía de Tallas"
+      >
+        <SizeGuide />
+      </Drawer>
     </div>
   );
 }
