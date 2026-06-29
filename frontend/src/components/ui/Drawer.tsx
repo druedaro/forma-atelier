@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
 
 export interface DrawerProps {
@@ -11,8 +12,23 @@ export interface DrawerProps {
 export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      gsap.set(panelRef.current, { x: '100%' });
+      gsap.set(overlayRef.current, { opacity: 0, display: 'none' });
+      return;
+    }
+
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       gsap.to(overlayRef.current, { opacity: 1, duration: 0.3, display: 'block' });
@@ -20,27 +36,31 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
     } else {
       document.body.style.overflow = '';
       gsap.to(panelRef.current, { x: '100%', duration: 0.3, ease: 'power3.in' });
-      gsap.to(overlayRef.current, { opacity: 0, duration: 0.3, display: 'none', delay: 0.1 });
+      gsap.to(overlayRef.current, { opacity: 0, duration: 0.3, display: 'none' });
     }
     
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [isOpen, mounted]);
 
-  return (
-    <>
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="relative" style={{ zIndex: 99999 }}>
       <div 
         ref={overlayRef}
-        className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[100] hidden opacity-0"
+        className="fixed inset-0 bg-black/40 backdrop-blur-sm hidden opacity-0"
         onClick={onClose}
         aria-hidden="true"
+        style={{ zIndex: 99999 }}
       />
       <div 
         ref={panelRef}
-        className="fixed top-0 right-0 h-[100dvh] w-full max-w-md bg-ivory z-[110] translate-x-full shadow-2xl flex flex-col"
+        className="fixed top-0 right-0 h-[100dvh] w-full max-w-md bg-ivory translate-x-full shadow-2xl flex flex-col"
+        style={{ zIndex: 100000 }}
       >
-        <div className="flex items-center justify-between p-6 md:p-8 border-b border-linen shrink-0">
+        <div className="flex items-center justify-between p-6 md:p-8 border-b border-linen shrink-0 bg-ivory">
           <h2 className="font-display text-xl uppercase tracking-widest text-noir">{title}</h2>
           <button 
             onClick={onClose}
@@ -52,10 +72,11 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
             </svg>
           </button>
         </div>
-        <div className="p-6 md:p-8 overflow-y-auto flex-1">
+        <div className="p-6 md:p-8 overflow-y-auto flex-1 bg-ivory">
           {children}
         </div>
       </div>
-    </>
+    </div>,
+    document.body
   );
 }
