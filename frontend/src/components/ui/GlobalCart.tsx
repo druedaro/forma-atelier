@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useCartStore } from '../../lib/store/cartStore';
 import { Drawer } from './Drawer';
 import { Button } from './Button';
 
 export function GlobalCart() {
-  const { items, isOpen, toggleCart, removeItem, updateQuantity } = useCartStore();
-  const [mounted, setMounted] = useState(false);
+  const { items, removeItem, updateQuantity, clearCart } = useCartStore();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    
-    const handleOpen = () => toggleCart(true);
-    window.addEventListener('open-cart', handleOpen);
-    
-    return () => window.removeEventListener('open-cart', handleOpen);
-  }, [toggleCart]);
+    const handleOpen = () => setIsOpen(true);
+    const handleClose = () => setIsOpen(false);
 
-  if (!mounted) return null;
+    window.addEventListener('open-cart', handleOpen);
+    window.addEventListener('close-cart', handleClose);
+
+    return () => {
+      window.removeEventListener('open-cart', handleOpen);
+      window.removeEventListener('close-cart', handleClose);
+    };
+  }, []);
 
   const total = items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
 
   return (
-    <Drawer isOpen={isOpen} onClose={() => toggleCart(false)} title="Cesta">
+    <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} title="Cesta">
       <div className="flex flex-col h-full">
         {items.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-6 opacity-50">
@@ -82,7 +84,7 @@ export function GlobalCart() {
               className="w-full h-12 rounded-none text-xs" 
               disabled={items.length === 0}
               onClick={() => {
-                toggleCart(false);
+                setIsOpen(false);
                 window.location.href = '/checkout';
               }}
             >
@@ -92,7 +94,7 @@ export function GlobalCart() {
               className="w-full h-12 rounded-none text-xs border border-noir text-noir hover:bg-noir hover:text-ivory transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-noir"
               disabled={items.length === 0}
               onClick={() => {
-                toggleCart(false);
+                setIsOpen(false);
                 window.location.href = '/cart';
               }}
             >

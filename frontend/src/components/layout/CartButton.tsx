@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useCartStore } from '../../lib/store/cartStore';
 
 export function CartButton() {
-  const { items, toggleCart } = useCartStore();
+  const items = useCartStore((state) => state.items);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -11,16 +11,17 @@ export function CartButton() {
 
   const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.dispatchEvent(new CustomEvent('open-cart'));
+  };
+
   return (
-    <a 
+    <a
       href="/cart"
-      onClick={(e) => {
-        e.preventDefault();
-        toggleCart(true);
-        window.dispatchEvent(new CustomEvent('open-cart'));
-      }}
-      aria-label="Cesta" 
-      className="p-2 hover:opacity-60 transition-opacity duration-200 relative block" 
+      onClick={handleClick}
+      aria-label="Cesta"
+      className="p-2 hover:opacity-60 transition-opacity duration-200 relative block"
       data-cursor="expand"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
