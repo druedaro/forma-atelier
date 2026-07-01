@@ -108,7 +108,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               <Button 
                 variant="primary" 
                 size="lg" 
-                className={`flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none transition-all duration-300 ${isAdded ? 'bg-[#8C7B6B] border-[#8C7B6B] text-ivory' : ''}`}
+                className={`flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none transition-all duration-300 ${isAdded ? '!bg-[#2F855A] !border-[#2F855A] !text-white' : ''}`}
                 disabled={!product.available || !selectedSize || isAdded}
                 onClick={() => {
                   addItem(product, selectedSize);
