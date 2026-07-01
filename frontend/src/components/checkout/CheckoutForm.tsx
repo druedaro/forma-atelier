@@ -1,11 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useCartStore } from '../../lib/store/cartStore';
 import { Button } from '../ui/Button';
+import { createOrder } from '../../lib/api/orders';
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  city: string;
+  zip: string;
+}
 
 export function CheckoutForm() {
   const { items, clearCart } = useCartStore();
   const [mounted, setMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const [form, setForm] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    city: '',
+    zip: '',
+  });
 
   useEffect(() => {
     setMounted(true);
@@ -28,15 +48,34 @@ export function CheckoutForm() {
   const shipping = total > 0 ? (total > 200 ? 0 : 15) : 0;
   const grandTotal = total + shipping;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setError(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate API call for payment processing
-    setTimeout(() => {
+    setError(null);
+
+    try {
+      await createOrder({
+        email: form.email,
+        items,
+        total: grandTotal,
+        shipping_name: `${form.firstName} ${form.lastName}`.trim(),
+        shipping_address: form.address,
+        shipping_city: form.city,
+        shipping_zip: form.zip,
+      });
+
       clearCart();
       window.location.href = '/success';
-    }, 2000);
+    } catch (err) {
+      console.error('[Checkout] Error creating order:', err);
+      setError('Ha ocurrido un error al procesar tu pedido. Por favor, inténtalo de nuevo.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -50,27 +89,75 @@ export function CheckoutForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="firstName" className="font-body text-xs tracking-widest text-stone uppercase">Nombre</label>
-              <input required id="firstName" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input
+                required
+                id="firstName"
+                name="firstName"
+                type="text"
+                value={form.firstName}
+                onChange={handleChange}
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+              />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="lastName" className="font-body text-xs tracking-widest text-stone uppercase">Apellidos</label>
-              <input required id="lastName" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input
+                required
+                id="lastName"
+                name="lastName"
+                type="text"
+                value={form.lastName}
+                onChange={handleChange}
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+              />
             </div>
             <div className="flex flex-col gap-2 md:col-span-2 w-full">
               <label htmlFor="email" className="font-body text-xs tracking-widest text-stone uppercase">Correo Electrónico</label>
-              <input required id="email" type="email" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input
+                required
+                id="email"
+                name="email"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+              />
             </div>
             <div className="flex flex-col gap-2 md:col-span-2 w-full">
               <label htmlFor="address" className="font-body text-xs tracking-widest text-stone uppercase">Dirección completa</label>
-              <input required id="address" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input
+                required
+                id="address"
+                name="address"
+                type="text"
+                value={form.address}
+                onChange={handleChange}
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+              />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="city" className="font-body text-xs tracking-widest text-stone uppercase">Ciudad</label>
-              <input required id="city" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input
+                required
+                id="city"
+                name="city"
+                type="text"
+                value={form.city}
+                onChange={handleChange}
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+              />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="zip" className="font-body text-xs tracking-widest text-stone uppercase">Código Postal</label>
-              <input required id="zip" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input
+                required
+                id="zip"
+                name="zip"
+                type="text"
+                value={form.zip}
+                onChange={handleChange}
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+              />
             </div>
           </div>
         </section>
@@ -81,20 +168,48 @@ export function CheckoutForm() {
           <div className="p-6 border border-[#E8DDD0] bg-white flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="card" className="font-body text-xs tracking-widest text-stone uppercase">Número de Tarjeta</label>
-              <input required id="card" type="text" placeholder="0000 0000 0000 0000" maxLength={19} className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
+              <input
+                required
+                id="card"
+                type="text"
+                placeholder="0000 0000 0000 0000"
+                maxLength={19}
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50"
+              />
             </div>
             <div className="grid grid-cols-2 gap-4 w-full">
               <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="exp" className="font-body text-xs tracking-widest text-stone uppercase">Caducidad</label>
-                <input required id="exp" type="text" placeholder="MM/YY" maxLength={5} className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
+                <input
+                  required
+                  id="exp"
+                  type="text"
+                  placeholder="MM/YY"
+                  maxLength={5}
+                  className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50"
+                />
               </div>
               <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="cvv" className="font-body text-xs tracking-widest text-stone uppercase">CVV</label>
-                <input required id="cvv" type="text" placeholder="123" maxLength={4} className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
+                <input
+                  required
+                  id="cvv"
+                  type="text"
+                  placeholder="123"
+                  maxLength={4}
+                  className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50"
+                />
               </div>
             </div>
           </div>
         </section>
+
+        {/* Error message */}
+        {error && (
+          <div className="p-4 border border-red-200 bg-red-50 text-red-700 font-body text-sm tracking-wider">
+            {error}
+          </div>
+        )}
 
       </div>
 
