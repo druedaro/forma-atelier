@@ -1,5 +1,6 @@
 ---
 import { CartButton } from './CartButton';
+import { AccountButton } from './AccountButton';
 
 interface Props {
   theme?: 'light' | 'dark';
@@ -57,12 +58,7 @@ const isActive = (path: string) => {
 
     <div class="flex items-center gap-4">
       <CartButton client:only="react" />
-      <a href="/login" aria-label="Account" class="p-2 hover:opacity-60 transition-opacity duration-200" data-cursor="expand">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </a>
+      <AccountButton client:only="react" />
     </div>
 
   </div>
