@@ -2,9 +2,17 @@ import { pb } from '../pb';
 import type { Product } from '../types';
 import { mockProducts } from '../mock/data';
 
-// Helper: build public image URL from PocketBase record + filename
-export function getImageUrl(product: Product, filename: string): string {
-  return pb.files.getUrl(product, filename);
+// Helper: map images to full URLs or fallback to mock Unsplash images
+function withFallbackImages(record: Product): Product {
+  const mockProduct = mockProducts.find((p) => p.slug === record.slug);
+
+  if (record.images && record.images.length > 0) {
+    record.images = record.images.map((filename) => pb.files.getUrl(record, filename));
+  } else if (mockProduct) {
+    record.images = mockProduct.images;
+  }
+
+  return record;
 }
 
 // ─── Fetch all products (with PocketBase fallback to mocks) ──────────────────
@@ -14,7 +22,7 @@ export async function getProducts(): Promise<Product[]> {
     const records = await pb.collection('products').getFullList<Product>({
       sort: 'name',
     });
-    return records;
+    return records.map(withFallbackImages);
   } catch (err) {
     console.warn('[API] PocketBase unavailable, using mock data:', err);
     return mockProducts as Product[];
@@ -29,10 +37,10 @@ export async function getProductsByCollection(collectionSlug: string): Promise<P
       filter: `collection = "${collectionSlug}"`,
       sort: 'name',
     });
-    return records;
+    return records.map(withFallbackImages);
   } catch (err) {
     console.warn('[API] PocketBase unavailable, using mock data:', err);
-    return (mockProducts as Product[]).filter(p => p.collection === collectionSlug);
+    return (mockProducts as Product[]).filter((p) => p.collection === collectionSlug);
   }
 }
 
@@ -40,13 +48,11 @@ export async function getProductsByCollection(collectionSlug: string): Promise<P
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    const record = await pb.collection('products').getFirstListItem<Product>(
-      `slug = "${slug}"`
-    );
-    return record;
+    const record = await pb.collection('products').getFirstListItem<Product>(`slug = "${slug}"`);
+    return withFallbackImages(record);
   } catch (err) {
     console.warn('[API] PocketBase unavailable, using mock data:', err);
-    return (mockProducts as Product[]).find(p => p.slug === slug) ?? null;
+    return (mockProducts as Product[]).find((p) => p.slug === slug) ?? null;
   }
 }
 
@@ -58,7 +64,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
       filter: 'featured = true',
       sort: 'name',
     });
-    return records;
+    return records.map(withFallbackImages);
   } catch (err) {
     console.warn('[API] PocketBase unavailable, using mock data:', err);
     return (mockProducts as Product[]).filter(p => p.featured);
