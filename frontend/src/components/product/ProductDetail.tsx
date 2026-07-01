@@ -13,6 +13,7 @@ export interface ProductDetailProps {
 
 export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const [isAdded, setIsAdded] = useState(false);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
   const addItem = useCartStore((state) => state.addItem);
@@ -107,14 +108,16 @@ export function ProductDetail({ product }: ProductDetailProps) {
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none"
-                disabled={!product.available || !selectedSize}
+                className={`flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none transition-all duration-300 ${isAdded ? 'bg-[#8C7B6B] border-[#8C7B6B] text-ivory' : ''}`}
+                disabled={!product.available || !selectedSize || isAdded}
                 onClick={() => {
                   addItem(product, selectedSize);
+                  setIsAdded(true);
                   window.dispatchEvent(new CustomEvent('open-cart'));
+                  setTimeout(() => setIsAdded(false), 2000);
                 }}
               >
-                {!product.available ? 'Agotado' : selectedSize ? 'Añadir a la cesta' : 'Selecciona una talla'}
+                {!product.available ? 'Agotado' : !selectedSize ? 'Selecciona una talla' : isAdded ? '✓ Añadido' : 'Añadir a la cesta'}
               </Button>
               <button 
                 className="w-[50px] h-[50px] flex-shrink-0 flex items-center justify-center border border-linen hover:border-noir transition-colors bg-white text-noir rounded-none"
