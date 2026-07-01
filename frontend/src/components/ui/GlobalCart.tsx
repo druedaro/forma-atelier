@@ -72,13 +72,28 @@ export function GlobalCart() {
             <span className="text-stone">Total</span>
             <span className="font-medium text-noir">{total} €</span>
           </div>
-          <Button 
-            className="w-full h-12 rounded-none text-xs" 
-            disabled={items.length === 0}
-            onClick={() => window.location.href = '/cart'}
-          >
-            Tramitar pedido
-          </Button>
+          <div className="flex flex-col gap-2">
+            <Button 
+              className="w-full h-12 rounded-none text-xs" 
+              disabled={items.length === 0}
+              onClick={() => {
+                toggleCart(false);
+                window.location.href = '/checkout';
+              }}
+            >
+              Tramitar pedido
+            </Button>
+            <button 
+              className="w-full h-12 rounded-none text-xs border border-noir text-noir hover:bg-noir hover:text-ivory transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-noir"
+              disabled={items.length === 0}
+              onClick={() => {
+                toggleCart(false);
+                window.location.href = '/cart';
+              }}
+            >
+              Ver cesta
+            </button>
+          </div>
         </div>
       </div>
     </Drawer>
