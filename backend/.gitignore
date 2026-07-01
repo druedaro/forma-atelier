@@ -1,0 +1,5 @@
+# PocketBase runtime data — never commit to git
+pb_data/
+*.db
+*.db-shm
+*.db-wal

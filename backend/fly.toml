@@ -1,0 +1,34 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Forma Atelier — Backend (PocketBase)
+# ─────────────────────────────────────────────────────────────────────────────
+# This file is used by Fly.io to deploy PocketBase as a persistent service.
+
+app       = "forma-atelier-pb"
+primary_region = "mad"          # Madrid — closest to Barcelona
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+
+[mounts]
+  source      = "pb_data"
+  destination = "/pb/pb_data"
+
+[[services]]
+  internal_port = 8080
+  protocol      = "tcp"
+
+  [[services.ports]]
+    port     = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port     = 443
+    handlers = ["tls", "http"]
+
+  [services.concurrency]
+    type       = "requests"
+    hard_limit = 200
+    soft_limit = 150
