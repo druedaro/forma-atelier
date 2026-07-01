@@ -9,7 +9,12 @@ export function GlobalCart() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    
+    const handleOpen = () => toggleCart(true);
+    window.addEventListener('open-cart', handleOpen);
+    
+    return () => window.removeEventListener('open-cart', handleOpen);
+  }, [toggleCart]);
 
   if (!mounted) return null;
 

@@ -40,37 +40,37 @@ export function CheckoutForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+    <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 w-full">
       {/* Columna Izquierda (Formularios) */}
-      <div className="lg:col-span-7 flex flex-col gap-12">
+      <div className="lg:col-span-7 flex flex-col gap-12 w-full">
         
         {/* Contacto y Envío */}
         <section>
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">1. Información de Envío</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="firstName" className="font-body text-xs tracking-widest text-stone uppercase">Nombre</label>
-              <input required id="firstName" type="text" className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input required id="firstName" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="lastName" className="font-body text-xs tracking-widest text-stone uppercase">Apellidos</label>
-              <input required id="lastName" type="text" className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input required id="lastName" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
-            <div className="flex flex-col gap-2 md:col-span-2">
+            <div className="flex flex-col gap-2 md:col-span-2 w-full">
               <label htmlFor="email" className="font-body text-xs tracking-widest text-stone uppercase">Correo Electrónico</label>
-              <input required id="email" type="email" className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input required id="email" type="email" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
-            <div className="flex flex-col gap-2 md:col-span-2">
+            <div className="flex flex-col gap-2 md:col-span-2 w-full">
               <label htmlFor="address" className="font-body text-xs tracking-widest text-stone uppercase">Dirección completa</label>
-              <input required id="address" type="text" className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input required id="address" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="city" className="font-body text-xs tracking-widest text-stone uppercase">Ciudad</label>
-              <input required id="city" type="text" className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input required id="city" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="zip" className="font-body text-xs tracking-widest text-stone uppercase">Código Postal</label>
-              <input required id="zip" type="text" className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
+              <input required id="zip" type="text" className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors" />
             </div>
           </div>
         </section>
@@ -78,19 +78,19 @@ export function CheckoutForm() {
         {/* Pago */}
         <section>
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">2. Pago Seguro</h2>
-          <div className="p-6 border border-[#E8DDD0] bg-white flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+          <div className="p-6 border border-[#E8DDD0] bg-white flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-2 w-full">
               <label htmlFor="card" className="font-body text-xs tracking-widest text-stone uppercase">Número de Tarjeta</label>
-              <input required id="card" type="text" placeholder="0000 0000 0000 0000" maxLength={19} className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
+              <input required id="card" type="text" placeholder="0000 0000 0000 0000" maxLength={19} className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-2">
+            <div className="grid grid-cols-2 gap-4 w-full">
+              <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="exp" className="font-body text-xs tracking-widest text-stone uppercase">Caducidad</label>
-                <input required id="exp" type="text" placeholder="MM/YY" maxLength={5} className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
+                <input required id="exp" type="text" placeholder="MM/YY" maxLength={5} className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="cvv" className="font-body text-xs tracking-widest text-stone uppercase">CVV</label>
-                <input required id="cvv" type="text" placeholder="123" maxLength={4} className="h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
+                <input required id="cvv" type="text" placeholder="123" maxLength={4} className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors tracking-widest placeholder:opacity-50" />
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ export function CheckoutForm() {
       </div>
 
       {/* Columna Derecha (Resumen y Botón Final) */}
-      <div className="lg:col-span-5">
+      <div className="lg:col-span-5 w-full">
         <div className="bg-white p-8 border border-[#E8DDD0] sticky top-8">
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">Tu Pedido</h2>
           

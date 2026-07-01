@@ -109,7 +109,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 size="lg" 
                 className="flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none"
                 disabled={!product.available || !selectedSize}
-                onClick={() => addItem(product, selectedSize)}
+                onClick={() => {
+                  addItem(product, selectedSize);
+                  window.dispatchEvent(new CustomEvent('open-cart'));
+                }}
               >
                 {!product.available ? 'Agotado' : selectedSize ? 'Añadir a la cesta' : 'Selecciona una talla'}
               </Button>

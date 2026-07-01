@@ -13,7 +13,10 @@ export function CartButton() {
 
   return (
     <button 
-      onClick={() => toggleCart(true)}
+      onClick={() => {
+        toggleCart(true);
+        window.dispatchEvent(new CustomEvent('open-cart'));
+      }}
       aria-label="Cesta" 
       className="p-2 hover:opacity-60 transition-opacity duration-200 relative" 
       data-cursor="expand"
