@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="FORMA ATELIER | Pedido Confirmado" theme="light">
+  <style is:global>
+    #main-nav { display: none !important; }
+  </style>
+
+  <main class="min-h-screen bg-ivory flex flex-col items-center justify-center text-center px-8 relative overflow-hidden">
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]">
+      <div class="absolute top-0 left-0 w-full h-px bg-noir"></div>
+      <div class="absolute bottom-0 left-0 w-full h-px bg-noir"></div>
+      <div class="absolute top-0 left-0 w-px h-full bg-noir"></div>
+      <div class="absolute top-0 right-0 w-px h-full bg-noir"></div>
+    </div>
+
+    <div class="max-w-2xl mx-auto z-10 flex flex-col items-center">
+      <svg class="w-16 h-16 text-noir mb-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1} d="M5 13l4 4L19 7" />
+      </svg>
+      
+      <h1 class="font-display text-4xl md:text-5xl text-noir uppercase font-light tracking-widest mb-6">
+        Gracias por tu pedido
+      </h1>
+      
+      <p class="font-body text-sm md:text-base text-stone tracking-wider leading-relaxed mb-4">
+        Hemos recibido tu pedido correctamente. En breve recibirás un correo de confirmación con los detalles del envío y seguimiento.
+      </p>
+      
+      <p class="font-body text-xs text-stone tracking-[0.2em] uppercase mb-12">
+        Nº Pedido: <span class="text-noir font-medium">#FA-{Math.floor(Math.random() * 90000) + 10000}</span>
+      </p>
+      
+      <a 
+        href="/" 
+        class="inline-flex items-center justify-center h-14 px-12 bg-noir text-ivory font-body text-xs tracking-[0.2em] uppercase hover:bg-stone transition-colors duration-300"
+      >
+        Volver al Atelier
+      </a>
+    </div>
+  </main>
+</BaseLayout>
