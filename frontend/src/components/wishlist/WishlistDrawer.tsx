@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useWishlistStore } from '../../store/wishlistStore';
+import { useWishlistStore } from '../../lib/store/wishlistStore';
 import { gsap } from 'gsap';
 import { mockProducts } from '../../lib/mock/data';
 import { Button } from '../ui/Button';

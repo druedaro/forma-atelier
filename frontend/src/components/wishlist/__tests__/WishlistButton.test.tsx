@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { WishlistButton } from '../WishlistButton';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { useWishlistStore } from '../../../store/wishlistStore';
-import { useAuthStore } from '../../../store/authStore';
+import { useWishlistStore } from '../../../lib/store/wishlistStore';
+import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('WishlistButton', () => {
   beforeEach(() => {

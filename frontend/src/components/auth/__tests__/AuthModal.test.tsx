@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { AuthModal } from '../AuthModal';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { useAuthStore } from '../../../store/authStore';
+import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('AuthModal', () => {
   beforeEach(() => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { WishlistDrawer } from '../WishlistDrawer';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useWishlistStore } from '../../../store/wishlistStore';
+import { useWishlistStore } from '../../../lib/store/wishlistStore';
 
 vi.mock('../../../lib/mock/data', () => ({
   mockProducts: [

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { LoginForm } from '../LoginForm';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { useAuthStore } from '../../../store/authStore';
+import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('LoginForm', () => {
   beforeEach(() => {

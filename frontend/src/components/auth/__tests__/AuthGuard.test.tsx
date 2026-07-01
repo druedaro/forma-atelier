@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { AuthGuard } from '../AuthGuard';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { useAuthStore } from '../../../store/authStore';
+import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('AuthGuard', () => {
   beforeEach(() => {
