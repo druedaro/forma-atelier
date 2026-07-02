@@ -12,9 +12,12 @@ const firebaseConfig = {
   appId:             import.meta.env.PUBLIC_FIREBASE_APP_ID,
 };
 
-// Singleton — safe to call multiple times (Astro SSR + client)
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+// Guard: during Astro static build, env vars may be undefined — defer init to client
+const hasConfig = !!firebaseConfig.apiKey;
+const app = hasConfig
+  ? (getApps().length ? getApps()[0] : initializeApp(firebaseConfig))
+  : null;
 
-export const db      = getFirestore(app);
-export const auth    = getAuth(app);
-export const storage = getStorage(app);
+export const db      = hasConfig ? getFirestore(app!) : null as unknown as ReturnType<typeof getFirestore>;
+export const auth    = hasConfig ? getAuth(app!) : null as unknown as ReturnType<typeof getAuth>;
+export const storage = hasConfig ? getStorage(app!) : null as unknown as ReturnType<typeof getStorage>;
