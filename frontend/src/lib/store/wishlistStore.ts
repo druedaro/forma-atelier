@@ -29,6 +29,7 @@ export const useWishlistStore = create<WishlistState>()((set, get) => ({
       set({ items: [] });
       return;
     }
+    if (get().isLoading) return;
     set({ isLoading: true });
     const ids = await getWishlistIds();
     set({ items: ids, isLoading: false });

@@ -21,6 +21,9 @@ export interface Product extends PBRecord {
   featured: boolean;
   composition: string;
   care: string[];
+  material?: string;
+  origin?: string;
+  expand?: Record<string, unknown>;
 }
 
 // ─── Collection (editorial) ───────────────────────────────────────────────────

@@ -6,6 +6,7 @@ import { Drawer } from '../ui/Drawer';
 import { SizeGuide } from './SizeGuide';
 import { initTextReveal } from '../../animations/textReveal';
 import { useCartStore } from '../../lib/store/cartStore';
+import { WishlistButton } from '../wishlist/WishlistButton';
 
 export interface ProductDetailProps {
   product: Product;
@@ -119,14 +120,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
               >
                 {!product.available ? 'Agotado' : !selectedSize ? 'Selecciona una talla' : isAdded ? '✓ Añadido' : 'Añadir a la cesta'}
               </Button>
-              <button 
-                className="w-[50px] h-[50px] flex-shrink-0 flex items-center justify-center border border-linen hover:border-noir transition-colors bg-white text-noir rounded-none"
-                aria-label="Añadir a Wishlist"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </button>
+              <WishlistButton
+                productId={product.id}
+                className="w-[50px] h-[50px] flex-shrink-0 border border-linen hover:border-noir bg-white rounded-none"
+              />
             </div>
 
           </div>

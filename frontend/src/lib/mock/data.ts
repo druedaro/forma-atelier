@@ -42,7 +42,7 @@ export const mockCollections: Collection[] = [
   }
 ];
 
-export const mockProducts: Product[] = [
+export const mockProducts = [
   {
     id: 'prod_1',
     name: 'Vestido Silk Georgette',
@@ -247,7 +247,7 @@ export const mockProducts: Product[] = [
     featured: false,
     expand: { collection: mockCollections[2] }
   }
-];
+] as unknown as Product[];
 
 export const mockLooks: Look[] = [
   {

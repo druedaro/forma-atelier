@@ -32,7 +32,13 @@ export async function getWishlistProducts(): Promise<Product[]> {
     });
     return records
       .map(r => r.expand?.product_id)
-      .filter((p): p is Product => !!p);
+      .filter((p): p is Product => !!p)
+      .map(p => ({
+        ...p,
+        images: (p.images || []).map(filename =>
+          filename.startsWith('http') ? filename : pb.files.getUrl(p, filename)
+        ),
+      }));
   } catch {
     return [];
   }

@@ -1,6 +1,7 @@
 ---
 import { CartButton } from './CartButton';
 import { AccountButton } from './AccountButton';
+import { WishlistNavButton } from './WishlistNavButton';
 
 interface Props {
   theme?: 'light' | 'dark';
@@ -57,6 +58,7 @@ const isActive = (path: string) => {
     </div>
 
     <div class="flex items-center gap-4">
+      <WishlistNavButton client:only="react" />
       <CartButton client:only="react" />
       <AccountButton client:only="react" />
     </div>
