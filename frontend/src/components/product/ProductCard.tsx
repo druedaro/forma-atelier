@@ -15,7 +15,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <a
       href={`/products/${product.slug}`}
-      className="group flex flex-col gap-0 block"
+      className="group flex flex-col gap-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsHovered(true)}
