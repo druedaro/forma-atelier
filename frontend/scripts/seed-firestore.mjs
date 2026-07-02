@@ -13,6 +13,8 @@
 import { readFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { initializeApp, cert } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -27,15 +29,8 @@ try {
   process.exit(1)
 }
 
-const { default: admin } = await import('firebase-admin')
-
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  })
-}
-
-const db = admin.firestore()
+initializeApp({ credential: cert(serviceAccount) })
+const db = getFirestore()
 
 // ─── Product catalogue ────────────────────────────────────────────────────────
 const PRODUCTS = [
