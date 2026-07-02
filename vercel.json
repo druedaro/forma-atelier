@@ -1,8 +1,6 @@
 {
-  "rootDirectory": "frontend",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "astro",
   "installCommand": "npm install",
   "env": {
     "PUBLIC_PB_URL": "https://forma-atelier-pb.fly.dev"
