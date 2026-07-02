@@ -1,4 +1,5 @@
-import { pb } from '../pb';
+import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import type { Order, CartItem } from '../types';
 
 export interface CreateOrderInput {
@@ -15,10 +16,11 @@ export interface CreateOrderInput {
 // ─── Create order (guest checkout) ──────────────────────────────────────────
 
 export async function createOrder(input: CreateOrderInput): Promise<Order> {
-  const record = await pb.collection('orders').create<Order>({
-    ...input,
-    status: 'pending',
-    // Serialize items as JSON-safe snapshot (strip PB-specific fields)
+  const now = new Date().toISOString();
+  const orderData = {
+    email: input.email,
+    status: 'pending' as const,
+    total: input.total,
     items: input.items.map(item => ({
       productId: item.product.id,
       productName: item.product.name,
@@ -27,16 +29,39 @@ export async function createOrder(input: CreateOrderInput): Promise<Order> {
       size: item.size,
       quantity: item.quantity,
     })),
-  });
+    shipping_name: input.shipping_name,
+    shipping_address: input.shipping_address,
+    shipping_city: input.shipping_city,
+    shipping_zip: input.shipping_zip,
+    notes: input.notes ?? '',
+    created: now,
+    updated: now,
+  };
 
-  return record;
+  const docRef = await addDoc(collection(db, 'orders'), orderData);
+
+  return {
+    id: docRef.id,
+    collectionId: '',
+    collectionName: 'orders',
+    ...orderData,
+    items: input.items,
+  } as Order;
 }
 
 // ─── Get order by ID ─────────────────────────────────────────────────────────
 
 export async function getOrder(id: string): Promise<Order | null> {
   try {
-    return await pb.collection('orders').getOne<Order>(id);
+    const snap = await getDoc(doc(db, 'orders', id));
+    if (!snap.exists()) return null;
+    const data = snap.data();
+    return {
+      id: snap.id,
+      collectionId: '',
+      collectionName: 'orders',
+      ...data,
+    } as Order;
   } catch {
     return null;
   }

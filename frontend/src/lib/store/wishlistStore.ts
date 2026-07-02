@@ -1,14 +1,16 @@
 import { create } from 'zustand';
 import { addToWishlist, removeFromWishlist, getWishlistIds } from '../api/wishlist';
-import { pb } from '../pb';
+import { auth } from '../firebase';
 
 interface WishlistState {
-  // Local set of product IDs (cached from PB)
+  // Local set of product IDs (cached from Firestore)
   items: string[];
   isLoading: boolean;
   isWishlistOpen: boolean;
 
   // Actions
+  loadItems: () => Promise<void>;
+  /** @deprecated use loadItems */
   loadFromPB: () => Promise<void>;
   openWishlist: () => void;
   closeWishlist: () => void;
@@ -24,8 +26,8 @@ export const useWishlistStore = create<WishlistState>()((set, get) => ({
   isLoading: false,
   isWishlistOpen: false,
 
-  loadFromPB: async () => {
-    if (!pb.authStore.isValid) {
+  loadItems: async () => {
+    if (!auth.currentUser) {
       set({ items: [] });
       return;
     }
@@ -34,6 +36,8 @@ export const useWishlistStore = create<WishlistState>()((set, get) => ({
     const ids = await getWishlistIds();
     set({ items: ids, isLoading: false });
   },
+
+  loadFromPB: async () => get().loadItems(),
 
   openWishlist: () => set({ isWishlistOpen: true }),
   closeWishlist: () => set({ isWishlistOpen: false }),

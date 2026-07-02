@@ -1,22 +1,19 @@
-import { pb } from '../pb';
+import { collection, doc, getDocs, setDoc, deleteDoc } from 'firebase/firestore';
+import { db, auth } from '../firebase';
+import { getProductById } from './products';
 import type { Product } from '../types';
 
-// ─── Wishlist record shape from PocketBase ────────────────────────────────────
-interface WishlistRecord {
-  id: string;
-  user_id: string;
-  product_id: string;
-  expand?: { product_id: Product };
+function wishlistRef(userId: string) {
+  return collection(db, 'wishlists', userId, 'items');
 }
 
 // ─── Get all wishlist product IDs for the current user ───────────────────────
 export async function getWishlistIds(): Promise<string[]> {
-  if (!pb.authStore.isValid) return [];
+  const user = auth.currentUser;
+  if (!user) return [];
   try {
-    const records = await pb.collection('wishlists').getFullList<WishlistRecord>({
-      filter: `user_id = "${pb.authStore.model?.id}"`,
-    });
-    return records.map(r => r.product_id);
+    const snap = await getDocs(wishlistRef(user.uid));
+    return snap.docs.map(d => d.id); // document ID = productId
   } catch {
     return [];
   }
@@ -24,21 +21,14 @@ export async function getWishlistIds(): Promise<string[]> {
 
 // ─── Get full product data for wishlist items ─────────────────────────────────
 export async function getWishlistProducts(): Promise<Product[]> {
-  if (!pb.authStore.isValid) return [];
+  const user = auth.currentUser;
+  if (!user) return [];
   try {
-    const records = await pb.collection('wishlists').getFullList<WishlistRecord>({
-      filter: `user_id = "${pb.authStore.model?.id}"`,
-      expand: 'product_id',
-    });
-    return records
-      .map(r => r.expand?.product_id)
-      .filter((p): p is Product => !!p)
-      .map(p => ({
-        ...p,
-        images: (p.images || []).map(filename =>
-          filename.startsWith('http') ? filename : pb.files.getUrl(p, filename)
-        ),
-      }));
+    const snap = await getDocs(wishlistRef(user.uid));
+    const ids = snap.docs.map(d => d.id);
+    if (ids.length === 0) return [];
+    const products = await Promise.all(ids.map(id => getProductById(id)));
+    return products.filter((p): p is Product => p !== null);
   } catch {
     return [];
   }
@@ -46,21 +36,19 @@ export async function getWishlistProducts(): Promise<Product[]> {
 
 // ─── Add product to wishlist ─────────────────────────────────────────────────
 export async function addToWishlist(productId: string): Promise<void> {
-  if (!pb.authStore.isValid) throw new Error('Not authenticated');
-  await pb.collection('wishlists').create({
-    user_id: pb.authStore.model?.id,
-    product_id: productId,
+  const user = auth.currentUser;
+  if (!user) throw new Error('Not authenticated');
+  await setDoc(doc(db, 'wishlists', user.uid, 'items', productId), {
+    addedAt: new Date().toISOString(),
   });
 }
 
 // ─── Remove product from wishlist ────────────────────────────────────────────
 export async function removeFromWishlist(productId: string): Promise<void> {
-  if (!pb.authStore.isValid) return;
+  const user = auth.currentUser;
+  if (!user) return;
   try {
-    const record = await pb.collection('wishlists').getFirstListItem<WishlistRecord>(
-      `user_id = "${pb.authStore.model?.id}" && product_id = "${productId}"`
-    );
-    await pb.collection('wishlists').delete(record.id);
+    await deleteDoc(doc(db, 'wishlists', user.uid, 'items', productId));
   } catch {
     // Already removed
   }

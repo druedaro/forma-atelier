@@ -1,31 +1,52 @@
-import { pb } from '../pb';
+import { collection, getDocs, query, where, doc, getDoc, type DocumentData } from 'firebase/firestore';
+import { db } from '../firebase';
 import type { Product } from '../types';
 import { mockProducts } from '../mock/data';
 
-// Helper: map images to full URLs or fallback to mock Unsplash images
-function withFallbackImages(record: Product): Product {
-  const mockProduct = mockProducts.find((p) => p.slug === record.slug);
-
-  if (record.images && record.images.length > 0) {
-    record.images = record.images.map((filename) => pb.files.getUrl(record, filename));
-  } else if (mockProduct) {
-    record.images = mockProduct.images;
-  }
-
-  return record;
+function docToProduct(id: string, data: DocumentData): Product {
+  return {
+    id,
+    collectionId: '',
+    collectionName: 'products',
+    created: '',
+    updated: '',
+    name: data.name,
+    slug: data.slug,
+    description: data.description || '',
+    price: data.price,
+    collection: data.collection || '',
+    category: data.category || '',
+    images: Array.isArray(data.images) ? data.images : [],
+    sizes: Array.isArray(data.sizes) ? data.sizes : [],
+    available: data.available ?? true,
+    featured: data.featured ?? false,
+    composition: data.composition || '',
+    care: Array.isArray(data.care) ? data.care : [],
+    material: data.material,
+    origin: data.origin,
+  };
 }
 
-// ─── Fetch all products (with PocketBase fallback to mocks) ──────────────────
+function withMockImages(product: Product): Product {
+  if (!product.images || product.images.length === 0) {
+    const mock = (mockProducts as unknown as Product[]).find(p => p.slug === product.slug);
+    if (mock) product.images = mock.images;
+  }
+  return product;
+}
+
+// ─── Fetch all products ───────────────────────────────────────────────────────
 
 export async function getProducts(): Promise<Product[]> {
   try {
-    const records = await pb.collection('products').getFullList<Product>({
-      sort: 'name',
-    });
-    return records.map(withFallbackImages);
+    const snap = await getDocs(collection(db, 'products'));
+    if (snap.empty) return mockProducts as unknown as Product[];
+    return snap.docs
+      .map(d => withMockImages(docToProduct(d.id, d.data())))
+      .sort((a, b) => a.name.localeCompare(b.name));
   } catch (err) {
-    console.warn('[API] PocketBase unavailable, using mock data:', err);
-    return mockProducts as Product[];
+    console.warn('[API] Firestore unavailable, using mock data:', err);
+    return mockProducts as unknown as Product[];
   }
 }
 
@@ -33,14 +54,15 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getProductsByCollection(collectionSlug: string): Promise<Product[]> {
   try {
-    const records = await pb.collection('products').getFullList<Product>({
-      filter: `collection = "${collectionSlug}"`,
-      sort: 'name',
-    });
-    return records.map(withFallbackImages);
+    const q = query(collection(db, 'products'), where('collection', '==', collectionSlug));
+    const snap = await getDocs(q);
+    if (snap.empty) return (mockProducts as unknown as Product[]).filter(p => p.collection === collectionSlug);
+    return snap.docs
+      .map(d => withMockImages(docToProduct(d.id, d.data())))
+      .sort((a, b) => a.name.localeCompare(b.name));
   } catch (err) {
-    console.warn('[API] PocketBase unavailable, using mock data:', err);
-    return (mockProducts as Product[]).filter((p) => p.collection === collectionSlug);
+    console.warn('[API] Firestore unavailable, using mock data:', err);
+    return (mockProducts as unknown as Product[]).filter(p => p.collection === collectionSlug);
   }
 }
 
@@ -48,11 +70,14 @@ export async function getProductsByCollection(collectionSlug: string): Promise<P
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    const record = await pb.collection('products').getFirstListItem<Product>(`slug = "${slug}"`);
-    return withFallbackImages(record);
+    const q = query(collection(db, 'products'), where('slug', '==', slug));
+    const snap = await getDocs(q);
+    if (snap.empty) return (mockProducts as unknown as Product[]).find(p => p.slug === slug) ?? null;
+    const d = snap.docs[0];
+    return withMockImages(docToProduct(d.id, d.data()));
   } catch (err) {
-    console.warn('[API] PocketBase unavailable, using mock data:', err);
-    return (mockProducts as Product[]).find((p) => p.slug === slug) ?? null;
+    console.warn('[API] Firestore unavailable, using mock data:', err);
+    return (mockProducts as unknown as Product[]).find(p => p.slug === slug) ?? null;
   }
 }
 
@@ -60,13 +85,26 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
 export async function getFeaturedProducts(): Promise<Product[]> {
   try {
-    const records = await pb.collection('products').getFullList<Product>({
-      filter: 'featured = true',
-      sort: 'name',
-    });
-    return records.map(withFallbackImages);
+    const q = query(collection(db, 'products'), where('featured', '==', true));
+    const snap = await getDocs(q);
+    if (snap.empty) return (mockProducts as unknown as Product[]).filter(p => p.featured);
+    return snap.docs
+      .map(d => withMockImages(docToProduct(d.id, d.data())))
+      .sort((a, b) => a.name.localeCompare(b.name));
   } catch (err) {
-    console.warn('[API] PocketBase unavailable, using mock data:', err);
-    return (mockProducts as Product[]).filter(p => p.featured);
+    console.warn('[API] Firestore unavailable, using mock data:', err);
+    return (mockProducts as unknown as Product[]).filter(p => p.featured);
+  }
+}
+
+// ─── Fetch single product by Firestore document ID ───────────────────────────
+
+export async function getProductById(id: string): Promise<Product | null> {
+  try {
+    const snap = await getDoc(doc(db, 'products', id));
+    if (!snap.exists()) return null;
+    return withMockImages(docToProduct(snap.id, snap.data()));
+  } catch {
+    return null;
   }
 }

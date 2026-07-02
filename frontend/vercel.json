@@ -3,7 +3,12 @@
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "env": {
-    "PUBLIC_PB_URL": "https://forma-atelier-pb.fly.dev"
+    "PUBLIC_FIREBASE_API_KEY": "AIzaSyDIPLtP2Vv1dqOrPy3vMnKF7d7onjTGkco",
+    "PUBLIC_FIREBASE_AUTH_DOMAIN": "forma-atelier.firebaseapp.com",
+    "PUBLIC_FIREBASE_PROJECT_ID": "forma-atelier",
+    "PUBLIC_FIREBASE_STORAGE_BUCKET": "forma-atelier.firebasestorage.app",
+    "PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "1014617515008",
+    "PUBLIC_FIREBASE_APP_ID": "1:1014617515008:web:c58d3dbf34b82dcfdea4e5"
   },
   "headers": [
     {

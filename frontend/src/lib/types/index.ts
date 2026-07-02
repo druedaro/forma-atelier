@@ -1,10 +1,10 @@
-// ─── PocketBase base record fields ──────────────────────────────────────────
+// ─── Base record fields (Firebase-compatible) ───────────────────────────────
 export interface PBRecord {
   id: string;
-  created: string;
-  updated: string;
-  collectionId: string;
-  collectionName: string;
+  created?: string;
+  updated?: string;
+  collectionId?: string;
+  collectionName?: string;
 }
 
 // ─── Product ─────────────────────────────────────────────────────────────────

@@ -1,7 +1,14 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { pb } from '../pb';
-import type { RecordModel } from 'pocketbase';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  onAuthStateChanged,
+  type User,
+} from 'firebase/auth';
+import { auth } from '../firebase';
 
 export interface AuthUser {
   id: string;
@@ -22,12 +29,12 @@ interface AuthState {
   restoreSession: () => void;
 }
 
-function recordToUser(record: RecordModel): AuthUser {
+function firebaseUserToAuthUser(user: User): AuthUser {
   return {
-    id: record.id,
-    email: record.email as string,
-    name: (record.name as string) || (record.email as string).split('@')[0],
-    avatar: record.avatar as string | undefined,
+    id: user.uid,
+    email: user.email ?? '',
+    name: user.displayName || (user.email ?? '').split('@')[0],
+    avatar: user.photoURL ?? undefined,
   };
 }
 
@@ -39,43 +46,38 @@ export const useAuthStore = create<AuthState>()(
       isLoggedIn: false,
 
       login: async (email, password) => {
-        const authData = await pb.collection('users').authWithPassword(email, password);
+        const credential = await signInWithEmailAndPassword(auth, email, password);
         set({
-          user: recordToUser(authData.record),
-          token: authData.token,
+          user: firebaseUserToAuthUser(credential.user),
+          token: null,
           isLoggedIn: true,
         });
       },
 
       register: async (email, password, name) => {
-        await pb.collection('users').create({
-          email,
-          password,
-          passwordConfirm: password,
-          name,
-        });
-        // Auto-login after register
-        const authData = await pb.collection('users').authWithPassword(email, password);
+        const credential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(credential.user, { displayName: name });
         set({
-          user: recordToUser(authData.record),
-          token: authData.token,
+          user: firebaseUserToAuthUser({ ...credential.user, displayName: name }),
+          token: null,
           isLoggedIn: true,
         });
       },
 
       logout: () => {
-        pb.authStore.clear();
+        signOut(auth);
         set({ user: null, token: null, isLoggedIn: false });
       },
 
       restoreSession: () => {
-        if (pb.authStore.isValid && pb.authStore.model) {
-          set({
-            user: recordToUser(pb.authStore.model as RecordModel),
-            token: pb.authStore.token,
-            isLoggedIn: true,
-          });
-        }
+        // Subscribe to Firebase Auth state — fires immediately with current user
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            set({ user: firebaseUserToAuthUser(user), token: null, isLoggedIn: true });
+          } else {
+            set({ user: null, token: null, isLoggedIn: false });
+          }
+        });
       },
     }),
     {
