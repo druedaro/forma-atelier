@@ -1,0 +1,8 @@
+# Local PocketBase binary (downloaded fresh in Docker)
+pocketbase
+
+# Live database — volumes handle this in production
+pb_data/
+
+# Dev scripts
+start.sh

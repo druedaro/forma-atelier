@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     unzip
 
 # Download PocketBase
-ARG PB_VERSION=0.22.22
+ARG PB_VERSION=0.27.0
 RUN wget -q "https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip" \
     -O /tmp/pb.zip \
     && unzip -q /tmp/pb.zip -d /pb \
