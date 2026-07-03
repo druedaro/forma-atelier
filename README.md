@@ -24,27 +24,29 @@ This repository serves as the official **digital lookbook for Forma**: an immers
 
 ### ✦ The Project
 
-An interactive, *headless* digital lookbook featuring user authentication and a wishlist system. Developed as a case study exploring premium editorial experiences in luxury retail.
+An interactive, *headless* digital lookbook and e-commerce experience featuring user authentication, a wishlist system, and a full checkout flow. Developed as a case study exploring premium editorial experiences in luxury retail.
 
 ### ✦ Tech Stack
 
 | Layer | Technology |
 | :--- | :--- |
-| **Frontend** | Astro + React + TypeScript |
+| **Frontend** | Astro 5 + React 19 + TypeScript |
 | **Styling** | Tailwind CSS |
-| **Animations** | GSAP ScrollTrigger |
+| **Animations** | GSAP ScrollTrigger + Lenis |
 | **State Management** | Zustand |
-| **Backend** | Pocketbase |
-| **Deployment** | Vercel + Fly.io |
+| **Backend & Auth** | Firebase (Firestore + Authentication) |
+| **Payments** | Stripe (PaymentIntent API - Test Mode) |
+| **Deployment** | Vercel (Astro SSR adapter) |
 
 ### ✦ Features
 
 - **Cinematic lookbook** with animated scrolling and seamless transitions.
 - **Collection navigation** featuring exclusive seasons (SS25 · AW25).
-- **User authentication** secure, robust, and optimized.
-- **Persistent wishlist** tied to each individual user account.
+- **User authentication** secure, robust, and optimized via Firebase.
+- **Persistent wishlist & cart** tied to each individual user account.
+- **Complete checkout flow** with Stripe elements and simulated payments.
+- **Order management** storing confirmed purchases in Firestore.
 - **Responsive editorial design** with a strong minimalist aesthetic.
-- **Comprehensive case study** fully documented within the project.
 
 ### ✦ Case Study
 

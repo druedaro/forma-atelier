@@ -4,14 +4,11 @@ import { AccountButton } from './AccountButton';
 import { WishlistNavButton } from './WishlistNavButton';
 
 interface Props {
-  theme?: 'light' | 'dark';
   fixedNav?: boolean;
   forceScrolled?: boolean;
 }
-const { theme = 'light', fixedNav = false, forceScrolled = false } = Astro.props;
+const { fixedNav = false, forceScrolled = false } = Astro.props;
 
-const isDark = theme === 'dark';
-const lineColor = isDark ? '#F5F0EA' : '#0A0A0A';
 const pathname = Astro.url.pathname;
 const isActive = (path: string) => {
   if (path === '/') return pathname === '/';
@@ -21,7 +18,7 @@ const isActive = (path: string) => {
 
 <header
   id="main-nav"
-  style={`color: ${isDark ? '#F5F0EA' : '#0A0A0A'};`}
+  style="color: #0A0A0A;"
   class={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${forceScrolled ? 'scrolled' : ''}`}
   data-fixed={fixedNav ? 'true' : 'false'}
 >
@@ -40,11 +37,11 @@ const isActive = (path: string) => {
     >
       <span
         id="ham-line-1"
-        style={`background-color: ${lineColor}; display:block; width:20px; height:1.5px; transition: all 0.3s; transform-origin: center;`}
+        style="background-color: #0A0A0A; display:block; width:20px; height:1.5px; transition: all 0.3s; transform-origin: center;"
       ></span>
       <span
         id="ham-line-2"
-        style={`background-color: ${lineColor}; display:block; width:20px; height:1.5px; transition: all 0.3s; transform-origin: center;`}
+        style="background-color: #0A0A0A; display:block; width:20px; height:1.5px; transition: all 0.3s; transform-origin: center;"
       ></span>
     </button>
 
