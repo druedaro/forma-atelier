@@ -33,10 +33,14 @@ export function LoginForm() {
       window.location.href = '/wishlist';
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      if (msg.includes('Failed to authenticate') || msg.includes('invalid credentials')) {
+      if (msg.includes('auth/invalid-credential') || msg.includes('auth/wrong-password') || msg.includes('auth/user-not-found') || msg.includes('invalid credentials')) {
         setError('Email o contraseña incorrectos.');
-      } else if (msg.includes('already exists') || msg.includes('unique')) {
+      } else if (msg.includes('auth/email-already-in-use') || msg.includes('already exists') || msg.includes('unique')) {
         setError('Ya existe una cuenta con ese email.');
+      } else if (msg.includes('auth/weak-password')) {
+        setError('La contraseña debe tener al menos 6 caracteres.');
+      } else if (msg.includes('auth/invalid-email')) {
+        setError('El formato del email no es válido.');
       } else {
         setError('Ha ocurrido un error. Por favor, inténtalo de nuevo.');
       }
@@ -84,7 +88,7 @@ export function LoginForm() {
               id="auth-name"
               value={name}
               onChange={(e) => { setName(e.target.value); setError(null); }}
-              className="bg-transparent border-b border-linen py-2.5 font-body text-sm text-noir focus:outline-none focus:border-noir transition-colors"
+              className="bg-transparent border-b border-linen py-2.5 font-body text-sm text-noir focus:outline-none focus:border-noir transition-colors placeholder:text-linen"
               placeholder="Tu nombre"
               required={tab === 'register'}
               autoComplete="name"
@@ -101,7 +105,7 @@ export function LoginForm() {
             id="auth-email"
             value={email}
             onChange={(e) => { setEmail(e.target.value); setError(null); }}
-            className="bg-transparent border-b border-linen py-2.5 font-body text-sm text-noir focus:outline-none focus:border-noir transition-colors"
+            className="bg-transparent border-b border-linen py-2.5 font-body text-sm text-noir focus:outline-none focus:border-noir transition-colors placeholder:text-linen"
             placeholder="tu@email.com"
             required
             autoComplete="email"
@@ -117,7 +121,7 @@ export function LoginForm() {
             id="auth-password"
             value={password}
             onChange={(e) => { setPassword(e.target.value); setError(null); }}
-            className="bg-transparent border-b border-linen py-2.5 font-body text-sm text-noir focus:outline-none focus:border-noir transition-colors"
+            className="bg-transparent border-b border-linen py-2.5 font-body text-sm text-noir focus:outline-none focus:border-noir transition-colors placeholder:text-linen"
             placeholder="••••••••"
             required
             minLength={8}

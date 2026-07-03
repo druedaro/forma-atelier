@@ -96,7 +96,9 @@ export function CheckoutForm() {
                 type="text"
                 value={form.firstName}
                 onChange={handleChange}
-                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+                placeholder="Ana"
+                autoComplete="given-name"
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors placeholder:text-[#C4B8AC]"
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
@@ -108,7 +110,9 @@ export function CheckoutForm() {
                 type="text"
                 value={form.lastName}
                 onChange={handleChange}
-                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+                placeholder="García Martínez"
+                autoComplete="family-name"
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors placeholder:text-[#C4B8AC]"
               />
             </div>
             <div className="flex flex-col gap-2 md:col-span-2 w-full">
@@ -120,7 +124,9 @@ export function CheckoutForm() {
                 type="email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+                placeholder="ana@ejemplo.com"
+                autoComplete="email"
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors placeholder:text-[#C4B8AC]"
               />
             </div>
             <div className="flex flex-col gap-2 md:col-span-2 w-full">
@@ -132,7 +138,9 @@ export function CheckoutForm() {
                 type="text"
                 value={form.address}
                 onChange={handleChange}
-                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+                placeholder="Calle Mayor 12, 3º B"
+                autoComplete="street-address"
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors placeholder:text-[#C4B8AC]"
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
@@ -144,7 +152,9 @@ export function CheckoutForm() {
                 type="text"
                 value={form.city}
                 onChange={handleChange}
-                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+                placeholder="Barcelona"
+                autoComplete="address-level2"
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors placeholder:text-[#C4B8AC]"
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
@@ -156,7 +166,11 @@ export function CheckoutForm() {
                 type="text"
                 value={form.zip}
                 onChange={handleChange}
-                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors"
+                placeholder="08001"
+                autoComplete="postal-code"
+                pattern="[0-9]{5}"
+                title="Introduce un código postal de 5 dígitos"
+                className="w-full h-12 border border-[#E8DDD0] bg-transparent px-4 font-body text-sm text-noir outline-none focus:border-noir transition-colors placeholder:text-[#C4B8AC]"
               />
             </div>
           </div>
