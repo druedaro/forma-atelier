@@ -29,7 +29,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       
       <p class="font-body text-xs text-stone tracking-[0.2em] uppercase mb-12">
-        Nº Pedido: <span class="text-noir font-medium">#FA-{Math.floor(Math.random() * 90000) + 10000}</span>
+        Nº Pedido: <span id="order-ref" class="text-noir font-medium">#FA-XXXXXX</span>
       </p>
       
       <a 
@@ -40,4 +40,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </a>
     </div>
   </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const redirectStatus = params.get('redirect_status');
+    const paymentIntent = params.get('payment_intent');
+
+    // If Stripe redirected here with a failed or unknown status, send back to checkout
+    if (redirectStatus && redirectStatus !== 'succeeded') {
+      window.location.href = '/checkout';
+    }
+
+    // Display last 8 chars of the payment intent ID as order reference
+    const ref = document.getElementById('order-ref');
+    if (ref && paymentIntent) {
+      ref.textContent = '#FA-' + paymentIntent.slice(-8).toUpperCase();
+    } else if (ref && !paymentIntent) {
+      // Direct visit without Stripe redirect — show a generic placeholder
+      ref.textContent = '#FA-' + Math.floor(Math.random() * 90000 + 10000);
+    }
+  </script>
 </BaseLayout>
