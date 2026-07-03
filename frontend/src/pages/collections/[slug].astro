@@ -4,6 +4,7 @@ import { CollectionHero } from '../../components/lookbook/CollectionHero';
 import { LookbookScroll } from '../../components/lookbook/LookbookScroll';
 import { LookCard } from '../../components/lookbook/LookCard';
 import { ProductCard } from '../../components/product/ProductCard';
+import { CampaignManifesto } from '../../components/campaign/CampaignManifesto';
 import { getCollections } from '../../lib/api/collections';
 import { mockCollections, mockLooks, mockProducts } from '../../lib/mock/data';
 
@@ -37,6 +38,14 @@ if (!collection) {
 <BaseLayout title={`FORMA ATELIER | ${collection.name}`}>
   <main>
     <CollectionHero collection={collection as any} client:load />
+
+    {collection.manifesto && (
+      <CampaignManifesto 
+        manifesto={collection.manifesto} 
+        image={collection.manifesto_image} 
+        client:load 
+      />
+    )}
     
     <LookbookScroll client:load>
       {collectionLooks.map((look, idx) => (

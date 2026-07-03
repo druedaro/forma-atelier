@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CheckoutForm } from '../components/checkout/CheckoutForm';
+---
+
+<BaseLayout title="FORMA ATELIER | Checkout" theme="light">
+  <!-- Ocultamos el header y footer globales mediante CSS para este layout tipo "Focus" -->
+  <style is:global>
+    #main-nav, footer { display: none !important; }
+  </style>
+
+  <main class="min-h-screen bg-[#F5F0EA] flex flex-col">
+    {/* Minimal Header */}
+    <header class="w-full py-8 px-8 md:px-16 border-b border-[#E8DDD0] flex justify-center lg:justify-start">
+      <a href="/cart" class="font-display text-2xl tracking-widest uppercase text-noir hover:opacity-70 transition-opacity">
+        Forma Atelier
+      </a>
+    </header>
+
+    {/* Contenido principal que inyectaremos en el siguiente paso con CheckoutForm */}
+    <div class="flex-1 max-w-[1400px] w-full mx-auto px-8 md:px-16 py-12 lg:py-24">
+      <h1 class="font-display text-3xl text-noir uppercase font-light tracking-widest mb-12">
+        Finalizar Compra
+      </h1>
+      
+      <CheckoutForm client:load />
+    </div>
+  </main>
+</BaseLayout>

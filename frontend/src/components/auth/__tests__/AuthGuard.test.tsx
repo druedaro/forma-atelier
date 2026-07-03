@@ -1,35 +1,36 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { AuthGuard } from '../AuthGuard';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { useAuthStore } from '../../../store/authStore';
+import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('AuthGuard', () => {
   beforeEach(() => {
+    // Reset window.location mock
     Object.defineProperty(window, 'location', {
-      writable: true,
-      value: { href: 'http://localhost/' },
+      value: { href: '/' },
+      writable: true
     });
   });
 
-  it('renders children if authenticated', () => {
-    useAuthStore.setState({ isAuthenticated: true });
+  it('renders children when authenticated', () => {
+    useAuthStore.setState({ isLoggedIn: true });
     
-    const { getByText } = render(
+    render(
       <AuthGuard>
-        <div>Protected Content</div>
+        <div data-testid="protected-content">Protected Content</div>
       </AuthGuard>
     );
-    
-    expect(getByText('Protected Content')).toBeInTheDocument();
+
+    expect(screen.getByTestId('protected-content')).toBeInTheDocument();
   });
 
-  it('redirects to /login and does not render children if not authenticated', () => {
-    useAuthStore.setState({ isAuthenticated: false });
+  it('redirects to login when not authenticated', () => {
+    useAuthStore.setState({ isLoggedIn: false });
     
     const { container } = render(
       <AuthGuard>
-        <div>Protected Content</div>
+        <div data-testid="protected-content">Protected Content</div>
       </AuthGuard>
     );
     

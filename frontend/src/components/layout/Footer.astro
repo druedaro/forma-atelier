@@ -1,44 +1,56 @@
 ---
-import { Divider } from '../ui/Divider';
 ---
 
-<footer class="bg-ivory pt-32 pb-16 px-8 md:px-16 text-stone font-body">
-  <div class="max-w-[1920px] mx-auto">
-    <Divider className="mb-16" />
-    
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-24">
-      <div class="md:col-span-2">
-        <h3 class="font-display text-2xl text-noir mb-6 uppercase tracking-widest font-light">Forma</h3>
-        <p class="max-w-sm text-sm leading-relaxed">
-          Atelier de moda de lujo fundado en Barcelona. La moda como arquitectura del cuerpo: cada prenda, una construcción. Cada colección, un poema.
+<footer class="bg-noir pt-0 pb-0 text-linen font-body overflow-hidden">
+
+  <div class="px-8 md:px-16 pt-24 pb-12 max-w-[1920px] mx-auto">
+
+    <div class="mb-16 md:mb-24">
+      <div role="img" aria-label="Forma Atelier Wordmark" class="font-display italic text-[clamp(3rem,10vw,9rem)] font-light leading-none select-none tracking-tight" style="color: rgba(245,240,234,0.6);">
+        Forma Atelier
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 border-t border-linen/10 pt-12">
+
+      <div class="md:col-span-1 flex flex-col justify-between gap-8">
+        <div>
+          <span class="font-display italic text-2xl text-ivory font-light">F</span>
+          <span class="font-body text-[11px] uppercase tracking-[0.25em] text-ivory/70 ml-2">Forma Atelier</span>
+        </div>
+        <p class="font-body text-[11px] leading-loose text-linen/50 max-w-[260px]">
+          La moda como arquitectura del cuerpo.<br />
+          Cada prenda, una construcción.<br />
+          Diseñado en Barcelona.
         </p>
       </div>
 
-      <div>
-        <h4 class="text-xs uppercase tracking-widest text-noir font-medium mb-6">Explorar</h4>
-        <ul class="flex flex-col gap-4 text-sm">
-          <li><a href="/collections" class="hover:text-noir transition-colors duration-200">Colecciones</a></li>
-          <li><a href="/lookbook" class="hover:text-noir transition-colors duration-200">Lookbook</a></li>
-          <li><a href="/atelier" class="hover:text-noir transition-colors duration-200">El Atelier</a></li>
-        </ul>
+      <div class="md:col-span-1 flex flex-col gap-3">
+        <p class="font-body text-[10px] uppercase tracking-[0.25em] text-linen/30 mb-2">Explorar</p>
+        <a href="/collections" class="font-display text-2xl font-light text-ivory/80 hover:text-ivory transition-colors duration-300 leading-tight">Colecciones</a>
+        <a href="/lookbook" class="font-display text-2xl font-light text-ivory/80 hover:text-ivory transition-colors duration-300 leading-tight">Lookbook</a>
+        <a href="/atelier" class="font-display text-2xl font-light text-ivory/80 hover:text-ivory transition-colors duration-300 leading-tight">Atelier</a>
       </div>
 
-      <div>
-        <h4 class="text-xs uppercase tracking-widest text-noir font-medium mb-6">Asistencia</h4>
-        <ul class="flex flex-col gap-4 text-sm">
-          <li><a href="/contact" class="hover:text-noir transition-colors duration-200">Contacto</a></li>
-          <li><a href="/shipping" class="hover:text-noir transition-colors duration-200">Envíos y devoluciones</a></li>
-          <li><a href="/care" class="hover:text-noir transition-colors duration-200">Cuidado de prendas</a></li>
-        </ul>
+      <div class="md:col-span-1 flex flex-col gap-3">
+        <p class="font-body text-[10px] uppercase tracking-[0.25em] text-linen/30 mb-2">Asistencia</p>
+        <a href="/contact" class="font-display text-2xl font-light text-ivory/80 hover:text-ivory transition-colors duration-300 leading-tight">Contacto</a>
+        <a href="/shipping" class="font-display text-2xl font-light text-ivory/80 hover:text-ivory transition-colors duration-300 leading-tight">Envíos</a>
+        <a href="/care" class="font-display text-2xl font-light text-ivory/80 hover:text-ivory transition-colors duration-300 leading-tight">Cuidado</a>
+      </div>
+
+    </div>
+
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-t border-linen/10 mt-12 pt-8 gap-4">
+      <p class="font-body text-[10px] uppercase tracking-[0.2em] text-linen/30">
+        &copy; {new Date().getFullYear()} Forma Atelier · Barcelona
+      </p>
+      <div class="flex gap-8">
+        <a href="/privacy" class="font-body text-[10px] uppercase tracking-[0.2em] text-linen/30 hover:text-linen/60 transition-colors duration-200">Privacidad</a>
+        <a href="/terms" class="font-body text-[10px] uppercase tracking-[0.2em] text-linen/30 hover:text-linen/60 transition-colors duration-200">Términos</a>
       </div>
     </div>
 
-    <div class="flex flex-col md:flex-row items-center justify-between text-xs tracking-wider border-t-[0.5px] border-linen pt-8">
-      <p>&copy; {new Date().getFullYear()} Forma Atelier. Todos los derechos reservados.</p>
-      <div class="flex gap-6 mt-4 md:mt-0">
-        <a href="/privacy" class="hover:text-noir transition-colors">Privacidad</a>
-        <a href="/terms" class="hover:text-noir transition-colors">Términos</a>
-      </div>
-    </div>
   </div>
+
 </footer>

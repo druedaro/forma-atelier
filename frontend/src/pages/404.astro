@@ -1,22 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { Button } from '../components/ui/Button';
 ---
 
-<BaseLayout title="FORMA ATELIER | 404">
-  <main class="min-h-screen pt-32 pb-16 px-8 md:px-16 bg-ivory flex flex-col items-center justify-center text-center">
-    <h1 class="font-display text-8xl md:text-9xl text-noir font-light mb-4 tracking-widest">
-      404
-    </h1>
-    <h2 class="font-display text-2xl uppercase tracking-widest text-noir font-light mb-8">
-      Página no encontrada
-    </h2>
-    <p class="font-body text-stone tracking-wider max-w-md mx-auto mb-12 text-sm">
-      Lo sentimos, no hemos podido encontrar la página que buscas. Es posible que haya sido movida o eliminada.
-    </p>
-    
-    <a href="/" data-cursor="expand">
-      <Button client:visible>Volver al inicio</Button>
-    </a>
+<BaseLayout title="FORMA ATELIER | 404" theme="dark" fixedNav={true}>
+  <main class="min-h-screen relative flex flex-col items-center justify-center text-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 w-full h-full">
+      <div class="absolute inset-0 bg-noir/40 z-10"></div>
+      <img 
+        src="/assets/photo-1496747611176-843222e1e57c.avif" 
+        alt="404 Background" 
+        class="w-full h-full object-cover scale-[1.02]"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-20 px-8 flex flex-col items-center">
+      <h1 class="font-display text-[15vw] md:text-[12rem] text-ivory font-light leading-none mb-6 tracking-widest opacity-90">
+        404
+      </h1>
+      <h2 class="font-body text-xs md:text-sm uppercase tracking-[0.2em] text-ivory/80 font-light mb-16 max-w-md">
+        La prenda que buscas no existe en nuestra colección
+      </h2>
+      
+      <a 
+        href="/" 
+        data-cursor="expand"
+        class="inline-flex items-center justify-center font-body text-xs tracking-[0.2em] uppercase text-ivory border-b border-ivory/30 pb-2 hover:border-ivory transition-colors duration-300"
+      >
+        Volver al Atelier
+      </a>
+    </div>
   </main>
 </BaseLayout>

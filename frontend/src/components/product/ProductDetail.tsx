@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { Product } from '../../lib/types';
 import { Button } from '../ui/Button';
 import { Divider } from '../ui/Divider';
+import { Drawer } from '../ui/Drawer';
+import { SizeGuide } from './SizeGuide';
 import { initTextReveal } from '../../animations/textReveal';
+import { useCartStore } from '../../lib/store/cartStore';
+import { WishlistButton } from '../wishlist/WishlistButton';
 
 export interface ProductDetailProps {
   product: Product;
@@ -10,7 +14,10 @@ export interface ProductDetailProps {
 
 export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const [isAdded, setIsAdded] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
+  const addItem = useCartStore((state) => state.addItem);
 
   useEffect(() => {
     if (infoRef.current) {
@@ -22,7 +29,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-ivory pt-32 pb-24 px-gutter">
+    <div className="min-h-screen bg-ivory pt-20 lg:pt-32 pb-24 px-gutter">
       <div className="max-w-[1920px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 relative">
         
         <div className="flex-1 flex flex-col gap-8 lg:gap-16">
@@ -39,7 +46,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           ))}
         </div>
 
-        <div className="w-full lg:w-[450px] flex-shrink-0">
+        <div className="w-full lg:w-[400px] xl:w-[500px] 2xl:w-[600px] flex-shrink-0 xl:pr-16 2xl:pr-32">
           <div ref={infoRef} className="sticky top-32 flex flex-col gap-10">
             <div className="flex flex-col gap-4 reveal">
               <h1 className="font-display text-4xl uppercase tracking-widest text-noir font-light">
@@ -65,48 +72,72 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <Divider className="reveal" />
 
             <div className="flex flex-col gap-4 reveal">
-              <div className="flex justify-between items-center font-body text-xs uppercase tracking-widest text-noir">
+              <div className="flex justify-between items-center font-body text-xs uppercase tracking-widest text-noir border-b border-linen pb-3">
                 <span>Talla</span>
-                <button className="underline hover:text-stone transition-colors" data-cursor="expand">
+                <button 
+                  onClick={() => setIsSizeGuideOpen(true)}
+                  className="underline hover:text-stone transition-colors" 
+                  data-cursor="expand"
+                >
                   Guía de tallas
                 </button>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-0 border-b border-linen">
                 {product.sizes.map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`h-10 px-4 font-body text-xs tracking-widest border transition-all duration-300 ${
+                    className={`h-12 flex justify-between items-center px-2 font-body text-xs tracking-widest transition-all duration-300 border-t border-linen first:border-t-0 ${
                       selectedSize === size 
-                        ? 'border-noir bg-noir text-ivory' 
-                        : 'border-linen text-noir hover:border-noir'
+                        ? 'font-bold bg-smoke/50 text-noir' 
+                        : 'text-stone hover:text-noir hover:bg-smoke/30'
                     }`}
                     data-cursor="expand"
                   >
-                    {size}
+                    <span>{size}</span>
+                    {selectedSize === size && (
+                      <svg className="w-4 h-4 text-noir" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 mt-4 reveal">
+            <div className="flex gap-3 mt-4 reveal">
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="w-full"
-                disabled={!product.available || !selectedSize}
+                className={`flex-1 uppercase tracking-widest text-xs h-[50px] rounded-none transition-all duration-300 ${isAdded ? '!bg-[#2F855A] !border-[#2F855A] !text-white' : ''}`}
+                disabled={!product.available || !selectedSize || isAdded}
+                onClick={() => {
+                  addItem(product, selectedSize);
+                  setIsAdded(true);
+                  window.dispatchEvent(new CustomEvent('open-cart'));
+                  setTimeout(() => setIsAdded(false), 2000);
+                }}
               >
-                {!product.available ? 'Agotado' : selectedSize ? 'Añadir a la cesta' : 'Selecciona una talla'}
+                {!product.available ? 'Agotado' : !selectedSize ? 'Selecciona una talla' : isAdded ? '✓ Añadido' : 'Añadir a la cesta'}
               </Button>
-              <Button variant="outline" size="lg" className="w-full">
-                Añadir a Wishlist
-              </Button>
+              <WishlistButton
+                productId={product.id}
+                className="w-[50px] h-[50px] flex-shrink-0 border border-linen hover:border-noir bg-white rounded-none"
+              />
             </div>
 
           </div>
         </div>
 
       </div>
+
+      <Drawer 
+        isOpen={isSizeGuideOpen} 
+        onClose={() => setIsSizeGuideOpen(false)} 
+        title="Guía de Tallas"
+      >
+        <SizeGuide />
+      </Drawer>
     </div>
   );
 }

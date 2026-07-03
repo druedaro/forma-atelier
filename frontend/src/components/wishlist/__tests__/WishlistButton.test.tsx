@@ -2,36 +2,41 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { WishlistButton } from '../WishlistButton';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { useWishlistStore } from '../../../store/wishlistStore';
-import { useAuthStore } from '../../../store/authStore';
+import { useWishlistStore } from '../../../lib/store/wishlistStore';
+import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('WishlistButton', () => {
   beforeEach(() => {
     useWishlistStore.setState({ items: [] });
-    useAuthStore.setState({ isAuthenticated: true, isAuthModalOpen: false });
+    useAuthStore.setState({ isLoggedIn: true });
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: { href: 'http://localhost/' },
+    });
   });
 
   it('renders correctly', () => {
     render(<WishlistButton productId="123" />);
-    const btn = screen.getByRole('button', { name: 'Add to wishlist' });
+    // The button label changed in Spanish translation
+    const btn = screen.getByRole('button', { name: 'Añadir a favoritos' });
     expect(btn).toBeInTheDocument();
   });
 
-  it('opens auth modal if not authenticated', () => {
-    useAuthStore.setState({ isAuthenticated: false });
+  it('redirects to login if not authenticated', async () => {
+    useAuthStore.setState({ isLoggedIn: false });
     render(<WishlistButton productId="123" />);
     
-    const btn = screen.getByRole('button', { name: 'Add to wishlist' });
+    const btn = screen.getByRole('button', { name: 'Añadir a favoritos' });
     fireEvent.click(btn);
     
-    expect(useAuthStore.getState().isAuthModalOpen).toBe(true);
+    expect(window.location.href).toBe('/login');
     expect(useWishlistStore.getState().items).not.toContain('123');
   });
 
   it('adds item to wishlist if authenticated', () => {
     render(<WishlistButton productId="123" />);
     
-    const btn = screen.getByRole('button', { name: 'Add to wishlist' });
+    const btn = screen.getByRole('button', { name: 'Añadir a favoritos' });
     fireEvent.click(btn);
     
     expect(useWishlistStore.getState().items).toContain('123');
@@ -41,7 +46,7 @@ describe('WishlistButton', () => {
     useWishlistStore.setState({ items: ['123'] });
     render(<WishlistButton productId="123" />);
     
-    const btn = screen.getByRole('button', { name: 'Remove from wishlist' });
+    const btn = screen.getByRole('button', { name: 'Quitar de favoritos' });
     fireEvent.click(btn);
     
     expect(useWishlistStore.getState().items).not.toContain('123');

@@ -1,24 +1,13 @@
-import { pb } from '../pocketbase';
 import type { Collection } from '../types';
+import { mockCollections } from '../mock/data';
+
+// Collections are editorial (not from PocketBase yet) — static data
+// When a collections PB table is added, swap mock for pb.collection('collections')
 
 export async function getCollections(): Promise<Collection[]> {
-  try {
-    const records = await pb.collection('collections').getFullList({
-      sort: '-created',
-    });
-    return records as unknown as Collection[];
-  } catch (error) {
-    return [];
-  }
+  return mockCollections as Collection[];
 }
 
 export async function getCollectionBySlug(slug: string): Promise<Collection | null> {
-  try {
-    const record = await pb.collection('collections').getFirstListItem(`slug="${slug}"`, {
-      expand: 'looks.products',
-    });
-    return record as unknown as Collection;
-  } catch (error) {
-    return null;
-  }
+  return (mockCollections as Collection[]).find(c => c.slug === slug) ?? null;
 }

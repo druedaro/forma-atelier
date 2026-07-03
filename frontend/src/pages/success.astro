@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { OrderConfirmation } from '../components/checkout/OrderConfirmation';
+---
+
+<BaseLayout title="FORMA ATELIER | Pedido Confirmado" theme="light">
+  <style is:global>
+    #main-nav, footer { display: none !important; }
+  </style>
+
+  <main class="min-h-screen bg-ivory flex flex-col items-center justify-center px-8 py-16 relative overflow-hidden">
+    {/* Subtle grid overlay */}
+    <div class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]">
+      <div class="absolute top-0 left-0 w-full h-px bg-noir"></div>
+      <div class="absolute bottom-0 left-0 w-full h-px bg-noir"></div>
+      <div class="absolute top-0 left-0 w-px h-full bg-noir"></div>
+      <div class="absolute top-0 right-0 w-px h-full bg-noir"></div>
+    </div>
+
+    <OrderConfirmation client:load />
+  </main>
+</BaseLayout>

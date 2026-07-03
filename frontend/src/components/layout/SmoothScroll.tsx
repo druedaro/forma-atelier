@@ -25,7 +25,13 @@ export default function SmoothScroll() {
       window.scrollTo(0, 0);
       lenis.scrollTo(0, { immediate: true });
     };
+
+    const handleBeforePreparation = () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
+
     document.addEventListener('astro:page-load', handlePageLoad);
+    document.addEventListener('astro:before-preparation', handleBeforePreparation);
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -37,6 +43,8 @@ export default function SmoothScroll() {
 
     return () => {
       document.removeEventListener('astro:page-load', handlePageLoad);
+      document.removeEventListener('astro:before-preparation', handleBeforePreparation);
+      ScrollTrigger.getAll().forEach(st => st.kill());
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };

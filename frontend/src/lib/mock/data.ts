@@ -7,6 +7,8 @@ export const mockCollections: Collection[] = [
     slug: 'lumiere',
     season: 'SS25',
     description: 'Un estudio de luz y estructura. Blancos, beiges y dorados suaves que definen el sol de la mañana rozando la piedra.',
+    manifesto: 'La luz no solo ilumina, esculpe. Lumière es una exploración de cómo los primeros rayos de sol transforman los volúmenes y definen el espacio. Tejidos etéreos y cortes arquitectónicos que dialogan con la mañana.',
+    manifesto_image: '/assets/vestido-lino-arena.avif',
     hero_image: '/assets/photo-1490481651871-ab68de25d43d.avif',
     palette: ['#F5F0EA', '#C9A96E', '#E8DDD0'],
     active: true,
@@ -18,6 +20,8 @@ export const mockCollections: Collection[] = [
     slug: 'ombra',
     season: 'AW25',
     description: 'La elegancia de la sombra. Carbones profundos, negros austeros y burdeos oscuros para las silenciosas noches de invierno.',
+    manifesto: 'En la ausencia de luz, la forma cobra todo su significado. Ombra rinde tributo a la austeridad elegante, donde el negro no es un vacío, sino un lienzo para la textura, la profundidad y el misterio.',
+    manifesto_image: '/assets/camisa-seda-medianoche.avif',
     hero_image: '/assets/photo-1539533018447-63fcce2678e3.avif',
     palette: ['#0A0A0A', '#8C7B6B', '#1A1A1A'],
     active: true,
@@ -29,6 +33,8 @@ export const mockCollections: Collection[] = [
     slug: 'terra',
     season: 'RE25',
     description: 'Un retorno al origen. Tonos tierra, siluetas fluidas y texturas orgánicas inspiradas en la costa del Mediterráneo.',
+    manifesto: 'Con los pies en la tierra y la mirada en el horizonte. Terra es una celebración de nuestros orígenes y la artesanía cruda. Siluetas que fluyen como el paisaje y materiales que envejecen con nobleza.',
+    manifesto_image: '/assets/corse-cinturon-piel.avif',
     hero_image: '/assets/photo-1469334031218-e382a71b716b.avif',
     palette: ['#8C7B6B', '#E8DDD0', '#C9A96E'],
     active: true,
@@ -36,7 +42,7 @@ export const mockCollections: Collection[] = [
   }
 ];
 
-export const mockProducts: Product[] = [
+export const mockProducts = [
   {
     id: 'prod_1',
     name: 'Vestido Silk Georgette',
@@ -46,7 +52,7 @@ export const mockProducts: Product[] = [
     material: '100% Seda Natural',
     origin: 'Hecho a mano en Barcelona',
     images: [
-      '/assets/photo-1512436991641-6745cdb1723f.avif',
+      '/assets/vestido-silk-georgette.avif',
       '/assets/photo-1539008835657-9e8e9680c956.avif'
     ],
     collection: 'col_1',
@@ -80,7 +86,7 @@ export const mockProducts: Product[] = [
     price: 950,
     material: '100% Algodón Orgánico',
     origin: 'Hecho en Barcelona',
-    images: ['/assets/photo-1591561954557-26941169b49e.avif'],
+    images: ['/assets/blazer-algodon-estructurado.avif'],
     collection: 'col_1',
     sizes: ['S', 'M', 'L'],
     available: true,
@@ -95,7 +101,7 @@ export const mockProducts: Product[] = [
     price: 450,
     material: '100% Satén de Seda',
     origin: 'Hecho en España',
-    images: ['/assets/photo-1584273143981-41c073dfe8f8.avif'],
+    images: ['/assets/falda-satin-slip.avif'],
     collection: 'col_1',
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
@@ -143,7 +149,7 @@ export const mockProducts: Product[] = [
     price: 590,
     material: '100% Seda',
     origin: 'Hecho en Italia',
-    images: ['/assets/photo-1604644401890-0bd678c83788.avif'],
+    images: ['/assets/camisa-seda-medianoche.avif'],
     collection: 'col_2',
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
@@ -173,7 +179,7 @@ export const mockProducts: Product[] = [
     price: 450,
     material: '100% Piel de Becerro',
     origin: 'Hecho en España',
-    images: ['/assets/photo-1553531384-cc64ac80f931.avif'],
+    images: ['/assets/corse-cinturon-piel.avif'],
     collection: 'col_2',
     sizes: ['S', 'M'],
     available: true,
@@ -189,7 +195,7 @@ export const mockProducts: Product[] = [
     price: 850,
     material: '100% Lino',
     origin: 'Hecho en España',
-    images: ['/assets/photo-1584273143981-41c073dfe8f8.avif'],
+    images: ['/assets/vestido-lino-arena.avif'],
     collection: 'col_3',
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
@@ -241,13 +247,15 @@ export const mockProducts: Product[] = [
     featured: false,
     expand: { collection: mockCollections[2] }
   }
-];
+] as unknown as Product[];
 
 export const mockLooks: Look[] = [
   {
     id: 'look_1',
     title: 'Campaña: La luz del alba',
     image: '/assets/photo-1485968579580-b6d095142e6e.avif',
+    manifesto: 'El despertar de una nueva silueta. Esta campaña explora la pureza de las primeras luces del día, traduciendo su fragilidad en tejidos orgánicos que acarician la piel. Una oda a los comienzos, donde cada pliegue captura un instante efímero de claridad y propósito.',
+    manifesto_image: '/assets/photo-1590874103328-eac38a683ce7.avif',
     collection: 'col_1',
     products: ['prod_1', 'prod_2'],
     order: 1,
@@ -257,6 +265,8 @@ export const mockLooks: Look[] = [
     id: 'look_2',
     title: 'Campaña: Simetría matutina',
     image: '/assets/photo-1512436991641-6745cdb1723f.avif',
+    manifesto: 'La precisión encuentra su fluidez. Nos inspiramos en la arquitectura clásica para estructurar cortes sartoriales que, paradójicamente, otorgan libertad absoluta al cuerpo. La simetría no como una restricción, sino como un lienzo para la expresión personal.',
+    manifesto_image: '/assets/falda-satin-slip.avif',
     collection: 'col_1',
     products: ['prod_1_3', 'prod_1_4'],
     order: 2,
@@ -266,6 +276,8 @@ export const mockLooks: Look[] = [
     id: 'look_3',
     title: 'Campaña: El eco de la noche',
     image: '/assets/photo-1509631179647-0177331693ae.avif',
+    manifesto: 'La sombra es tan esencial como la luz. En esta cápsula, indagamos en el misterio de los tonos profundos y los volúmenes dramáticos. Prendas diseñadas para resonar en el silencio, ofreciendo refugio y misterio a quien las viste.',
+    manifesto_image: '/assets/camisa-seda-medianoche.avif',
     collection: 'col_2',
     products: ['prod_3', 'prod_2_3'],
     order: 3,
@@ -275,6 +287,8 @@ export const mockLooks: Look[] = [
     id: 'look_4',
     title: 'Campaña: Contrastes oscuros',
     image: '/assets/photo-1539533018447-63fcce2678e3.avif',
+    manifesto: 'Donde la lana se encuentra con la suavidad del cashmere, y la rigidez dialoga con el movimiento. Una yuxtaposición táctil que desafía las convenciones del diseño invernal, redefiniendo la elegancia contemporánea a través de la tensión material.',
+    manifesto_image: '/assets/photo-1556905055-8f358a7a47b2.avif',
     collection: 'col_2',
     products: ['prod_2_2', 'prod_2_4'],
     order: 4,
@@ -284,6 +298,8 @@ export const mockLooks: Look[] = [
     id: 'look_5',
     title: 'Campaña: Retorno al origen',
     image: '/assets/photo-1496747611176-843222e1e57c.avif',
+    manifesto: 'Una llamada a la tierra, a nuestras raíces más profundas. Utilizando paletas ocres y fibras sin teñir, esta campaña celebra la imperfección natural. Cada prenda es un homenaje a las manos artesanas que convierten lo crudo en algo exquisito.',
+    manifesto_image: '/assets/photo-1469334031218-e382a71b716b.avif',
     collection: 'col_3',
     products: ['prod_3_1', 'prod_3_2'],
     order: 5,
@@ -293,6 +309,8 @@ export const mockLooks: Look[] = [
     id: 'look_6',
     title: 'Campaña: Texturas orgánicas',
     image: '/assets/photo-1490481651871-ab68de25d43d.avif',
+    manifesto: 'Despojando al lujo de su artificio, revelamos la belleza en lo esencial. El tacto se convierte en el sentido primordial, invitando a una interacción íntima con cada fibra. Es una moda que se siente antes de ser vista.',
+    manifesto_image: '/assets/photo-1582552938357-32b906df40cb.avif',
     collection: 'col_3',
     products: ['prod_3_3', 'prod_3_4'],
     order: 6,

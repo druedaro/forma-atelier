@@ -1,20 +1,47 @@
-app = "forma-atelier-pb"
+# ─────────────────────────────────────────────────────────────────────────────
+# Forma Atelier — Backend (PocketBase on Fly.io)
+# ─────────────────────────────────────────────────────────────────────────────
+
+app            = "forma-atelier-pb"
 primary_region = "mad"
 
 [build]
-  image = "ghcr.io/pocketbase/pocketbase:latest"
+  dockerfile = "Dockerfile"
 
 [env]
-  PB_DATA_DIR = "/pb_data"
+  PORT = "8080"
 
-[mounts]
-  source = "pb_data"
-  destination = "/pb_data"
+# Persistent volume for the database
+[[mounts]]
+  source      = "pb_data"
+  destination = "/pb/pb_data"
 
 [http_service]
-  internal_port = 8090
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
+  internal_port        = 8080
+  force_https          = true
+  auto_stop_machines   = "stop"
+  auto_start_machines  = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type       = "requests"
+    hard_limit = 200
+    soft_limit = 150
+
+  # Readiness: wait until PB is accepting connections before routing traffic
+  [[http_service.checks]]
+    grace_period  = "10s"
+    interval      = "15s"
+    timeout       = "5s"
+    method        = "GET"
+    path          = "/api/health"
+
+[[vm]]
+  memory   = "256mb"
+  cpu_kind = "shared"
+  cpus     = 1
+
+[deploy]
+  # Roll out one machine at a time — zero downtime on re-deploys
+  strategy = "rolling"
+

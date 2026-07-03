@@ -1,36 +1,55 @@
-import { pb } from '../pocketbase';
-import type { Wishlist } from '../types';
+import { collection, doc, getDocs, setDoc, deleteDoc } from 'firebase/firestore';
+import { db, auth } from '../firebase';
+import { getProductById } from './products';
+import type { Product } from '../types';
 
-export async function getUserWishlist(userId: string): Promise<Wishlist | null> {
+function wishlistRef(userId: string) {
+  return collection(db, 'wishlists', userId, 'items');
+}
+
+// ─── Get all wishlist product IDs for the current user ───────────────────────
+export async function getWishlistIds(): Promise<string[]> {
+  const user = auth.currentUser;
+  if (!user) return [];
   try {
-    const record = await pb.collection('wishlists').getFirstListItem(`user="${userId}"`, {
-      expand: 'products'
-    });
-    return record as unknown as Wishlist;
-  } catch (error) {
-    return null;
+    const snap = await getDocs(wishlistRef(user.uid));
+    return snap.docs.map(d => d.id); // document ID = productId
+  } catch {
+    return [];
   }
 }
 
-export async function updateWishlist(wishlistId: string, products: string[]): Promise<Wishlist | null> {
+// ─── Get full product data for wishlist items ─────────────────────────────────
+export async function getWishlistProducts(): Promise<Product[]> {
+  const user = auth.currentUser;
+  if (!user) return [];
   try {
-    const record = await pb.collection('wishlists').update(wishlistId, {
-      products
-    }, { expand: 'products' });
-    return record as unknown as Wishlist;
-  } catch (error) {
-    return null;
+    const snap = await getDocs(wishlistRef(user.uid));
+    const ids = snap.docs.map(d => d.id);
+    if (ids.length === 0) return [];
+    const products = await Promise.all(ids.map(id => getProductById(id)));
+    return products.filter((p): p is Product => p !== null);
+  } catch {
+    return [];
   }
 }
 
-export async function createWishlist(userId: string, products: string[]): Promise<Wishlist | null> {
+// ─── Add product to wishlist ─────────────────────────────────────────────────
+export async function addToWishlist(productId: string): Promise<void> {
+  const user = auth.currentUser;
+  if (!user) throw new Error('Not authenticated');
+  await setDoc(doc(db, 'wishlists', user.uid, 'items', productId), {
+    addedAt: new Date().toISOString(),
+  });
+}
+
+// ─── Remove product from wishlist ────────────────────────────────────────────
+export async function removeFromWishlist(productId: string): Promise<void> {
+  const user = auth.currentUser;
+  if (!user) return;
   try {
-    const record = await pb.collection('wishlists').create({
-      user: userId,
-      products
-    }, { expand: 'products' });
-    return record as unknown as Wishlist;
-  } catch (error) {
-    return null;
+    await deleteDoc(doc(db, 'wishlists', user.uid, 'items', productId));
+  } catch {
+    // Already removed
   }
 }
