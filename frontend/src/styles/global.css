@@ -14,7 +14,15 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevents black flash during Astro View Transitions and overscroll */
+  background-color: var(--color-ivory);
 }
+
+/* Dark pages (lookbook) — match overscroll to page background */
+html[data-theme="dark"] {
+  background-color: var(--color-noir);
+}
+
 
 body {
   font-family: var(--font-body);

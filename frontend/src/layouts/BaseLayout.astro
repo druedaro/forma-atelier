@@ -62,3 +62,11 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <Footer />
   </body>
 </html>
+
+<script define:vars={{ theme }}>
+  // Set data-theme on <html> so CSS can scope dark-mode overscroll
+  document.documentElement.setAttribute('data-theme', theme);
+  document.addEventListener('astro:page-load', () => {
+    document.documentElement.setAttribute('data-theme', theme);
+  });
+</script>
