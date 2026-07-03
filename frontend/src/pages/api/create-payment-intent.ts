@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (!amount || typeof amount !== 'number' || amount < 50) {
       return new Response(
-        JSON.stringify({ error: 'Invalid amount (minimum 0.50 €)' }),
+        JSON.stringify({ error: 'Invalid amount (minimum 5 €)' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }

@@ -74,8 +74,10 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
             email: form.email,
             address: {
               line1: form.address,
+              line2: '',      // required by Stripe schema when address:'never'
               city: form.city,
               postal_code: form.zip,
+              state: '',      // required by Stripe schema — Spain has no states
               country: 'ES',
             },
           },
