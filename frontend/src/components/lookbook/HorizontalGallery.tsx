@@ -42,16 +42,16 @@ export function HorizontalGallery({ looks, collectionSlugs }: HorizontalGalleryP
 
   return (
     <div ref={outerRef} className="relative w-full">
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-noir">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-ivory">
         <div
           ref={innerRef}
           className="h-full flex flex-nowrap items-center px-[10vw] w-max will-change-transform"
         >
           <div className="flex-shrink-0 w-[40vw] mr-[10vw]">
-            <h1 className="font-display text-5xl md:text-8xl text-ivory font-light leading-none mb-6">
+            <h1 className="font-display text-5xl md:text-8xl text-noir font-light leading-none mb-6">
               L'Édition
             </h1>
-            <p className="font-body text-sm md:text-base tracking-widest uppercase text-linen max-w-sm">
+            <p className="font-body text-sm md:text-base tracking-widest uppercase text-stone max-w-sm">
               Nuestra colección completa, estructurada a través de narrativas visuales y contrastes texturales.
             </p>
           </div>
