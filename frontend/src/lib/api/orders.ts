@@ -6,21 +6,25 @@ export interface CreateOrderInput {
   email: string;
   items: CartItem[];
   total: number;
+  shipping: number;
   shipping_name: string;
   shipping_address: string;
   shipping_city: string;
   shipping_zip: string;
+  paymentIntentId?: string;
   notes?: string;
 }
 
-// ─── Create order (guest checkout) ──────────────────────────────────────────
+// ─── Create order (guest checkout — only called after Stripe confirms payment) ─
 
 export async function createOrder(input: CreateOrderInput): Promise<Order> {
   const now = new Date().toISOString();
   const orderData = {
     email: input.email,
-    status: 'pending' as const,
+    status: 'paid' as const,
     total: input.total,
+    shipping: input.shipping,
+    paymentIntentId: input.paymentIntentId ?? '',
     items: input.items.map(item => ({
       productId: item.product.id,
       productName: item.product.name,
@@ -28,6 +32,7 @@ export async function createOrder(input: CreateOrderInput): Promise<Order> {
       price: item.product.price,
       size: item.size,
       quantity: item.quantity,
+      image: item.product.images?.[0] ?? '',
     })),
     shipping_name: input.shipping_name,
     shipping_address: input.shipping_address,

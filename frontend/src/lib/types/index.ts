@@ -69,10 +69,12 @@ export interface Order extends PBRecord {
   email: string;
   status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   total: number;
+  shipping: number;
   items: CartItem[];
   shipping_name: string;
   shipping_address: string;
   shipping_city: string;
   shipping_zip: string;
+  paymentIntentId?: string;
   notes?: string;
 }

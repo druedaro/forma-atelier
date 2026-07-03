@@ -63,23 +63,8 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
     setIsSubmitting(true);
     setError(null);
 
-    // Save order to Firestore (best-effort — continues even if this fails)
-    try {
-      await createOrder({
-        email: form.email,
-        items,
-        total: grandTotal,
-        shipping_name: `${form.firstName} ${form.lastName}`.trim(),
-        shipping_address: form.address,
-        shipping_city: form.city,
-        shipping_zip: form.zip,
-      });
-    } catch (err) {
-      console.warn('[Checkout] Order save failed, proceeding to payment:', err);
-    }
-
-    // Confirm payment — Stripe redirects to /success on completion
-    const { error: stripeError } = await stripe.confirmPayment({
+    // Confirm payment with Stripe first — order is only created if payment succeeds
+    const { error: stripeError, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: `${window.location.origin}/success`,
@@ -96,6 +81,8 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
           },
         },
       },
+      // Don't redirect yet — we need to save the order first
+      redirect: 'if_required',
     });
 
     if (stripeError) {
@@ -105,8 +92,31 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
           : 'Ha ocurrido un error al procesar el pago. Por favor inténtalo de nuevo.'
       );
       setIsSubmitting(false);
+      return;
     }
-    // On success, Stripe handles the redirect automatically
+
+    // Payment confirmed — now persist the order to Firestore
+    try {
+      const order = await createOrder({
+        email: form.email,
+        items,
+        total: grandTotal,
+        shipping,
+        paymentIntentId: paymentIntent?.id ?? '',
+        shipping_name: `${form.firstName} ${form.lastName}`.trim(),
+        shipping_address: form.address,
+        shipping_city: form.city,
+        shipping_zip: form.zip,
+      });
+      // Pass orderId to /success via sessionStorage (cleared by OrderConfirmation)
+      sessionStorage.setItem('forma_order_id', order.id);
+    } catch (err) {
+      console.warn('[Checkout] Order save failed after payment:', err);
+      // Payment succeeded — still redirect even if Firestore write failed
+    }
+
+    // Redirect to success page
+    window.location.href = `/success?payment_intent=${paymentIntent?.id ?? ''}&redirect_status=succeeded`;
   };
 
   return (
