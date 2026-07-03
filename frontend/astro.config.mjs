@@ -4,10 +4,18 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+// Platform adapter — swap this single line to move to a different host:
+//   Vercel:  @astrojs/vercel  → vercel()
+//   Netlify: @astrojs/netlify → netlify()
+//   Node.js: @astrojs/node   → node({ mode: 'standalone' })
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
+  // Astro 5: 'static' + prerender=false in API routes = same as legacy 'hybrid'
+  // Pages are static; src/pages/api/* endpoints are SSR (prerender=false)
   output: 'static',
+  adapter: vercel(),
   site: 'https://forma-atelier.com',
   integrations: [react(), tailwind(), sitemap()],
   vite: {
