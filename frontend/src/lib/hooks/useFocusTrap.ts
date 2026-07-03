@@ -33,8 +33,8 @@ export function useFocusTrap(isActive: boolean) {
     };
 
     document.addEventListener('keydown', handleTabKey);
-    
-    // Focus first element on mount
+
+
     if (firstElement) {
       setTimeout(() => firstElement.focus(), 100);
     }

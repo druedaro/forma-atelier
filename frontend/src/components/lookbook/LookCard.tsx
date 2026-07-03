@@ -51,7 +51,7 @@ export function LookCard({ look, href, onClick, priority }: LookCardProps) {
           loading={priority ? "eager" : "lazy"}
         />
       </div>
-      
+
       <div 
         className="absolute bottom-0 left-0 w-full p-8 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-[400ms]"
         style={{

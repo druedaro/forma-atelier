@@ -22,7 +22,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount), // in euro cents
+      amount: Math.round(amount), 
       currency: 'eur',
       automatic_payment_methods: { enabled: true },
     });

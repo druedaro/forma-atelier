@@ -14,7 +14,7 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
   const [mounted, setMounted] = useState(false);
-  
+
   const panelRef = useFocusTrap(isOpen);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export function Drawer({ isOpen, onClose, title, children }: DrawerProps) {
       gsap.to(panelRef.current, { x: '100%', duration: 0.3, ease: 'power3.in' });
       gsap.to(overlayRef.current, { opacity: 0, duration: 0.3, display: 'none' });
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };

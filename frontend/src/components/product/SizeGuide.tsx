@@ -56,7 +56,7 @@ export function SizeGuide() {
 
       <div className="flex flex-col gap-6 p-6 bg-smoke/50 mt-4">
         <h3 className="font-display text-lg uppercase tracking-widest text-noir">Cómo medirte</h3>
-        
+
         <div className="flex flex-col gap-4 font-body text-sm text-stone">
           <div>
             <strong className="text-noir font-medium block mb-1">Pecho</strong>

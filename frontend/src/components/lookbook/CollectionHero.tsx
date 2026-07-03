@@ -30,7 +30,7 @@ export function CollectionHero({ collection }: CollectionHeroProps) {
           fetchPriority="high"
         />
       </div>
-      
+
       <div className="relative z-10 flex flex-col items-center text-center px-4 mt-16">
         <p 
           ref={subtitleRef}
@@ -38,14 +38,14 @@ export function CollectionHero({ collection }: CollectionHeroProps) {
         >
           {collection.season} Collection
         </p>
-        
+
         <h1 
           ref={titleRef}
           className="font-display text-7xl md:text-[9rem] text-noir tracking-wider font-light uppercase mb-16 opacity-0 translate-y-8"
         >
           {collection.name}
         </h1>
-        
+
         <div ref={ctaRef} className="opacity-0 translate-y-8">
           <button 
             onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}

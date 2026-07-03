@@ -31,11 +31,11 @@ describe('ProductCard', () => {
   it('shows hover image on mouse enter', () => {
     const { container } = render(<ProductCard product={mockProduct as any} />);
     const link = container.firstChild as HTMLElement;
-    
+
     fireEvent.mouseEnter(link);
     const img = screen.getByAltText('Test Product');
     expect(img).toHaveAttribute('src', 'img2.jpg');
-    
+
     fireEvent.mouseLeave(link);
     expect(img).toHaveAttribute('src', 'img1.jpg');
   });

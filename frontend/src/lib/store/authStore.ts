@@ -22,7 +22,7 @@ interface AuthState {
   token: string | null;
   isLoggedIn: boolean;
 
-  // Actions
+
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => void;
@@ -70,7 +70,7 @@ export const useAuthStore = create<AuthState>()(
       },
 
       restoreSession: () => {
-        // Subscribe to Firebase Auth state — fires immediately with current user
+
         onAuthStateChanged(auth, (user) => {
           if (user) {
             set({ user: firebaseUserToAuthUser(user), token: null, isLoggedIn: true });

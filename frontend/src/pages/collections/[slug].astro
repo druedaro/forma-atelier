@@ -13,7 +13,7 @@ export async function getStaticPaths() {
   if (collections.length === 0) {
     collections = mockCollections;
   }
-  
+
   return collections.map((collection) => ({
     params: { slug: collection.slug },
     props: { collection },
@@ -46,7 +46,7 @@ if (!collection) {
         client:load 
       />
     )}
-    
+
     <LookbookScroll client:load>
       {collectionLooks.map((look, idx) => (
         <div class="h-screen w-screen flex-shrink-0 flex items-center justify-center p-8 md:p-16">

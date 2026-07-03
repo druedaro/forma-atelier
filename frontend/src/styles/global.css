@@ -14,7 +14,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevents black flash during Astro View Transitions and overscroll */
+
   background-color: var(--color-ivory);
 }
 

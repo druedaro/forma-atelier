@@ -18,7 +18,7 @@ export function CampaignManifesto({ manifesto, image }: CampaignManifestoProps) 
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Text reveal animation
+
       gsap.fromTo(textRef.current,
         { y: 50, opacity: 0 },
         {
@@ -34,7 +34,7 @@ export function CampaignManifesto({ manifesto, image }: CampaignManifestoProps) 
         }
       );
 
-      // Line expand animation
+
       gsap.fromTo(lineRef.current,
         { scaleY: 0 },
         {
@@ -50,7 +50,7 @@ export function CampaignManifesto({ manifesto, image }: CampaignManifestoProps) 
         }
       );
 
-      // Image entrance and parallax
+
       if (imgWrapRef.current && imgRef.current) {
         gsap.fromTo(imgWrapRef.current,
           { clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)' },
@@ -86,7 +86,7 @@ export function CampaignManifesto({ manifesto, image }: CampaignManifestoProps) 
   return (
     <section ref={sectionRef} className="relative w-full bg-ivory py-24 md:py-40 px-8 md:px-16 overflow-hidden">
       <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-16 md:gap-24">
-        
+
         <div className="w-full md:w-5/12 flex flex-col">
           <div className="flex gap-6">
             <div ref={lineRef} className="w-[1px] h-32 md:h-48 bg-stone/40 shrink-0"></div>

@@ -29,7 +29,7 @@ export function LoginForm() {
         }
         await register(email, password, name);
       }
-      // Redirect to account/wishlist after login
+
       window.location.href = '/wishlist';
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -50,7 +50,7 @@ export function LoginForm() {
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Tabs */}
+
       <div className="flex border-b border-linen">
         <button
           type="button"
@@ -76,7 +76,7 @@ export function LoginForm() {
         </button>
       </div>
 
-      {/* Form */}
+
       <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
         {tab === 'register' && (
           <div className="flex flex-col gap-2">
@@ -132,7 +132,7 @@ export function LoginForm() {
           )}
         </div>
 
-        {/* Error */}
+
         {error && (
           <p className="font-body text-xs text-red-600 tracking-wider bg-red-50 border border-red-200 px-4 py-3">
             {error}

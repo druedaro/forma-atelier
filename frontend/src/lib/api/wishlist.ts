@@ -13,7 +13,7 @@ export async function getWishlistIds(): Promise<string[]> {
   if (!user) return [];
   try {
     const snap = await getDocs(wishlistRef(user.uid));
-    return snap.docs.map(d => d.id); // document ID = productId
+    return snap.docs.map(d => d.id); 
   } catch {
     return [];
   }
@@ -50,6 +50,6 @@ export async function removeFromWishlist(productId: string): Promise<void> {
   try {
     await deleteDoc(doc(db, 'wishlists', user.uid, 'items', productId));
   } catch {
-    // Already removed
+
   }
 }

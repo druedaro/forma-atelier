@@ -18,7 +18,7 @@ describe('WishlistDrawer', () => {
 
   it('renders correctly when open with items', () => {
     render(<WishlistDrawer />);
-    
+
     expect(screen.getByText('Wishlist (1)')).toBeInTheDocument();
     expect(screen.getByText('Product 1')).toBeInTheDocument();
     expect(screen.getByText('100 €')).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('WishlistDrawer', () => {
   it('renders empty state when no items', () => {
     useWishlistStore.setState({ items: [] });
     render(<WishlistDrawer />);
-    
+
     expect(screen.getByText('Wishlist (0)')).toBeInTheDocument();
     expect(screen.getByText('Tu lista de deseos está vacía.')).toBeInTheDocument();
     expect(screen.getByText('Explorar colección')).toBeInTheDocument();
@@ -36,16 +36,16 @@ describe('WishlistDrawer', () => {
   it('does not render when closed', () => {
     useWishlistStore.setState({ isWishlistOpen: false });
     const { container } = render(<WishlistDrawer />);
-    
+
     expect(container.firstChild).toBeNull();
   });
 
   it('allows removing an item', () => {
     render(<WishlistDrawer />);
-    
+
     const removeBtn = screen.getByText('Eliminar');
     fireEvent.click(removeBtn);
-    
+
     expect(useWishlistStore.getState().items).not.toContain('1');
   });
 });

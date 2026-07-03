@@ -1,14 +1,5 @@
 #!/usr/bin/env node
-/**
- * Seed Firestore with Forma Atelier products.
- *
- * Prerequisites:
- *   1. Go to Firebase Console → Project Settings → Service accounts
- *      → Generate new private key → save as serviceAccountKey.json
- *      in this same directory (frontend/scripts/)
- *   2. npm install -g firebase-admin  OR  npm install --save-dev firebase-admin
- *   3. node scripts/seed-firestore.mjs
- */
+
 
 import { readFileSync } from 'fs'
 import { resolve, dirname } from 'path'
@@ -135,12 +126,12 @@ let updated = 0
 for (const product of PRODUCTS) {
   const slug = product.slug
   const ref = db.collection('products').doc(slug)
-  
+
   batch.set(ref, {
     ...product,
     updated: new Date().toISOString(),
   }, { merge: true })
-  
+
   console.log(`  ✓ Updated "${product.name}"`)
   updated++
 }

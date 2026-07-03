@@ -22,7 +22,7 @@ describe('LoginForm', () => {
 
   it('logs in and redirects on submit', () => {
     render(<LoginForm />);
-    
+
     const emailInput = screen.getByLabelText('Email');
     const passwordInput = screen.getByLabelText('Contraseña');
     const submitBtn = screen.getByRole('button', { name: 'Iniciar sesión' });
@@ -32,7 +32,7 @@ describe('LoginForm', () => {
     fireEvent.click(submitBtn);
 
     const state = useAuthStore.getState();
-    expect(state.isLoggedIn).toBe(false); // Because pb is not mocked, it throws and doesn't login
+    expect(state.isLoggedIn).toBe(false); 
     expect(state.user?.email).toBe('test@forma.com');
     expect(window.location.href).toBe('/');
   });

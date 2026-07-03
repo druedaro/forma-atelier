@@ -29,7 +29,7 @@ export function WishlistGrid() {
     getWishlistProducts()
       .then(setProducts)
       .finally(() => setIsLoading(false));
-  }, [isLoggedIn, items, mounted]); // Re-fetch when items change
+  }, [isLoggedIn, items, mounted]); 
 
   if (!mounted || isLoading) {
     return (

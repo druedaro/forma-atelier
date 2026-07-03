@@ -24,10 +24,10 @@ const mockLook = {
 describe('LookCard', () => {
   it('renders look information correctly', () => {
     render(<LookCard look={mockLook as any} />);
-    
+
     expect(screen.getByText('Autumn Look')).toBeInTheDocument();
     expect(screen.getByText('2 prendas')).toBeInTheDocument();
-    
+
     const img = screen.getByAltText('Autumn Look');
     expect(img).toHaveAttribute('src', 'test.jpg');
   });
@@ -35,7 +35,7 @@ describe('LookCard', () => {
   it('calls onClick when clicked', () => {
     const handleClick = vi.fn();
     const { container } = render(<LookCard look={mockLook as any} onClick={handleClick} />);
-    
+
     if (container.firstChild) {
       fireEvent.click(container.firstChild);
     }

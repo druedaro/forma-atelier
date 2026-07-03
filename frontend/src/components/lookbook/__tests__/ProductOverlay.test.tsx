@@ -32,7 +32,7 @@ describe('ProductOverlay', () => {
   it('contains close button that triggers close logic', () => {
     const handleClose = vi.fn();
     render(<ProductOverlay look={mockLook as any} onClose={handleClose} />);
-    
+
     const closeBtn = screen.getByLabelText('Close overlay');
     fireEvent.click(closeBtn);
     expect(closeBtn).toBeInTheDocument();

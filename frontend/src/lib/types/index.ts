@@ -1,4 +1,4 @@
-// ─── Base record fields (Firebase-compatible) ───────────────────────────────
+
 export interface PBRecord {
   id: string;
   created?: string;
@@ -13,9 +13,9 @@ export interface Product extends PBRecord {
   slug: string;
   description: string;
   price: number;
-  collection: string;     // "lumiere" | "ombra" | "terra"
+  collection: string;     
   category: string;
-  images: string[];       // PocketBase file names
+  images: string[];       
   sizes: string[];
   available: boolean;
   featured: boolean;

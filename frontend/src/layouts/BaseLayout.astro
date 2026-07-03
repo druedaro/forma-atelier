@@ -41,7 +41,7 @@ import SmoothScroll from '../components/layout/SmoothScroll';
         history.scrollRestoration = 'manual';
       }
       window.scrollTo(0, 0);
-      
+
       window.addEventListener('load', () => window.scrollTo(0, 0));
       document.addEventListener('astro:page-load', () => window.scrollTo(0, 0));
     </script>
@@ -56,7 +56,7 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     </div>
     <GlobalCart client:only="react" />
     <WishlistDrawer client:only="react" />
-    
+
     <Footer />
   </body>
 </html>

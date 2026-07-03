@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 import type { Product } from '../types';
 
 export interface CartItem {
-  id: string; // product.id + size
+  id: string; 
   product: Product;
   size: string;
   quantity: number;
@@ -27,7 +27,7 @@ export const useCartStore = create<CartState>()(
       addItem: (product, size) => set((state) => {
         const id = `${product.id}-${size}`;
         const existingItem = state.items.find(item => item.id === id);
-        
+
         if (existingItem) {
           return {
             items: state.items.map(item => 
@@ -36,7 +36,7 @@ export const useCartStore = create<CartState>()(
             isOpen: true
           };
         }
-        
+
         return {
           items: [...state.items, { id, product, size, quantity: 1 }],
           isOpen: true

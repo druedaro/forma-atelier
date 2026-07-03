@@ -28,19 +28,19 @@ describe('ProductDetail', () => {
     expect(screen.getByText('150 €')).toBeInTheDocument();
     expect(screen.getByText('A detailed test product')).toBeInTheDocument();
     expect(screen.getByText('Material: Silk')).toBeInTheDocument();
-    
+
     const images = screen.getAllByRole('img');
     expect(images).toHaveLength(2);
   });
 
   it('handles size selection', () => {
     render(<ProductDetail product={mockProduct as any} />);
-    
+
     const sizeM = screen.getByText('M');
     fireEvent.click(sizeM);
-    
+
     expect(sizeM).toHaveClass('bg-noir', 'text-ivory');
-    
+
     const addToCart = screen.getByText('Añadir a la cesta');
     expect(addToCart).toBeEnabled();
   });

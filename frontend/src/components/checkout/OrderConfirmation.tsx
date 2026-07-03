@@ -23,20 +23,20 @@ export function OrderConfirmation() {
     const redirectStatus = params.get('redirect_status');
     const paymentIntent = params.get('payment_intent');
 
-    // Guard: if Stripe redirected with a failed status, send back to checkout
+
     if (redirectStatus && redirectStatus !== 'succeeded') {
       window.location.href = '/checkout';
       return;
     }
 
-    // Build the human-readable payment reference
+
     if (paymentIntent) {
       setPaymentRef('#FA-' + paymentIntent.slice(-8).toUpperCase());
     } else {
       setPaymentRef('#FA-' + Math.floor(Math.random() * 90000 + 10000));
     }
 
-    // Try to load the full order from Firestore via the orderId stored in sessionStorage
+
     const orderId = sessionStorage.getItem('forma_order_id');
     if (!orderId) {
       setLoading(false);
@@ -46,22 +46,22 @@ export function OrderConfirmation() {
     getOrder(orderId)
       .then((data) => {
         setOrder(data);
-        // Clear sensitive data from sessionStorage
+
         sessionStorage.removeItem('forma_order_id');
-        // Clear the cart store
+
         try {
           localStorage.removeItem('forma-atelier-cart');
         } catch {}
       })
       .catch(() => {
-        // Non-critical — still show the confirmation page
+
       })
       .finally(() => setLoading(false));
   }, []);
 
   return (
     <div className="max-w-2xl mx-auto z-10 flex flex-col items-center w-full">
-      {/* Check icon */}
+
       <svg
         className="w-16 h-16 text-noir mb-8 flex-shrink-0"
         fill="none"
@@ -91,7 +91,7 @@ export function OrderConfirmation() {
         <span className="text-noir font-medium">{paymentRef || '—'}</span>
       </p>
 
-      {/* ── Order summary card ──────────────────────────────────────────────── */}
+
       {loading ? (
         <div className="w-full border border-[#E8DDD0] bg-white p-8 mb-10 flex flex-col gap-4">
           <Skeleton className="h-4 w-1/3 mb-2" />
@@ -115,7 +115,7 @@ export function OrderConfirmation() {
             Resumen del Pedido
           </h2>
 
-          {/* Items */}
+
           <div className="flex flex-col gap-5 mb-6">
             {(order.items as any[]).map((item: any, i: number) => (
               <div key={i} className="flex gap-4 items-center">
@@ -146,7 +146,7 @@ export function OrderConfirmation() {
             ))}
           </div>
 
-          {/* Totals */}
+
           <div className="border-t border-[#E8DDD0] pt-5 flex flex-col gap-2 mb-5">
             <div className="flex justify-between font-body text-sm text-stone tracking-wider">
               <span>Subtotal</span>
@@ -170,7 +170,7 @@ export function OrderConfirmation() {
             </div>
           </div>
 
-          {/* Shipping address */}
+
           <div className="border-t border-[#E8DDD0] pt-5">
             <p className="font-body text-[10px] uppercase tracking-[0.2em] text-stone mb-2">
               Dirección de envío
@@ -186,7 +186,7 @@ export function OrderConfirmation() {
         </div>
       ) : null}
 
-      {/* CTA */}
+
       <a
         href="/"
         className="inline-flex items-center justify-center h-14 px-12 bg-noir text-ivory font-body text-xs tracking-[0.2em] uppercase hover:bg-stone transition-colors duration-300"

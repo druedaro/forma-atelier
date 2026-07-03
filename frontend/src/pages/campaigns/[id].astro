@@ -7,7 +7,7 @@ import { mockLooks, mockProducts } from '../../lib/mock/data';
 
 export async function getStaticPaths() {
   const looks = mockLooks;
-  
+
   return looks.map((look) => ({
     params: { id: look.id },
     props: { look },
@@ -33,7 +33,7 @@ const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
         class="w-full h-full object-cover object-center opacity-80"
         fetchpriority="high"
       />
-      
+
       <div class="absolute inset-0 flex flex-col items-center justify-end pb-32 px-8 bg-gradient-to-t from-noir/90 via-noir/20 to-transparent">
         <p class="font-body text-xs md:text-sm uppercase tracking-widest text-stone mb-6 font-medium">
           Campaña
@@ -41,7 +41,7 @@ const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
         <h1 class="font-display text-5xl md:text-8xl text-ivory tracking-widest uppercase font-light text-center max-w-5xl">
           {look.title.replace('Campaña: ', '')}
         </h1>
-        
+
         <div class="mt-16 text-ivory">
           <button 
             onclick="window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })"
@@ -78,7 +78,7 @@ const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
               Ver todas las colecciones
             </a>
           </header>
-          
+
           <Divider className="mb-16" />
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">

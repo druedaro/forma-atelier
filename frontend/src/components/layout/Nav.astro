@@ -171,7 +171,7 @@ const isActive = (path: string) => {
 
     function trapFocus(e: KeyboardEvent) {
       if (e.key !== 'Tab' || !mobileMenu) return;
-      
+
       const focusable = mobileMenu.querySelectorAll<HTMLElement>('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
       const firstElement = focusable[0];
       const lastElement = focusable[focusable.length - 1];

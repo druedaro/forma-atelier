@@ -14,7 +14,7 @@ export function ProductOverlay({ look, onClose }: ProductOverlayProps) {
   useEffect(() => {
     if (look && overlayRef.current && contentRef.current) {
       document.body.style.overflow = 'hidden';
-      
+
       const tl = gsap.timeline();
       tl.to(overlayRef.current, { autoAlpha: 1, duration: 0.4, ease: 'power2.out' })
         .fromTo(contentRef.current, 
@@ -51,7 +51,7 @@ export function ProductOverlay({ look, onClose }: ProductOverlayProps) {
         onClick={handleClose}
         data-cursor="expand"
       />
-      
+
       <div 
         ref={contentRef}
         className="absolute top-0 right-0 w-full md:w-[450px] h-full bg-ivory shadow-2xl flex flex-col"

@@ -3,14 +3,14 @@ import { addToWishlist, removeFromWishlist, getWishlistIds } from '../api/wishli
 import { auth } from '../firebase';
 
 interface WishlistState {
-  // Local set of product IDs (cached from Firestore)
+
   items: string[];
   isLoading: boolean;
   isWishlistOpen: boolean;
 
-  // Actions
+
   loadItems: () => Promise<void>;
-  /** @deprecated use loadItems */
+
   loadFromPB: () => Promise<void>;
   openWishlist: () => void;
   closeWishlist: () => void;
@@ -45,23 +45,23 @@ export const useWishlistStore = create<WishlistState>()((set, get) => ({
   hasItem: (productId) => get().items.includes(productId),
 
   addItem: async (productId) => {
-    // Optimistic update
+
     set(state => ({ items: [...new Set([...state.items, productId])] }));
     try {
       await addToWishlist(productId);
     } catch {
-      // Rollback on error
+
       set(state => ({ items: state.items.filter(id => id !== productId) }));
     }
   },
 
   removeItem: async (productId) => {
-    // Optimistic update
+
     set(state => ({ items: state.items.filter(id => id !== productId) }));
     try {
       await removeFromWishlist(productId);
     } catch {
-      // Rollback on error — re-add
+
       set(state => ({ items: [...state.items, productId] }));
     }
   },

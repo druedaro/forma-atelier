@@ -63,7 +63,7 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
     setIsSubmitting(true);
     setError(null);
 
-    // Confirm payment with Stripe first — order is only created if payment succeeds
+
     const { error: stripeError, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -74,16 +74,16 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
             email: form.email,
             address: {
               line1: form.address,
-              line2: '',      // required by Stripe schema when address:'never'
+              line2: '',      
               city: form.city,
               postal_code: form.zip,
-              state: '',      // required by Stripe schema — Spain has no states
+              state: '',      
               country: 'ES',
             },
           },
         },
       },
-      // Don't redirect yet — we need to save the order first
+
       redirect: 'if_required',
     });
 
@@ -97,7 +97,7 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
       return;
     }
 
-    // Payment confirmed — now persist the order to Firestore
+
     try {
       const order = await createOrder({
         email: form.email,
@@ -110,24 +110,24 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
         shipping_city: form.city,
         shipping_zip: form.zip,
       });
-      // Pass orderId to /success via sessionStorage (cleared by OrderConfirmation)
+
       sessionStorage.setItem('forma_order_id', order.id);
     } catch (err) {
       console.warn('[Checkout] Order save failed after payment:', err);
-      // Payment succeeded — still redirect even if Firestore write failed
+
     }
 
-    // Redirect to success page
+
     window.location.href = `/success?payment_intent=${paymentIntent?.id ?? ''}&redirect_status=succeeded`;
   };
 
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 w-full">
 
-      {/* ── Left column ───────────────────────────────────────────────────────── */}
+
       <div className="lg:col-span-7 flex flex-col gap-12 w-full">
 
-        {/* Shipping */}
+
         <section>
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">1. Información de Envío</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
@@ -189,7 +189,7 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
           </div>
         </section>
 
-        {/* Payment — Stripe Elements */}
+
         <section>
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">2. Pago Seguro</h2>
           <div className="p-6 border border-[#E8DDD0] bg-white w-full">
@@ -214,7 +214,7 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
         )}
       </div>
 
-      {/* ── Right column — order summary ──────────────────────────────────────── */}
+
       <div className="lg:col-span-5 w-full">
         <div className="bg-white p-8 border border-[#E8DDD0] sticky top-8">
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">Tu Pedido</h2>
@@ -297,7 +297,7 @@ export function CheckoutForm() {
   const shipping  = total > 0 ? (total > 200 ? 0 : 15) : 0;
   const grandTotal = total + shipping;
 
-  // Create Stripe PaymentIntent when cart amount is known
+
   useEffect(() => {
     if (!mounted || items.length === 0 || grandTotal <= 0) return;
     fetch('/api/create-payment-intent', {

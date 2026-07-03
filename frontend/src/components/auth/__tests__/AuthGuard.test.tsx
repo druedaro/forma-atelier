@@ -6,7 +6,7 @@ import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('AuthGuard', () => {
   beforeEach(() => {
-    // Reset window.location mock
+
     Object.defineProperty(window, 'location', {
       value: { href: '/' },
       writable: true
@@ -15,7 +15,7 @@ describe('AuthGuard', () => {
 
   it('renders children when authenticated', () => {
     useAuthStore.setState({ isLoggedIn: true });
-    
+
     render(
       <AuthGuard>
         <div data-testid="protected-content">Protected Content</div>
@@ -27,13 +27,13 @@ describe('AuthGuard', () => {
 
   it('redirects to login when not authenticated', () => {
     useAuthStore.setState({ isLoggedIn: false });
-    
+
     const { container } = render(
       <AuthGuard>
         <div data-testid="protected-content">Protected Content</div>
       </AuthGuard>
     );
-    
+
     expect(container.firstChild).toBeNull();
     expect(window.location.href).toBe('/login');
   });

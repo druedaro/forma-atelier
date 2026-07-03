@@ -21,7 +21,7 @@ describe('CollectionHero', () => {
     render(<CollectionHero collection={mockCollection as any} />);
     expect(screen.getByText('Spring 2026')).toBeInTheDocument();
     expect(screen.getByText('Spring Collection')).toBeInTheDocument();
-    
+
     const img = screen.getByAltText('Spring 2026');
     expect(img).toHaveAttribute('src', 'hero.jpg');
   });
@@ -29,10 +29,10 @@ describe('CollectionHero', () => {
   it('scrolls down when CTA is clicked', () => {
     window.scrollBy = vi.fn();
     render(<CollectionHero collection={mockCollection as any} />);
-    
+
     const btn = screen.getByText('Scroll to explore').closest('button');
     btn?.click();
-    
+
     expect(window.scrollBy).toHaveBeenCalledWith({ top: window.innerHeight, behavior: 'smooth' });
   });
 });

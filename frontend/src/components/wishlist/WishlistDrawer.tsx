@@ -94,7 +94,7 @@ export function WishlistDrawer() {
                     {product.name}
                   </h3>
                   <p className="font-body text-xs text-stone tracking-wider">{product.price} €</p>
-                  
+
                   <div className="mt-4 flex gap-4">
                     <a 
                       href={`/products/${product.slug}`}

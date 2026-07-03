@@ -52,7 +52,7 @@ export function GlobalCart() {
                     <p className="font-body text-xs text-stone tracking-wider">{item.product.price} €</p>
                     <p className="font-body text-xs text-stone tracking-wider mt-1">Talla: {item.size}</p>
                   </div>
-                  
+
                   <div className="flex items-center gap-4 mt-4 border border-linen w-max h-8">
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}

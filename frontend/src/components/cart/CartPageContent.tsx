@@ -13,7 +13,7 @@ export function CartPageContent() {
   if (!mounted) return null;
 
   const total = items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
-  const shipping = total > 0 ? (total > 200 ? 0 : 15) : 0; // Free shipping over 200 EUR
+  const shipping = total > 0 ? (total > 200 ? 0 : 15) : 0; 
   const grandTotal = total + shipping;
 
   if (items.length === 0) {
@@ -31,7 +31,7 @@ export function CartPageContent() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-      {/* Lista de productos (Columna Izquierda) */}
+
       <div className="lg:col-span-8 flex flex-col gap-8">
         {items.map((item) => (
           <div key={item.id} className="flex gap-6 lg:gap-8 pb-8 border-b border-[#E8DDD0] last:border-b-0">
@@ -42,7 +42,7 @@ export function CartPageContent() {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
               />
             </a>
-            
+
             <div className="flex-1 flex flex-col justify-between py-2">
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-start gap-4">
@@ -62,7 +62,7 @@ export function CartPageContent() {
                 <p className="font-body text-sm text-stone tracking-wider">{item.product.price} €</p>
                 <p className="font-body text-sm text-stone tracking-wider">Talla: <span className="text-noir">{item.size}</span></p>
               </div>
-              
+
               <div className="flex items-center justify-between mt-6">
                 <div className="flex items-center gap-4 border border-[#E8DDD0] w-max h-10">
                   <button 
@@ -88,11 +88,11 @@ export function CartPageContent() {
         ))}
       </div>
 
-      {/* Resumen del pedido (Columna Derecha) */}
+
       <div className="lg:col-span-4">
         <div className="bg-white p-8 border border-[#E8DDD0] sticky top-32">
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-8">Resumen</h2>
-          
+
           <div className="flex flex-col gap-4 mb-8 font-body text-sm tracking-wider">
             <div className="flex justify-between items-center text-stone">
               <span>Subtotal</span>
@@ -106,7 +106,7 @@ export function CartPageContent() {
               <p className="text-xs text-[#8C7B6B] mt-[-0.5rem]">Envío gratis a partir de 200 €</p>
             )}
           </div>
-          
+
           <div className="pt-6 border-t border-[#E8DDD0] mb-8">
             <div className="flex justify-between items-end font-body tracking-widest uppercase">
               <span className="text-sm text-stone">Total</span>
@@ -114,7 +114,7 @@ export function CartPageContent() {
             </div>
             <p className="text-[10px] text-stone mt-2 text-right">IVA INCLUIDO</p>
           </div>
-          
+
           <Button 
             className="w-full h-14 rounded-none text-xs"
             onClick={() => window.location.href = '/checkout'}

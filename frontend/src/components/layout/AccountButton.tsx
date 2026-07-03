@@ -41,13 +41,13 @@ export function AccountButton() {
         className="p-2 hover:opacity-60 transition-opacity duration-200 relative flex items-center gap-2"
         data-cursor="expand"
       >
-        {/* Filled icon when logged in */}
+
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
           <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
         </svg>
       </button>
 
-      {/* Dropdown menu */}
+
       {menuOpen && (
         <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-linen shadow-lg z-50 py-2">
           <div className="px-4 py-2 border-b border-linen">
@@ -74,7 +74,7 @@ export function AccountButton() {
         </div>
       )}
 
-      {/* Close on outside click */}
+
       {menuOpen && (
         <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
       )}
