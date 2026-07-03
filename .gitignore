@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# PocketBase — never commit live data
+backend/pb_data/data.db
+backend/pb_data/data.db-shm
+backend/pb_data/data.db-wal
+backend/pb_data/logs.db
+backend/pb_data/logs.db-shm
+backend/pb_data/logs.db-wal
+backend/pb_data/storage/
+
+# PocketBase binary (platform-specific, downloaded on deploy)
+backend/pocketbase
+
+# Frontend build output
+frontend/dist/
+frontend/.astro/
+frontend/node_modules/
+
+# Env files (keep .env.example / .env.production.example if you add them)
+frontend/.env
+frontend/.env.production
+
+# Vercel
+.vercel/
+.vercel
+.env*

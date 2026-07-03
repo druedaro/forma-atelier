@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Product } from '../../lib/types';
 import { Badge } from '../ui/Badge';
+import { WishlistButton } from '../wishlist/WishlistButton';
 
 export interface ProductCardProps {
   product: Product;
@@ -14,7 +15,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <a
       href={`/products/${product.slug}`}
-      className="group flex flex-col gap-0 block"
+      className="group flex flex-col gap-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsHovered(true)}
@@ -36,6 +37,10 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.available && product.featured && (
             <Badge>Destacado</Badge>
           )}
+        </div>
+
+        <div className="absolute top-2 right-2">
+          <WishlistButton productId={product.id} className="bg-white" />
         </div>
 
         <div

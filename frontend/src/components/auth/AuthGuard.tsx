@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
-import { useAuthStore } from '../../store/authStore';
+import { useAuthStore } from '../../lib/store/authStore';
 
 interface AuthGuardProps {
   children: React.ReactNode;
 }
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const { isAuthenticated } = useAuthStore();
+  const { isLoggedIn } = useAuthStore();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isLoggedIn) {
       window.location.href = '/login';
     }
-  }, [isAuthenticated]);
+  }, [isLoggedIn]);
 
-  if (!isAuthenticated) return null;
+  if (!isLoggedIn) return null;
 
   return <>{children}</>;
 }
