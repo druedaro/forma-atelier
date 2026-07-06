@@ -2,14 +2,27 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'product';
+  schema?: string;
   fixedNav?: boolean;
   forceScrolled?: boolean;
 }
 
-const { title, description = 'Forma Atelier - Barcelona', fixedNav = false, forceScrolled = false } = Astro.props;
+const { 
+  title, 
+  description = 'Forma Atelier - Barcelona', 
+  image,
+  type,
+  schema,
+  fixedNav = false, 
+  forceScrolled = false 
+} = Astro.props;
+
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
+import SEO from '../components/seo/SEO.astro';
 import Nav from '../components/layout/Nav.astro';
 import Footer from '../components/layout/Footer.astro';
 import { GlobalCart } from '../components/ui/GlobalCart';
@@ -23,10 +36,9 @@ import SmoothScroll from '../components/layout/SmoothScroll';
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <SEO title={title} description={description} image={image} type={type} schema={schema} />
     <ClientRouter />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />

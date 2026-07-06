@@ -22,9 +22,32 @@ const { product } = Astro.props;
 if (!product) {
   return Astro.redirect('/404');
 }
+
+const productSchema = JSON.stringify({
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": product.name,
+  "image": product.images[0] ? `https://forma-atelier.com${product.images[0]}` : undefined,
+  "description": product.description,
+  "sku": product.id,
+  "offers": {
+    "@type": "Offer",
+    "url": `https://forma-atelier.com/products/${product.slug}`,
+    "priceCurrency": "EUR",
+    "price": product.price,
+    "availability": product.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+});
 ---
 
-<BaseLayout title={`FORMA ATELIER | ${product.name}`}>
+<BaseLayout 
+  title={`FORMA ATELIER | ${product.name}`}
+  description={product.description}
+  image={product.images[0]}
+  type="product"
+  schema={productSchema}
+>
   <main class="min-h-screen pt-24 bg-ivory">
     <ProductDetail product={product as any} client:load />
   </main>

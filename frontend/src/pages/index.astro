@@ -3,9 +3,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { CreativeHero } from '../components/home/CreativeHero';
 import { HomeManifesto } from '../components/home/HomeManifesto';
 import { HomeFeatured } from '../components/home/HomeFeatured';
+
+const websiteSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "url": "https://forma-atelier.com/",
+      "name": "Forma Atelier",
+      "description": "Moda contemporánea y sastrería de diseño desde Barcelona."
+    },
+    {
+      "@type": "Organization",
+      "name": "Forma Atelier",
+      "url": "https://forma-atelier.com/",
+      "logo": "https://forma-atelier.com/favicon.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contact@forma-atelier.com",
+        "contactType": "customer support"
+      }
+    }
+  ]
+});
 ---
 
-<BaseLayout title="FORMA ATELIER | Redefiniendo la silueta moderna">
+<BaseLayout 
+  title="FORMA ATELIER | Redefiniendo la silueta moderna"
+  type="website"
+  schema={websiteSchema}
+>
   <main>
     <CreativeHero client:load />
     <HomeManifesto client:load />

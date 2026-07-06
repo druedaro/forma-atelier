@@ -17,7 +17,19 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
   site: 'https://forma-atelier.com',
-  integrations: [react(), tailwind(), sitemap()],
+  integrations: [
+    react(),
+    tailwind(),
+    sitemap({
+      filter: (page) =>
+        !page.includes('/checkout') &&
+        !page.includes('/success') &&
+        !page.includes('/cart') &&
+        !page.includes('/wishlist') &&
+        !page.includes('/login') &&
+        !page.includes('/api/'),
+    }),
+  ],
   vite: {
     build: {
       chunkSizeWarningLimit: 600,
