@@ -39,7 +39,7 @@ const ogImage = new URL(image, Astro.site);
 {schema && <script type="application/ld+json" set:html={schema} />}
 
 <script type="application/ld+json">
-{JSON.stringify({
+{
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Forma Atelier",
@@ -50,5 +50,5 @@ const ogImage = new URL(image, Astro.site);
     "email": "contact@forma-atelier.com",
     "contactType": "customer support"
   }
-})}
+}
 </script>
