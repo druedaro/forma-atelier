@@ -39,7 +39,7 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <SEO title={title} description={description} image={image} type={type} schema={schema} />
-    <ClientRouter />
+    <ClientRouter prefetch />
 
     <style is:inline>
       :root {
@@ -67,23 +67,19 @@ import SmoothScroll from '../components/layout/SmoothScroll';
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-      window.scrollTo(0, 0);
-
-      window.addEventListener('load', () => window.scrollTo(0, 0));
-      document.addEventListener('astro:page-load', () => window.scrollTo(0, 0));
     </script>
   </head>
   <body>
     <div class="page-overlay"></div>
     <SmoothScroll client:load transition:persist="smooth-scroll" />
     <BackToTop client:load transition:persist="back-to-top" />
-    <Nav fixedNav={fixedNav} forceScrolled={forceScrolled} />
+    <Nav fixedNav={fixedNav} forceScrolled={forceScrolled} transition:animate="none" />
     <div id="main-content" tabindex="-1">
       <slot />
     </div>
     <GlobalCart client:only="react" />
     <WishlistDrawer client:only="react" />
 
-    <Footer />
+    <Footer transition:animate="none" />
   </body>
 </html>

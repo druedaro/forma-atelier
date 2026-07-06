@@ -197,14 +197,24 @@ const isActive = (path: string) => {
     });
   }
 
-  function handleScroll() {
-    const nav = document.getElementById('main-nav');
-    if (nav?.dataset.fixed === 'true') return;
+  let scrollTicking = false;
 
-    if (window.scrollY > 50) {
-      nav?.classList.add('scrolled');
-    } else {
-      nav?.classList.remove('scrolled');
+  function handleScroll() {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        const nav = document.getElementById('main-nav');
+        if (nav?.dataset.fixed === 'true') {
+          scrollTicking = false;
+          return;
+        }
+        if (window.scrollY > 50) {
+          nav?.classList.add('scrolled');
+        } else {
+          nav?.classList.remove('scrolled');
+        }
+        scrollTicking = false;
+      });
+      scrollTicking = true;
     }
   }
 
