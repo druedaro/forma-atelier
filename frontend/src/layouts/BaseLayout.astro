@@ -41,6 +41,21 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <SEO title={title} description={description} image={image} type={type} schema={schema} />
     <ClientRouter />
 
+    <style is:inline>
+      :root {
+        --color-noir: #0A0A0A;
+        --color-ivory: #F5F0EA;
+        --color-gold: #C9A96E;
+        --color-linen: #E8DDD0;
+        --color-smoke: #F0EBE3;
+        --font-display: 'Cormorant Garamond', 'Georgia', serif;
+        --font-body: 'Jost', 'Inter', sans-serif;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { background-color: #F5F0EA; -webkit-font-smoothing: antialiased; }
+      body { font-family: 'Jost', 'Inter', sans-serif; color: #0A0A0A; background-color: #F5F0EA; overflow-x: hidden; }
+    </style>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&family=JetBrains+Mono&display=swap" as="style" />

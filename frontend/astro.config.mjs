@@ -1,14 +1,52 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import Critters from 'critters';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-// Platform adapter — swap this single line to move to a different host:
-//   Vercel:  @astrojs/vercel  → vercel()
-//   Netlify: @astrojs/netlify → netlify()
-//   Node.js: @astrojs/node   → node({ mode: 'standalone' })
 import vercel from '@astrojs/vercel';
+
+function criticalCssIntegration() {
+  return {
+    name: 'critical-css',
+    hooks: {
+      'astro:build:done': async ({ dir }) => {
+        const critters = new Critters({
+          path: dir.pathname,
+          publicPath: '/',
+          preload: 'swap',
+          inlineFonts: false,
+          pruneSource: false,
+          logLevel: 'silent',
+        });
+
+        const htmlFiles = [];
+        const scanDir = (d) => {
+          for (const entry of fs.readdirSync(d)) {
+            const full = path.join(d, entry);
+            if (fs.statSync(full).isDirectory()) scanDir(full);
+            else if (entry.endsWith('.html')) htmlFiles.push(full);
+          }
+        };
+        scanDir(dir.pathname);
+
+        for (const file of htmlFiles) {
+          try {
+            const html = fs.readFileSync(file, 'utf-8');
+            const result = await critters.process(html);
+            fs.writeFileSync(file, result);
+          } catch (e) {
+            console.warn(`[critical-css] skipped ${file}: ${e.message}`);
+          }
+        }
+        console.log(`[critical-css] processed ${htmlFiles.length} HTML files`);
+      },
+    },
+  };
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,10 +67,14 @@ export default defineConfig({
         !page.includes('/login') &&
         !page.includes('/api/'),
     }),
+    criticalCssIntegration(),
   ],
   vite: {
     build: {
       chunkSizeWarningLimit: 600,
+      modulePreload: {
+        polyfill: false,
+      },
       rollupOptions: {
         output: {
           manualChunks(id) {
