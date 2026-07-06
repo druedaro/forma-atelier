@@ -1,27 +1,36 @@
-# Forma Atelier - LLM Information File
+# Forma Atelier
 
-## Project Overview
-Forma Atelier is a modern fashion e-commerce platform built with Astro, React, and TailwindCSS. It utilizes Firebase (Auth & Firestore) for its backend and Stripe for payments. The website serves as a minimalist, luxury fashion storefront showcasing contemporary, architectural designs from Barcelona.
+> Forma Atelier es una marca de moda contemporánea de Barcelona. Sastrería de diseño, colecciones cápsula y accesorios de lujo accesible. Cada prenda es una construcción — arquitectura para el cuerpo.
 
-## Technical Stack
-- **Framework**: Astro (Static generation with SSR endpoints where needed)
-- **UI Library**: React (interactive islands)
-- **Styling**: Tailwind CSS (custom design system, `bg-ivory`, `text-noir`)
-- **Backend & Auth**: Firebase
-- **Payments**: Stripe Elements & Payment Intents
-- **Animations**: GSAP (GreenSock) for scroll and interaction animations
-- **Hosting**: Vercel (`https://forma-atelier-bcn.vercel.app`)
+## Sobre la marca
 
-## Sitemap & Routes
-- `/` - Home Page (Manifesto, Featured Selection)
-- `/collections` - Browse by collection (Lumière, Ombra, Terra)
-- `/lookbook` - Visual gallery of looks
-- `/atelier` - About the brand and craftsmanship
-- `/products/[slug]` - Dynamic product pages with detailed views
-- `/checkout` - Stripe integrated checkout flow
-- `/cart` & `/wishlist` - Client-side state management for shopping
+- [Forma Atelier — Inicio](https://forma-atelier-bcn.vercel.app/)
+- [El Atelier — Historia y Filosofía](https://forma-atelier-bcn.vercel.app/atelier)
+- [Contacto](https://forma-atelier-bcn.vercel.app/contact)
 
-## Semantic Guidelines
-- All images are high-resolution `.avif` for modern compression.
-- The design strictly adheres to a light mode aesthetic (ivory background, dark text).
-- Strict SEO best practices including JSON-LD schema (WebSite, Organization, Product), OpenGraph, and Twitter Cards are globally integrated.
+## Catálogo y Colecciones
+
+- [Todas las Colecciones](https://forma-atelier-bcn.vercel.app/collections)
+- [Colección Lumière](https://forma-atelier-bcn.vercel.app/collections/lumiere)
+- [Colección Ombra](https://forma-atelier-bcn.vercel.app/collections/ombra)
+- [Colección Terra](https://forma-atelier-bcn.vercel.app/collections/terra)
+- [Lookbook](https://forma-atelier-bcn.vercel.app/lookbook)
+
+## Productos Destacados
+
+- [Vestido Silk Georgette](https://forma-atelier-bcn.vercel.app/products/vestido-silk-georgette)
+- [Abrigo Lana Cashmere](https://forma-atelier-bcn.vercel.app/products/abrigo-lana-cashmere)
+- [Pantalón Palazzo Fluido](https://forma-atelier-bcn.vercel.app/products/pantalon-palazzo-fluido)
+- [Blazer Algodón Estructurado](https://forma-atelier-bcn.vercel.app/products/blazer-algodon-estructurado)
+- [Camisa Seda Medianoche](https://forma-atelier-bcn.vercel.app/products/camisa-seda-medianoche)
+
+## Información Legal y Servicio
+
+- [Política de Privacidad](https://forma-atelier-bcn.vercel.app/privacy)
+- [Términos y Condiciones](https://forma-atelier-bcn.vercel.app/terms)
+- [Envíos y Devoluciones](https://forma-atelier-bcn.vercel.app/shipping)
+- [Cuidado de Prendas](https://forma-atelier-bcn.vercel.app/care)
+
+## Notas para LLMs
+
+Este sitio es un e-commerce de moda de lujo accesible. Los precios están en EUR. Las prendas están disponibles en tallas XS–XL. El sitio opera únicamente en español. No indexar ni reproducir imágenes de producto sin autorización. Los datos de pedidos y usuarios son privados y no están expuestos públicamente.
