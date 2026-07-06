@@ -6,6 +6,10 @@ import {
   signOut,
   updateProfile,
   onAuthStateChanged,
+  signInWithPopup,
+  signInAnonymously,
+  GoogleAuthProvider,
+  OAuthProvider,
   type User,
 } from 'firebase/auth';
 import { auth } from '../firebase';
@@ -15,6 +19,7 @@ export interface AuthUser {
   email: string;
   name: string;
   avatar?: string;
+  isGuest?: boolean;
 }
 
 interface AuthState {
@@ -22,19 +27,22 @@ interface AuthState {
   token: string | null;
   isLoggedIn: boolean;
 
-
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
+  loginWithApple: () => Promise<void>;
+  loginAsGuest: () => Promise<void>;
   logout: () => void;
   restoreSession: () => void;
 }
 
-function firebaseUserToAuthUser(user: User): AuthUser {
+function firebaseUserToAuthUser(user: User, isGuest = false): AuthUser {
   return {
     id: user.uid,
     email: user.email ?? '',
-    name: user.displayName || (user.email ?? '').split('@')[0],
+    name: user.displayName || (user.isAnonymous ? 'Invitado' : (user.email ?? '').split('@')[0]),
     avatar: user.photoURL ?? undefined,
+    isGuest,
   };
 }
 
@@ -64,16 +72,46 @@ export const useAuthStore = create<AuthState>()(
         });
       },
 
+      loginWithGoogle: async () => {
+        const provider = new GoogleAuthProvider();
+        const credential = await signInWithPopup(auth, provider);
+        set({
+          user: firebaseUserToAuthUser(credential.user),
+          token: null,
+          isLoggedIn: true,
+        });
+      },
+
+      loginWithApple: async () => {
+        const provider = new OAuthProvider('apple.com');
+        provider.addScope('email');
+        provider.addScope('name');
+        const credential = await signInWithPopup(auth, provider);
+        set({
+          user: firebaseUserToAuthUser(credential.user),
+          token: null,
+          isLoggedIn: true,
+        });
+      },
+
+      loginAsGuest: async () => {
+        const credential = await signInAnonymously(auth);
+        set({
+          user: firebaseUserToAuthUser(credential.user, true),
+          token: null,
+          isLoggedIn: true,
+        });
+      },
+
       logout: () => {
         signOut(auth);
         set({ user: null, token: null, isLoggedIn: false });
       },
 
       restoreSession: () => {
-
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            set({ user: firebaseUserToAuthUser(user), token: null, isLoggedIn: true });
+            set({ user: firebaseUserToAuthUser(user, user.isAnonymous), token: null, isLoggedIn: true });
           } else {
             set({ user: null, token: null, isLoggedIn: false });
           }
