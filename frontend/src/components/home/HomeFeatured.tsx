@@ -78,7 +78,7 @@ export function HomeFeatured() {
           <h2 className="font-display text-4xl md:text-5xl text-noir uppercase tracking-widest font-light">
             Selección<br/>Exclusiva
           </h2>
-          <a href="/lookbook" className="font-body text-xs uppercase tracking-widest text-stone hover:text-noir transition-colors underline underline-offset-4">
+          <a href="/lookbook" className="font-body text-xs uppercase tracking-widest text-noir/70 hover:text-noir transition-colors underline underline-offset-4">
             Ver Colecciones completas
           </a>
         </header>

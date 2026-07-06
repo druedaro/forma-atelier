@@ -1,0 +1,27 @@
+# Forma Atelier - LLM Information File
+
+## Project Overview
+Forma Atelier is a modern fashion e-commerce platform built with Astro, React, and TailwindCSS. It utilizes Firebase (Auth & Firestore) for its backend and Stripe for payments. The website serves as a minimalist, luxury fashion storefront showcasing contemporary, architectural designs from Barcelona.
+
+## Technical Stack
+- **Framework**: Astro (Static generation with SSR endpoints where needed)
+- **UI Library**: React (interactive islands)
+- **Styling**: Tailwind CSS (custom design system, `bg-ivory`, `text-noir`)
+- **Backend & Auth**: Firebase
+- **Payments**: Stripe Elements & Payment Intents
+- **Animations**: GSAP (GreenSock) for scroll and interaction animations
+- **Hosting**: Vercel (`https://forma-atelier-bcn.vercel.app`)
+
+## Sitemap & Routes
+- `/` - Home Page (Manifesto, Featured Selection)
+- `/collections` - Browse by collection (Lumière, Ombra, Terra)
+- `/lookbook` - Visual gallery of looks
+- `/atelier` - About the brand and craftsmanship
+- `/products/[slug]` - Dynamic product pages with detailed views
+- `/checkout` - Stripe integrated checkout flow
+- `/cart` & `/wishlist` - Client-side state management for shopping
+
+## Semantic Guidelines
+- All images are high-resolution `.avif` for modern compression.
+- The design strictly adheres to a light mode aesthetic (ivory background, dark text).
+- Strict SEO best practices including JSON-LD schema (WebSite, Organization, Product), OpenGraph, and Twitter Cards are globally integrated.
