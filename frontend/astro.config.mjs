@@ -16,7 +16,7 @@ export default defineConfig({
   // Pages are static; src/pages/api/* endpoints are SSR (prerender=false)
   output: 'static',
   adapter: vercel(),
-  site: 'https://forma-atelier.com',
+  site: 'https://forma-atelier-bcn.vercel.app',
   integrations: [
     react(),
     tailwind(),

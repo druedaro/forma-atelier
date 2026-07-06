@@ -8,4 +8,4 @@ Disallow: /cart
 Disallow: /wishlist
 Disallow: /login
 
-Sitemap: https://forma-atelier.com/sitemap-index.xml
+Sitemap: https://forma-atelier-bcn.vercel.app/sitemap-index.xml

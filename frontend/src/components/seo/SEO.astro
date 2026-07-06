@@ -37,3 +37,18 @@ const ogImage = new URL(image, Astro.site);
 <meta name="twitter:image" content={ogImage} />
 
 {schema && <script type="application/ld+json" set:html={schema} />}
+
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Forma Atelier",
+  "url": "https://forma-atelier-bcn.vercel.app/",
+  "logo": "https://forma-atelier-bcn.vercel.app/favicon.svg",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "contact@forma-atelier.com",
+    "contactType": "customer support"
+  }
+})}
+</script>
