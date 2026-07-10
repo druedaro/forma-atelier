@@ -2,6 +2,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CheckoutForm } from '../components/checkout/CheckoutForm';
+import { ErrorBoundary } from '../components/ui/ErrorBoundary';
 ---
 
 <BaseLayout title="FORMA ATELIER | Checkout">
@@ -24,7 +25,9 @@ import { CheckoutForm } from '../components/checkout/CheckoutForm';
         Finalizar Compra
       </h1>
 
-      <CheckoutForm client:load />
+      <ErrorBoundary client:only="react">
+        <CheckoutForm client:load />
+      </ErrorBoundary>
     </div>
   </main>
 </BaseLayout>

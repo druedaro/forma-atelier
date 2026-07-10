@@ -27,6 +27,7 @@ import Nav from '../components/layout/Nav.astro';
 import Footer from '../components/layout/Footer.astro';
 import { GlobalCart } from '../components/ui/GlobalCart';
 import { WishlistDrawer } from '../components/wishlist/WishlistDrawer';
+import { ErrorBoundary } from '../components/ui/ErrorBoundary';
 
 import { BackToTop } from '../components/ui/BackToTop';
 import SmoothScroll from '../components/layout/SmoothScroll';
@@ -77,8 +78,12 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <div id="main-content" tabindex="-1">
       <slot />
     </div>
-    <GlobalCart client:only="react" />
-    <WishlistDrawer client:only="react" />
+    <ErrorBoundary client:only="react">
+      <GlobalCart client:only="react" />
+    </ErrorBoundary>
+    <ErrorBoundary client:only="react">
+      <WishlistDrawer client:only="react" />
+    </ErrorBoundary>
 
     <Footer transition:animate="none" />
   </body>
