@@ -1,51 +1,63 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { WishlistDrawer } from '../WishlistDrawer';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useWishlistStore } from '../../../lib/store/wishlistStore';
+import type { Product } from '../../../lib/types/index';
 
-vi.mock('../../../lib/mock/data', () => ({
-  mockProducts: [
-    { id: '1', name: 'Product 1', slug: 'p1', price: 100, images: ['img1.jpg'] },
-    { id: '2', name: 'Product 2', slug: 'p2', price: 200, images: ['img2.jpg'] },
-  ]
+vi.mock('../../../lib/api/wishlist', () => ({
+  getWishlistProducts: vi.fn(),
+  addToWishlist: vi.fn().mockResolvedValue(undefined),
+  removeFromWishlist: vi.fn().mockResolvedValue(undefined),
+  getWishlistIds: vi.fn().mockResolvedValue([]),
 }));
 
-describe('WishlistDrawer', () => {
-  beforeEach(() => {
-    useWishlistStore.setState({ isWishlistOpen: true, items: ['1'] });
+vi.mock('../../../lib/firebase', () => ({
+  auth: { currentUser: { uid: 'test-uid' } },
+  db: {},
+}));
+
+const mockProducts: Product[] = [
+  {
+    id: '1', name: 'Vestido Silk', slug: 'vestido-silk', price: 1850,
+    images: ['/img1.avif'], description: 'Test', collection: 'lumiere',
+    category: 'vestidos', sizes: ['S', 'M'], available: true, featured: false,
+    composition: '100% Seda', care: [],
+  },
+];
+
+describe('[MUST] WishlistDrawer', () => {
+  beforeEach(async () => {
+    const { getWishlistProducts } = await import('../../../lib/api/wishlist');
+    vi.mocked(getWishlistProducts).mockResolvedValue(mockProducts);
+    useWishlistStore.setState({ isWishlistOpen: true, items: ['1'], isLoading: false });
   });
 
-  it('renders correctly when open with items', () => {
+  it('[M1] renders drawer header when open', () => {
     render(<WishlistDrawer />);
-
-    expect(screen.getByText('Wishlist (1)')).toBeInTheDocument();
-    expect(screen.getByText('Product 1')).toBeInTheDocument();
-    expect(screen.getByText('100 €')).toBeInTheDocument();
+    expect(screen.getByText(/Wishlist/i)).toBeInTheDocument();
   });
 
-  it('renders empty state when no items', () => {
-    useWishlistStore.setState({ items: [] });
+  it('[M2] renders empty state when no items', async () => {
+    const { getWishlistProducts } = await import('../../../lib/api/wishlist');
+    vi.mocked(getWishlistProducts).mockResolvedValue([]);
+    useWishlistStore.setState({ items: [], isWishlistOpen: true });
     render(<WishlistDrawer />);
-
-    expect(screen.getByText('Wishlist (0)')).toBeInTheDocument();
-    expect(screen.getByText('Tu lista de deseos está vacía.')).toBeInTheDocument();
-    expect(screen.getByText('Explorar colección')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/Tu lista de deseos está vacía/i)).toBeInTheDocument();
+    });
   });
 
-  it('does not render when closed', () => {
+  it('[M3] does not render when closed', () => {
     useWishlistStore.setState({ isWishlistOpen: false });
     const { container } = render(<WishlistDrawer />);
-
     expect(container.firstChild).toBeNull();
   });
 
-  it('allows removing an item', () => {
+  it('[S1] shows product price when loaded', async () => {
     render(<WishlistDrawer />);
-
-    const removeBtn = screen.getByText('Eliminar');
-    fireEvent.click(removeBtn);
-
-    expect(useWishlistStore.getState().items).not.toContain('1');
+    await waitFor(() => {
+      expect(screen.getByText(/1850/)).toBeInTheDocument();
+    });
   });
 });

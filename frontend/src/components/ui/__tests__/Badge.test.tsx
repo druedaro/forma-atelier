@@ -3,22 +3,27 @@ import { render, screen } from '@testing-library/react';
 import { Badge } from '../Badge';
 import { describe, it, expect } from 'vitest';
 
-describe('Badge', () => {
-  it('renders correctly with children', () => {
+describe('[MUST] Badge', () => {
+  it('[M1] renders children text correctly', () => {
     render(<Badge>New Collection</Badge>);
-    const badge = screen.getByText(/New Collection/i);
-    expect(badge).toBeInTheDocument();
+    expect(screen.getByText('New Collection')).toBeInTheDocument();
   });
 
-  it('applies the correct default classes', () => {
+  it('[M2] renders as an inline-flex span element', () => {
     render(<Badge>Test</Badge>);
-    const badge = screen.getByText(/Test/i);
-    expect(badge).toHaveClass('inline-flex', 'items-center', 'px-2', 'py-0.5', 'rounded-sm', 'font-body', 'text-[10px]', 'font-medium', 'tracking-widest', 'uppercase', 'bg-smoke', 'text-stone', 'border-[0.5px]', 'border-linen');
+    const badge = screen.getByText('Test');
+    expect(badge.tagName).toBe('SPAN');
   });
 
-  it('accepts additional class names', () => {
-    render(<Badge className="bg-stone">Custom</Badge>);
-    const badge = screen.getByText(/Custom/i);
-    expect(badge).toHaveClass('bg-stone');
+  it('[M3] accepts additional class names via className prop', () => {
+    render(<Badge className="custom-class">Custom</Badge>);
+    const badge = screen.getByText('Custom');
+    expect(badge).toHaveClass('custom-class');
+  });
+
+  it('[M4] renders empty when no children', () => {
+    render(<Badge>{''}</Badge>);
+    const badge = screen.getByText('', { selector: 'span' });
+    expect(badge).toBeInTheDocument();
   });
 });

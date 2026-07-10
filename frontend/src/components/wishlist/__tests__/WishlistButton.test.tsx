@@ -5,6 +5,10 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { useWishlistStore } from '../../../lib/store/wishlistStore';
 import { useAuthStore } from '../../../lib/store/authStore';
 
+vi.mock('../../../lib/firebase', () => ({
+  auth: { currentUser: { uid: 'test-user' } },
+}));
+
 describe('WishlistButton', () => {
   beforeEach(() => {
     useWishlistStore.setState({ items: [] });
