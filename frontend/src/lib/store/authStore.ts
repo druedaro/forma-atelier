@@ -9,7 +9,6 @@ import {
   signInWithPopup,
   signInAnonymously,
   GoogleAuthProvider,
-  OAuthProvider,
   type User,
 } from 'firebase/auth';
 import { auth } from '../firebase';
@@ -30,7 +29,6 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
-  loginWithApple: () => Promise<void>;
   loginAsGuest: () => Promise<void>;
   logout: () => void;
   restoreSession: () => void;
@@ -74,18 +72,6 @@ export const useAuthStore = create<AuthState>()(
 
       loginWithGoogle: async () => {
         const provider = new GoogleAuthProvider();
-        const credential = await signInWithPopup(auth, provider);
-        set({
-          user: firebaseUserToAuthUser(credential.user),
-          token: null,
-          isLoggedIn: true,
-        });
-      },
-
-      loginWithApple: async () => {
-        const provider = new OAuthProvider('apple.com');
-        provider.addScope('email');
-        provider.addScope('name');
         const credential = await signInWithPopup(auth, provider);
         set({
           user: firebaseUserToAuthUser(credential.user),

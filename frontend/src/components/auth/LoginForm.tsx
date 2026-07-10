@@ -14,14 +14,6 @@ function GoogleIcon() {
   );
 }
 
-function AppleIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.19 1.28-2.17 3.83.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.36 2.75M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-    </svg>
-  );
-}
-
 function GuestIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -39,10 +31,10 @@ export function LoginForm() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [socialLoading, setSocialLoading] = useState<'google' | 'apple' | 'guest' | null>(null);
+  const [socialLoading, setSocialLoading] = useState<'google' | 'guest' | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const { login, register, loginWithGoogle, loginWithApple, loginAsGuest } = useAuthStore();
+  const { login, register, loginWithGoogle, loginAsGuest } = useAuthStore();
 
   const handleError = (err: unknown) => {
     const msg = err instanceof Error ? err.message : String(err);
@@ -78,12 +70,11 @@ export function LoginForm() {
     }
   };
 
-  const handleSocial = async (provider: 'google' | 'apple' | 'guest') => {
+  const handleSocial = async (provider: 'google' | 'guest') => {
     setSocialLoading(provider);
     setError(null);
     try {
       if (provider === 'google') await loginWithGoogle();
-      else if (provider === 'apple') await loginWithApple();
       else await loginAsGuest();
       window.location.href = '/wishlist';
     } catch (err) {
@@ -133,21 +124,6 @@ export function LoginForm() {
             </svg>
           ) : <GoogleIcon />}
           Continuar con Google
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleSocial('apple')}
-          disabled={isBusy}
-          className="w-full flex items-center justify-center gap-3 py-3 bg-noir text-ivory font-body text-[10px] uppercase tracking-widest hover:bg-stone transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {socialLoading === 'apple' ? (
-            <svg className="animate-spin h-4 w-4 text-ivory" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-          ) : <AppleIcon />}
-          Continuar con Apple
         </button>
       </div>
 
