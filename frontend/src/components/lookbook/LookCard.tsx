@@ -53,13 +53,13 @@ export function LookCard({ look, href, onClick, priority }: LookCardProps) {
       </div>
 
       <div 
-        className="absolute bottom-0 left-0 w-full p-8 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-[400ms]"
+        className="absolute bottom-0 left-0 w-full p-6 md:p-8 transition-opacity duration-[400ms] opacity-90 group-hover:opacity-100 group-focus-within:opacity-100"
         style={{
-          background: 'linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.55) 50%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.45) 55%, transparent 100%)',
         }}
       >
         <h2 
-          className="text-3xl tracking-widest uppercase font-light mb-2"
+          className="text-2xl md:text-3xl tracking-widest uppercase font-light mb-1"
           style={{ 
             fontFamily: 'var(--font-display)', 
             color: '#F5F0EA',
