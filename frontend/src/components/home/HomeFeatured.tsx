@@ -16,18 +16,20 @@ export function HomeFeatured() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo([wrap1Ref.current, wrap2Ref.current, wrap3Ref.current],
-        { y: 60, opacity: 0 },
+      // Only animate y-position — never start at opacity:0 to avoid
+      // content being clipped by section overflow or GSAP not firing
+      gsap.from([wrap1Ref.current, wrap2Ref.current, wrap3Ref.current],
         {
-          y: 0,
-          opacity: 1,
+          y: 50,
           duration: 1.2,
           stagger: 0.15,
           ease: "power3.out",
+          clearProps: "y",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 85%",
+            start: "top 90%",
             once: true,
+            invalidateOnRefresh: true,
           }
         }
       );
@@ -72,7 +74,7 @@ export function HomeFeatured() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-20 px-8 md:px-16 bg-smoke overflow-hidden">
+    <section ref={containerRef} className="py-20 px-8 md:px-16 bg-smoke">
       <div className="max-w-[1920px] mx-auto">
         <header className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <h2 className="font-display text-4xl md:text-5xl text-noir uppercase tracking-widest font-light">
