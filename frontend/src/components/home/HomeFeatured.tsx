@@ -17,17 +17,17 @@ export function HomeFeatured() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo([wrap1Ref.current, wrap2Ref.current, wrap3Ref.current],
-        { y: 100, opacity: 0 },
+        { y: 60, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.5,
-          stagger: 0.2,
+          duration: 1.2,
+          stagger: 0.15,
           ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse"
+            start: "top 85%",
+            once: true,
           }
         }
       );
@@ -74,11 +74,11 @@ export function HomeFeatured() {
   return (
     <section ref={containerRef} className="py-20 px-8 md:px-16 bg-smoke overflow-hidden">
       <div className="max-w-[1920px] mx-auto">
-        <header className="mb-16 flex justify-between items-end">
+        <header className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <h2 className="font-display text-4xl md:text-5xl text-noir uppercase tracking-widest font-light">
             Selección<br/>Exclusiva
           </h2>
-          <a href="/lookbook" className="font-body text-xs uppercase tracking-widest text-noir/70 hover:text-noir transition-colors underline underline-offset-4">
+          <a href="/collections" className="font-body text-xs uppercase tracking-widest text-noir/70 hover:text-noir transition-colors underline underline-offset-4 self-start md:self-auto">
             Ver Colecciones completas
           </a>
         </header>
