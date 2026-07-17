@@ -24,9 +24,14 @@ export default function SmoothScroll() {
     const handlePageLoad = () => {
       window.scrollTo(0, 0);
       lenis.scrollTo(0, { immediate: true });
+      lenis.start();
     };
 
     const handleBeforePreparation = () => {
+      // Stop Lenis before View Transition starts to prevent InvalidStateError.
+      // The View Transitions API and Lenis both intercept scroll state — stopping
+      // Lenis first puts the browser in a clean state for the transition.
+      lenis.stop();
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
 

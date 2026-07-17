@@ -5,7 +5,6 @@ import { initImageParallax } from '../../animations/imageParallax';
 export interface LookCardProps {
   look: Look;
   href?: string;
-  href?: string;
   onClick?: () => void;
   priority?: boolean;
 }
