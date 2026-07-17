@@ -54,8 +54,10 @@ const isActive = (path: string) => {
       </a>
     </div>
 
-    <div class="flex items-center gap-4">
-      <WishlistNavButton client:only="react" />
+    <div class="flex items-center gap-3 md:gap-4">
+      <span class="hidden md:contents">
+        <WishlistNavButton client:only="react" />
+      </span>
       <CartButton client:only="react" />
       <AccountButton client:only="react" />
     </div>

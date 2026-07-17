@@ -75,7 +75,7 @@ import SmoothScroll from '../components/layout/SmoothScroll';
     <SmoothScroll client:load transition:persist="smooth-scroll" />
     <BackToTop client:load transition:persist="back-to-top" />
     <Nav fixedNav={fixedNav} forceScrolled={forceScrolled} transition:animate="none" />
-    <div id="main-content" tabindex="-1">
+    <div id="main-content" class="w-full" tabindex="-1">
       <slot />
     </div>
     <ErrorBoundary client:only="react">
