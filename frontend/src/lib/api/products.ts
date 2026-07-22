@@ -6,10 +6,6 @@ import { mockProducts } from '../mock/data';
 function docToProduct(id: string, data: DocumentData): Product {
   return {
     id,
-    collectionId: '',
-    collectionName: 'products',
-    created: '',
-    updated: '',
     name: data.name,
     slug: data.slug,
     description: data.description || '',

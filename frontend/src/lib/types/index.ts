@@ -1,20 +1,12 @@
-
-export interface PBRecord {
+export interface Product {
   id: string;
-  created?: string;
-  updated?: string;
-  collectionId?: string;
-  collectionName?: string;
-}
-
-export interface Product extends PBRecord {
   name: string;
   slug: string;
   description: string;
   price: number;
-  collection: string;     
+  collection: string;
   category: string;
-  images: string[];       
+  images: string[];
   sizes: string[];
   available: boolean;
   featured: boolean;
@@ -22,7 +14,6 @@ export interface Product extends PBRecord {
   care: string[];
   material?: string;
   origin?: string;
-  expand?: Record<string, unknown>;
 }
 
 export interface Collection {
@@ -60,7 +51,8 @@ export interface CartItem {
   quantity: number;
 }
 
-export interface Order extends PBRecord {
+export interface Order {
+  id: string;
   email: string;
   status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   total: number;
@@ -72,4 +64,6 @@ export interface Order extends PBRecord {
   shipping_zip: string;
   paymentIntentId?: string;
   notes?: string;
+  created?: string;
+  updated?: string;
 }

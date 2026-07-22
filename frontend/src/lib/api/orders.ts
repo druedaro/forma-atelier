@@ -45,14 +45,10 @@ export async function createOrder(input: CreateOrderInput): Promise<Order> {
 
   return {
     id: docRef.id,
-    collectionId: '',
-    collectionName: 'orders',
     ...orderData,
     items: input.items,
   } as Order;
 }
-
-
 
 export async function getOrder(id: string): Promise<Order | null> {
   try {
@@ -61,8 +57,6 @@ export async function getOrder(id: string): Promise<Order | null> {
     const data = snap.data();
     return {
       id: snap.id,
-      collectionId: '',
-      collectionName: 'orders',
       ...data,
     } as Order;
   } catch {
