@@ -7,7 +7,6 @@ function wishlistRef(userId: string) {
   return collection(db, 'wishlists', userId, 'items');
 }
 
-// ─── Get all wishlist product IDs for the current user ───────────────────────
 export async function getWishlistIds(): Promise<string[]> {
   const user = auth.currentUser;
   if (!user) return [];
@@ -19,7 +18,6 @@ export async function getWishlistIds(): Promise<string[]> {
   }
 }
 
-// ─── Get full product data for wishlist items ─────────────────────────────────
 export async function getWishlistProducts(): Promise<Product[]> {
   const user = auth.currentUser;
   if (!user) return [];
@@ -34,7 +32,6 @@ export async function getWishlistProducts(): Promise<Product[]> {
   }
 }
 
-// ─── Add product to wishlist ─────────────────────────────────────────────────
 export async function addToWishlist(productId: string): Promise<void> {
   const user = auth.currentUser;
   if (!user) throw new Error('Not authenticated');
@@ -43,7 +40,6 @@ export async function addToWishlist(productId: string): Promise<void> {
   });
 }
 
-// ─── Remove product from wishlist ────────────────────────────────────────────
 export async function removeFromWishlist(productId: string): Promise<void> {
   const user = auth.currentUser;
   if (!user) return;

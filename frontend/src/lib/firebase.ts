@@ -12,7 +12,6 @@ const firebaseConfig = {
   appId:             import.meta.env.PUBLIC_FIREBASE_APP_ID,
 };
 
-// Guard: during Astro static build, env vars may be undefined — defer init to client
 const hasConfig = !!firebaseConfig.apiKey;
 const app = hasConfig
   ? (getApps().length ? getApps()[0] : initializeApp(firebaseConfig))

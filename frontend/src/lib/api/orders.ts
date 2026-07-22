@@ -15,8 +15,6 @@ export interface CreateOrderInput {
   notes?: string;
 }
 
-// ─── Create order (guest checkout — only called after Stripe confirms payment) ─
-
 export async function createOrder(input: CreateOrderInput): Promise<Order> {
   const now = new Date().toISOString();
   const orderData = {
@@ -55,7 +53,6 @@ export async function createOrder(input: CreateOrderInput): Promise<Order> {
 }
 
 
-// ─── Get order by ID ─────────────────────────────────────────────────────────
 
 export async function getOrder(id: string): Promise<Order | null> {
   try {

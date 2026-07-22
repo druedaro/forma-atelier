@@ -7,7 +7,6 @@ export interface PBRecord {
   collectionName?: string;
 }
 
-// ─── Product ─────────────────────────────────────────────────────────────────
 export interface Product extends PBRecord {
   name: string;
   slug: string;
@@ -26,7 +25,6 @@ export interface Product extends PBRecord {
   expand?: Record<string, unknown>;
 }
 
-// ─── Collection (editorial) ───────────────────────────────────────────────────
 export interface Collection {
   id: string;
   name: string;
@@ -41,7 +39,6 @@ export interface Collection {
   order: number;
 }
 
-// ─── Look (lookbook entry) ────────────────────────────────────────────────────
 export interface Look {
   id: string;
   title: string;
@@ -56,7 +53,6 @@ export interface Look {
   };
 }
 
-// ─── Cart ─────────────────────────────────────────────────────────────────────
 export interface CartItem {
   id: string;
   product: Product;
@@ -64,7 +60,6 @@ export interface CartItem {
   quantity: number;
 }
 
-// ─── Order ───────────────────────────────────────────────────────────────────
 export interface Order extends PBRecord {
   email: string;
   status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';

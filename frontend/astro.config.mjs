@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import Critters from 'critters';
 import fs from 'node:fs';
@@ -48,10 +47,7 @@ function criticalCssIntegration() {
   };
 }
 
-// https://astro.build/config
 export default defineConfig({
-  // Astro 5: 'static' + prerender=false in API routes = same as legacy 'hybrid'
-  // Pages are static; src/pages/api/* endpoints are SSR (prerender=false)
   output: 'static',
   adapter: vercel(),
   site: 'https://forma-atelier-bcn.vercel.app',
