@@ -6,14 +6,13 @@ import { useAuthStore } from '../../../lib/store/authStore';
 
 describe('AuthGuard', () => {
   beforeEach(() => {
-
     Object.defineProperty(window, 'location', {
       value: { href: '/' },
-      writable: true
+      writable: true,
     });
   });
 
-  it('renders children when authenticated', () => {
+  it('renders children when the user is authenticated', () => {
     useAuthStore.setState({ isLoggedIn: true });
 
     render(
@@ -25,7 +24,7 @@ describe('AuthGuard', () => {
     expect(screen.getByTestId('protected-content')).toBeInTheDocument();
   });
 
-  it('redirects to login when not authenticated', () => {
+  it('redirects to /login when the user is not authenticated', () => {
     useAuthStore.setState({ isLoggedIn: false });
 
     const { container } = render(

@@ -18,7 +18,7 @@ const mockProduct = {
 };
 
 describe('ProductCard', () => {
-  it('renders correctly', () => {
+  it('renders product name, price, material, and featured badge', () => {
     render(<ProductCard product={mockProduct as any} />);
     expect(screen.getByText('Test Product')).toBeInTheDocument();
     expect(screen.getByText('99.99 €')).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('ProductCard', () => {
     expect(img).toHaveAttribute('src', 'img1.jpg');
   });
 
-  it('shows hover image on mouse enter', () => {
+  it('swaps to the hover image on mouse enter and back on mouse leave', () => {
     const { container } = render(<ProductCard product={mockProduct as any} />);
     const link = container.firstChild as HTMLElement;
 
@@ -40,7 +40,7 @@ describe('ProductCard', () => {
     expect(img).toHaveAttribute('src', 'img1.jpg');
   });
 
-  it('shows out of stock badge if unavailable', () => {
+  it('shows an out-of-stock badge when the product is unavailable', () => {
     const unavailableProduct = { ...mockProduct, available: false, featured: false };
     render(<ProductCard product={unavailableProduct as any} />);
     expect(screen.getByText('Agotado')).toBeInTheDocument();

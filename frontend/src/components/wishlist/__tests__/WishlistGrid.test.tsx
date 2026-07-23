@@ -32,17 +32,16 @@ const mockProducts: Product[] = [
   },
 ];
 
-describe('[MUST] WishlistGrid', () => {
+describe('WishlistGrid', () => {
   beforeEach(async () => {
     const { getWishlistProducts } = await import('../../../lib/api/wishlist');
     vi.mocked(getWishlistProducts).mockResolvedValue(mockProducts);
-    
-    // Auth store setup for all tests
+
     const { useAuthStore } = await import('../../../lib/store/authStore');
     useAuthStore.setState({ isLoggedIn: true });
   });
 
-  it('[M1] renders empty state message when wishlist is empty', async () => {
+  it('shows the empty wishlist message when there are no items', async () => {
     const { getWishlistProducts } = await import('../../../lib/api/wishlist');
     vi.mocked(getWishlistProducts).mockResolvedValueOnce([]);
     useWishlistStore.setState({ items: [] });
@@ -52,7 +51,7 @@ describe('[MUST] WishlistGrid', () => {
     });
   });
 
-  it('[M2] renders a link to explore collections when empty', async () => {
+  it('renders an explore collections link when the wishlist is empty', async () => {
     const { getWishlistProducts } = await import('../../../lib/api/wishlist');
     vi.mocked(getWishlistProducts).mockResolvedValueOnce([]);
     useWishlistStore.setState({ items: [] });
@@ -62,7 +61,7 @@ describe('[MUST] WishlistGrid', () => {
     });
   });
 
-  it('[S1] renders with items in store', () => {
+  it('reflects items that exist in the store', () => {
     useWishlistStore.setState({ items: ['1'] });
     render(<WishlistGrid />);
     expect(useWishlistStore.getState().items).toContain('1');
