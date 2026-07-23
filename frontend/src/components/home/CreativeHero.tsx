@@ -17,11 +17,10 @@ export function CreativeHero() {
       const tl = gsap.timeline();
 
       gsap.set([text1Ref.current, text2Ref.current], { y: '100%', opacity: 0 });
-      gsap.set(imageRef.current, { scale: 1.2, filter: 'blur(10px)' });
+      gsap.set(imageRef.current, { scale: 1.1 });
 
       tl.to(imageRef.current, {
         scale: 1,
-        filter: 'blur(0px)',
         duration: 2.5,
         ease: 'power3.out',
       })

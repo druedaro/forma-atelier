@@ -22,6 +22,13 @@ const websiteSchema = JSON.stringify({
   type="website"
   schema={websiteSchema}
 >
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href="/assets/photo-1469334031218-e382a71b716b.avif"
+    type="image/avif"
+  />
   <main>
     <CreativeHero client:load />
     <HomeManifesto client:load />

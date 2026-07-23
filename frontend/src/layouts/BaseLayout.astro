@@ -49,8 +49,8 @@ import SmoothScroll from '../components/layout/SmoothScroll';
         --color-gold: #C9A96E;
         --color-linen: #E8DDD0;
         --color-smoke: #F0EBE3;
-        --font-display: 'Cormorant Garamond', 'Georgia', serif;
-        --font-body: 'Jost', 'Inter', sans-serif;
+        --font-display: 'Cormorant Garamond', Georgia, serif;
+        --font-body: 'Jost', system-ui, sans-serif;
       }
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html { background-color: #F5F0EA; -webkit-font-smoothing: antialiased; }
@@ -62,6 +62,7 @@ import SmoothScroll from '../components/layout/SmoothScroll';
         history.scrollRestoration = 'manual';
       }
     </script>
+    <slot name="head" />
   </head>
   <body>
     <div class="page-overlay"></div>
