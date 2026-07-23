@@ -24,7 +24,7 @@ Inspired by the heritage of the great European ateliers — the patience of Herm
 This repository serves as the official **digital lookbook and e-commerce experience for Forma**: an immersive editorial platform where each collection comes alive through motion, light, and form.
 
 <p align="center">
-  <img src="./frontend/public/assets/chrome-capture-2026-07-23-0.gif" alt="Forma Atelier Hero" width="100%" />
+  <img src="./frontend/public/assets/1.gif" alt="Forma Atelier Hero" width="100%" />
 </p>
 
 ---
@@ -46,7 +46,7 @@ An interactive, headless digital lookbook and luxury e-commerce platform featuri
 - 🧪 **Comprehensive Test Suite**: Over 150 unit and component tests passing via Vitest & React Testing Library.
 
 <p align="center">
-  <img src="./frontend/public/assets/chrome-capture-2026-07-23.gif" alt="Forma Atelier Lookbook Scroll" width="100%" />
+  <img src="./frontend/public/assets/2.gif" alt="Forma Atelier Lookbook Scroll" width="100%" />
 </p>
 
 ---
