@@ -37,13 +37,13 @@ An interactive, headless digital lookbook and luxury e-commerce platform featuri
 
 ### ✦ Features
 
-- 🎬 **Cinematic Lookbook**: Animated horizontal scrolling, parallax reveals, and seamless view transitions powered by GSAP & Lenis.
-- 🛍️ **E-Commerce Journey**: Product collections (*Lumière*, *Ombra*, *Terra*), interactive size guides, detailed product specifications, and free shipping threshold calculations.
-- 🔐 **Authentication Flow**: Robust authentication with Firebase Auth supporting Email/Password, Google OAuth, and Guest access.
-- 🖤 **Persistent Wishlist & Cart**: Real-time state management using Zustand 5 synced directly to Firebase Firestore.
-- 💳 **Stripe Checkout**: Integrated Stripe PaymentIntent API with styled custom Stripe Elements for simulated payments.
-- ⚡ **Performance & Privacy First**: 100% self-hosted typography via `@fontsource` (zero external Google Fonts tracking calls), preloaded LCP hero resources, and critical inline CSS optimization.
-- 🧪 **Comprehensive Test Suite**: Over 150 unit and component tests passing via Vitest & React Testing Library.
+- **Cinematic Lookbook**: Animated horizontal scrolling, parallax reveals, and view transitions built with GSAP and Lenis.
+- **E-Commerce Architecture**: Product catalog filtering across collections (*Lumière*, *Ombra*, *Terra*), interactive size guides, detail view modals, and shipping threshold logic.
+- **Authentication System**: User session persistence powered by Firebase Auth, supporting Email/Password, Google OAuth, and Guest access.
+- **Persistent Wishlist & Shopping Cart**: Real-time state management via Zustand 5 synchronized with Firestore.
+- **Stripe Checkout**: Integrated PaymentIntent API flow with custom-styled Stripe Elements.
+- **Performance & Privacy**: 100% self-hosted typography using `@fontsource` with zero third-party font tracking calls, LCP preloading, and inlined critical CSS.
+- **Automated Testing**: Comprehensive unit and component test suite (+150 tests) using Vitest and React Testing Library.
 
 <p align="center">
   <img src="./frontend/public/assets/2.gif" alt="Forma Atelier Lookbook Scroll" width="100%" />
