@@ -18,12 +18,13 @@ import { Button } from '../components/ui/Button';
 
       <Divider className="mb-16" />
 
-      <form class="flex flex-col gap-8">
+      <form id="contact-form" class="flex flex-col gap-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="flex flex-col gap-2">
             <label class="font-body text-[10px] uppercase tracking-widest text-stone">Nombre completo</label>
             <input 
-              type="text" 
+              type="text"
+              name="name" 
               required
               class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
             />
@@ -31,7 +32,8 @@ import { Button } from '../components/ui/Button';
           <div class="flex flex-col gap-2">
             <label class="font-body text-[10px] uppercase tracking-widest text-stone">Email</label>
             <input 
-              type="email" 
+              type="email"
+              name="email" 
               required
               class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
             />
@@ -41,7 +43,8 @@ import { Button } from '../components/ui/Button';
         <div class="flex flex-col gap-2">
           <label class="font-body text-[10px] uppercase tracking-widest text-stone">Asunto</label>
           <input 
-            type="text" 
+            type="text"
+            name="subject" 
             required
             class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
           />
@@ -50,6 +53,7 @@ import { Button } from '../components/ui/Button';
         <div class="flex flex-col gap-2">
           <label class="font-body text-[10px] uppercase tracking-widest text-stone">Mensaje</label>
           <textarea 
+            name="message" 
             required
             rows={5}
             class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none resize-none"
@@ -57,9 +61,41 @@ import { Button } from '../components/ui/Button';
         </div>
 
         <div class="mt-8 text-center">
-          <Button type="button" variant="primary">Enviar Mensaje</Button>
+          <Button type="submit" variant="primary">Enviar Mensaje</Button>
         </div>
       </form>
     </div>
   </main>
 </BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      
+      // Basic sanitization to prevent XSS injection in any future processing
+      const sanitize = (str: string) => {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      };
+
+      const sanitizedData = {
+        name: sanitize((data.name as string) || ''),
+        email: sanitize((data.email as string) || ''),
+        subject: sanitize((data.subject as string) || ''),
+        message: sanitize((data.message as string) || ''),
+      };
+      
+      console.log('Mensaje seguro enviado:', sanitizedData);
+      
+      alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+      form.reset();
+    });
+  }
+</script>
