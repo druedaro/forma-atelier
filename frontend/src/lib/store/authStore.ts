@@ -7,6 +7,7 @@ import {
   updateProfile,
   onAuthStateChanged,
   signInWithPopup,
+  signInWithRedirect,
   signInAnonymously,
   GoogleAuthProvider,
   type User,
@@ -72,12 +73,18 @@ export const useAuthStore = create<AuthState>()(
 
       loginWithGoogle: async () => {
         const provider = new GoogleAuthProvider();
-        const credential = await signInWithPopup(auth, provider);
-        set({
-          user: firebaseUserToAuthUser(credential.user),
-          token: null,
-          isLoggedIn: true,
-        });
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+          await signInWithRedirect(auth, provider);
+        } else {
+          const credential = await signInWithPopup(auth, provider);
+          set({
+            user: firebaseUserToAuthUser(credential.user),
+            token: null,
+            isLoggedIn: true,
+          });
+        }
       },
 
       loginAsGuest: async () => {
