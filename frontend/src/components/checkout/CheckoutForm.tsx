@@ -48,86 +48,84 @@ interface InnerProps {
   grandTotal: number;
 }
 
-// ─── Inner form — must be a child of <Elements> to use Stripe hooks ───────────
 function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: InnerProps) {
   const stripe = useStripe();
   const elements = useElements();
-  const { clearCart } = useCartStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!stripe || !elements) return;
+
+    if (!stripe || !elements) {
+      setError('El pago aún se está inicializando. Inténtalo de nuevo en unos segundos.');
+      return;
+    }
 
     setIsSubmitting(true);
     setError(null);
 
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      setError(submitError.message ?? 'Error al validar el formulario de pago.');
+      setIsSubmitting(false);
+      return;
+    }
 
-    const { error: stripeError, paymentIntent } = await stripe.confirmPayment({
+    const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: `${window.location.origin}/success`,
+        receipt_email: form.email,
         payment_method_data: {
           billing_details: {
             name: `${form.firstName} ${form.lastName}`.trim(),
             email: form.email,
             address: {
               line1: form.address,
-              line2: '',      
               city: form.city,
               postal_code: form.zip,
-              state: '',      
               country: 'ES',
             },
           },
         },
       },
-
       redirect: 'if_required',
     });
 
-    if (stripeError) {
+    if (confirmError) {
       setError(
-        stripeError.type === 'card_error'
-          ? (stripeError.message ?? 'Tarjeta rechazada.')
-          : 'Ha ocurrido un error al procesar el pago. Por favor inténtalo de nuevo.'
+        confirmError.message ?? 'Ha ocurrido un error al procesar el pago. Por favor inténtalo de nuevo.'
       );
       setIsSubmitting(false);
       return;
     }
 
+    if (paymentIntent?.status === 'succeeded') {
+      try {
+        const order = await createOrder({
+          email: form.email,
+          items,
+          total: grandTotal,
+          shipping,
+          paymentIntentId: paymentIntent.id,
+          shipping_name: `${form.firstName} ${form.lastName}`.trim(),
+          shipping_address: form.address,
+          shipping_city: form.city,
+          shipping_zip: form.zip,
+        });
+        sessionStorage.setItem('forma_order_id', order.id);
+      } catch (err) {
+        console.warn('[Checkout] Order save failed after payment:', err);
+      }
 
-    try {
-      const order = await createOrder({
-        email: form.email,
-        items,
-        total: grandTotal,
-        shipping,
-        paymentIntentId: paymentIntent?.id ?? '',
-        shipping_name: `${form.firstName} ${form.lastName}`.trim(),
-        shipping_address: form.address,
-        shipping_city: form.city,
-        shipping_zip: form.zip,
-      });
-
-      sessionStorage.setItem('forma_order_id', order.id);
-    } catch (err) {
-      console.warn('[Checkout] Order save failed after payment:', err);
-
+      window.location.href = `/success?payment_intent=${paymentIntent.id}&redirect_status=succeeded`;
     }
-
-
-    window.location.href = `/success?payment_intent=${paymentIntent?.id ?? ''}&redirect_status=succeeded`;
   };
 
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 w-full">
-
-
       <div className="lg:col-span-7 flex flex-col gap-12 w-full">
-
-
         <section>
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">1. Información de Envío</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
@@ -189,7 +187,6 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
           </div>
         </section>
 
-
         <section>
           <h2 className="font-display text-xl uppercase tracking-widest text-noir mb-6">2. Pago Seguro</h2>
           <div className="p-6 border border-[#E8DDD0] bg-white w-full">
@@ -213,7 +210,6 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
           </div>
         )}
       </div>
-
 
       <div className="lg:col-span-5 w-full">
         <div className="bg-white p-8 border border-[#E8DDD0] sticky top-8">
@@ -281,7 +277,6 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
   );
 }
 
-// ─── Outer wrapper — creates PaymentIntent, provides Elements context ─────────
 export function CheckoutForm() {
   const { items } = useCartStore();
   const [mounted, setMounted] = useState(false);
@@ -293,31 +288,42 @@ export function CheckoutForm() {
 
   useEffect(() => { setMounted(true); }, []);
 
-  const total     = items.reduce((s, i) => s + i.product.price * i.quantity, 0);
-  const shipping  = total > 0 ? (total > 200 ? 0 : 15) : 0;
+  const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const shipping = total > 0 ? (total > 200 ? 0 : 15) : 0;
   const grandTotal = total + shipping;
-
 
   useEffect(() => {
     if (!mounted || items.length === 0 || grandTotal <= 0) return;
+
     fetch('/api/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: Math.round(grandTotal * 100) }),
+      body: JSON.stringify({ items, shipping, amount: Math.round(grandTotal * 100) }),
     })
-      .then(r => r.json())
-      .then(d => {
-        if (d.clientSecret) setClientSecret(d.clientSecret);
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.clientSecret) setClientSecret(data.clientSecret);
         else setInitError('No se pudo inicializar el pago.');
       })
       .catch(() => setInitError('Error de conexión. Por favor, recarga la página.'));
   }, [mounted, items.length, grandTotal]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForm((previous) => ({ ...previous, [event.target.name]: event.target.value }));
   };
 
   if (!mounted) return null;
+
+  if (!STRIPE_PK) {
+    return (
+      <div className="text-center py-12">
+        <p className="font-body text-sm text-red-600 tracking-wider mb-6">
+          Stripe no está configurado en el entorno de despliegue.
+        </p>
+        <Button onClick={() => window.location.reload()}>Reintentar</Button>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

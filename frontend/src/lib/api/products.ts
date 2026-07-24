@@ -6,10 +6,6 @@ import { mockProducts } from '../mock/data';
 function docToProduct(id: string, data: DocumentData): Product {
   return {
     id,
-    collectionId: '',
-    collectionName: 'products',
-    created: '',
-    updated: '',
     name: data.name,
     slug: data.slug,
     description: data.description || '',
@@ -35,8 +31,6 @@ function withMockImages(product: Product): Product {
   return product;
 }
 
-// ─── Fetch all products ───────────────────────────────────────────────────────
-
 export async function getProducts(): Promise<Product[]> {
   try {
     const snap = await getDocs(collection(db, 'products'));
@@ -49,8 +43,6 @@ export async function getProducts(): Promise<Product[]> {
     return mockProducts as unknown as Product[];
   }
 }
-
-// ─── Fetch products by collection slug ───────────────────────────────────────
 
 export async function getProductsByCollection(collectionSlug: string): Promise<Product[]> {
   try {
@@ -66,8 +58,6 @@ export async function getProductsByCollection(collectionSlug: string): Promise<P
   }
 }
 
-// ─── Fetch single product by slug ────────────────────────────────────────────
-
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
     const q = query(collection(db, 'products'), where('slug', '==', slug));
@@ -80,8 +70,6 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     return (mockProducts as unknown as Product[]).find(p => p.slug === slug) ?? null;
   }
 }
-
-// ─── Fetch featured products ─────────────────────────────────────────────────
 
 export async function getFeaturedProducts(): Promise<Product[]> {
   try {
@@ -96,8 +84,6 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     return (mockProducts as unknown as Product[]).filter(p => p.featured);
   }
 }
-
-// ─── Fetch single product by Firestore document ID ───────────────────────────
 
 export async function getProductById(id: string): Promise<Product | null> {
   try {

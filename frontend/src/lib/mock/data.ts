@@ -59,7 +59,6 @@ export const mockProducts = [
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
     featured: true,
-    expand: { collection: mockCollections[0] }
   },
   {
     id: 'prod_2',
@@ -76,7 +75,6 @@ export const mockProducts = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     available: true,
     featured: true,
-    expand: { collection: mockCollections[0] }
   },
   {
     id: 'prod_1_3',
@@ -91,7 +89,6 @@ export const mockProducts = [
     sizes: ['S', 'M', 'L'],
     available: true,
     featured: false,
-    expand: { collection: mockCollections[0] }
   },
   {
     id: 'prod_1_4',
@@ -106,7 +103,6 @@ export const mockProducts = [
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
     featured: false,
-    expand: { collection: mockCollections[0] }
   },
   {
     id: 'prod_1_5',
@@ -121,7 +117,6 @@ export const mockProducts = [
     sizes: ['S', 'M', 'L'],
     available: true,
     featured: false,
-    expand: { collection: mockCollections[0] }
   },
 
   {
@@ -139,7 +134,6 @@ export const mockProducts = [
     sizes: ['S', 'M', 'L'],
     available: true,
     featured: true,
-    expand: { collection: mockCollections[1] }
   },
   {
     id: 'prod_2_2',
@@ -154,7 +148,6 @@ export const mockProducts = [
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
     featured: false,
-    expand: { collection: mockCollections[1] }
   },
   {
     id: 'prod_2_3',
@@ -169,7 +162,6 @@ export const mockProducts = [
     sizes: ['S', 'M', 'L', 'XL'],
     available: true,
     featured: true,
-    expand: { collection: mockCollections[1] }
   },
   {
     id: 'prod_2_4',
@@ -184,7 +176,6 @@ export const mockProducts = [
     sizes: ['S', 'M'],
     available: true,
     featured: false,
-    expand: { collection: mockCollections[1] }
   },
 
   {
@@ -200,7 +191,6 @@ export const mockProducts = [
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
     featured: true,
-    expand: { collection: mockCollections[2] }
   },
   {
     id: 'prod_3_2',
@@ -215,7 +205,6 @@ export const mockProducts = [
     sizes: ['TALLA ÚNICA'],
     available: true,
     featured: true,
-    expand: { collection: mockCollections[2] }
   },
   {
     id: 'prod_3_3',
@@ -230,7 +219,6 @@ export const mockProducts = [
     sizes: ['S', 'M', 'L'],
     available: true,
     featured: false,
-    expand: { collection: mockCollections[2] }
   },
   {
     id: 'prod_3_4',
@@ -245,7 +233,6 @@ export const mockProducts = [
     sizes: ['XS', 'S', 'M', 'L'],
     available: true,
     featured: false,
-    expand: { collection: mockCollections[2] }
   }
 ] as unknown as Product[];
 

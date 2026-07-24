@@ -28,7 +28,7 @@ const mockProduct2: Product = {
   price: 2400,
 };
 
-describe('[MUST] cartStore', () => {
+describe('cartStore — core actions', () => {
   beforeEach(() => {
     useCartStore.setState({ items: [], isOpen: false });
   });
@@ -107,7 +107,7 @@ describe('[MUST] cartStore', () => {
   });
 });
 
-describe('[SHOULD] cartStore — totals calculation', () => {
+describe('cartStore — totals calculation', () => {
   beforeEach(() => {
     useCartStore.setState({ items: [], isOpen: false });
   });
@@ -142,7 +142,7 @@ describe('[SHOULD] cartStore — totals calculation', () => {
   });
 });
 
-describe('[COULD] cartStore — edge cases', () => {
+describe('cartStore — edge cases', () => {
   beforeEach(() => {
     useCartStore.setState({ items: [], isOpen: false });
   });

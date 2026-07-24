@@ -1,21 +1,12 @@
-
-export interface PBRecord {
+export interface Product {
   id: string;
-  created?: string;
-  updated?: string;
-  collectionId?: string;
-  collectionName?: string;
-}
-
-// ─── Product ─────────────────────────────────────────────────────────────────
-export interface Product extends PBRecord {
   name: string;
   slug: string;
   description: string;
   price: number;
-  collection: string;     
+  collection: string;
   category: string;
-  images: string[];       
+  images: string[];
   sizes: string[];
   available: boolean;
   featured: boolean;
@@ -23,10 +14,8 @@ export interface Product extends PBRecord {
   care: string[];
   material?: string;
   origin?: string;
-  expand?: Record<string, unknown>;
 }
 
-// ─── Collection (editorial) ───────────────────────────────────────────────────
 export interface Collection {
   id: string;
   name: string;
@@ -41,7 +30,6 @@ export interface Collection {
   order: number;
 }
 
-// ─── Look (lookbook entry) ────────────────────────────────────────────────────
 export interface Look {
   id: string;
   title: string;
@@ -56,7 +44,6 @@ export interface Look {
   };
 }
 
-// ─── Cart ─────────────────────────────────────────────────────────────────────
 export interface CartItem {
   id: string;
   product: Product;
@@ -64,8 +51,8 @@ export interface CartItem {
   quantity: number;
 }
 
-// ─── Order ───────────────────────────────────────────────────────────────────
-export interface Order extends PBRecord {
+export interface Order {
+  id: string;
   email: string;
   status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
   total: number;
@@ -77,4 +64,6 @@ export interface Order extends PBRecord {
   shipping_zip: string;
   paymentIntentId?: string;
   notes?: string;
+  created?: string;
+  updated?: string;
 }

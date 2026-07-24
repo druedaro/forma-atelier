@@ -21,7 +21,7 @@ describe('LookbookScroll', () => {
     expect(getByText('Test Child')).toBeInTheDocument();
   });
 
-  it('renders the wrapper and container with correct classes', () => {
+  it('renders the wrapper element with the expected layout classes', () => {
     const { container } = render(
       <LookbookScroll>
         <div>Child</div>

@@ -3,16 +3,16 @@ import { useWishlistStore } from '../../lib/store/wishlistStore';
 import { useAuthStore } from '../../lib/store/authStore';
 
 export function WishlistNavButton() {
-  const { openWishlist, items, loadFromPB } = useWishlistStore();
+  const { openWishlist, items, loadItems } = useWishlistStore();
   const { isLoggedIn } = useAuthStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     if (isLoggedIn) {
-      loadFromPB();
+      loadItems();
     }
-  }, [isLoggedIn, loadFromPB]);
+  }, [isLoggedIn, loadItems]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();

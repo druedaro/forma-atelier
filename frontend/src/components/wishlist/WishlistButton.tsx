@@ -8,7 +8,7 @@ export interface WishlistButtonProps {
 }
 
 export function WishlistButton({ productId, className = '' }: WishlistButtonProps) {
-  const { hasItem, toggleItem, loadFromPB } = useWishlistStore();
+  const { hasItem, toggleItem, loadItems } = useWishlistStore();
   const { isLoggedIn } = useAuthStore();
   const [mounted, setMounted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -17,9 +17,9 @@ export function WishlistButton({ productId, className = '' }: WishlistButtonProp
   useEffect(() => {
     setMounted(true);
     if (isLoggedIn) {
-      loadFromPB();
+      loadItems();
     }
-  }, [isLoggedIn, loadFromPB]);
+  }, [isLoggedIn, loadItems]);
 
   if (!mounted) return null;
 

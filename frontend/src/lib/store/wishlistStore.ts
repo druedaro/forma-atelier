@@ -11,7 +11,6 @@ interface WishlistState {
 
   loadItems: () => Promise<void>;
 
-  loadFromPB: () => Promise<void>;
   openWishlist: () => void;
   closeWishlist: () => void;
   hasItem: (productId: string) => boolean;
@@ -36,8 +35,6 @@ export const useWishlistStore = create<WishlistState>()((set, get) => ({
     const ids = await getWishlistIds();
     set({ items: ids, isLoading: false });
   },
-
-  loadFromPB: async () => get().loadItems(),
 
   openWishlist: () => set({ isWishlistOpen: true }),
   closeWishlist: () => set({ isWishlistOpen: false }),

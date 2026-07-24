@@ -8,12 +8,12 @@ const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }) => {
   return <div>OK</div>;
 };
 
-describe('[MUST] ErrorBoundary', () => {
+describe('ErrorBoundary', () => {
   beforeEach(() => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
-  it('[M1] renders children when there is no error', () => {
+  it('renders children when there is no error', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={false} />
@@ -22,7 +22,7 @@ describe('[MUST] ErrorBoundary', () => {
     expect(screen.getByText('OK')).toBeInTheDocument();
   });
 
-  it('[M2] renders default fallback UI when child throws', () => {
+  it('renders the default fallback UI when a child throws', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
@@ -32,7 +32,7 @@ describe('[MUST] ErrorBoundary', () => {
     expect(screen.getByText(/Algo ha ido mal/i)).toBeInTheDocument();
   });
 
-  it('[M3] renders Reintentar button in fallback', () => {
+  it('renders a retry button in the fallback', () => {
     render(
       <ErrorBoundary>
         <ThrowError shouldThrow={true} />
@@ -41,7 +41,7 @@ describe('[MUST] ErrorBoundary', () => {
     expect(screen.getByRole('button', { name: /Reintentar/i })).toBeInTheDocument();
   });
 
-  it('[M4] renders custom fallback when provided', () => {
+  it('renders a custom fallback when one is provided', () => {
     render(
       <ErrorBoundary fallback={<p>Custom fallback</p>}>
         <ThrowError shouldThrow={true} />
@@ -50,7 +50,7 @@ describe('[MUST] ErrorBoundary', () => {
     expect(screen.getByText('Custom fallback')).toBeInTheDocument();
   });
 
-  it('[S1] calls onError callback when child throws', () => {
+  it('calls the onError callback when a child throws', () => {
     const onError = vi.fn();
     render(
       <ErrorBoundary onError={onError}>
@@ -63,7 +63,7 @@ describe('[MUST] ErrorBoundary', () => {
     );
   });
 
-  it('[S2] retry button resets error boundary and allows re-render', () => {
+  it('resets the error boundary and re-renders on retry', () => {
     let shouldThrow = true;
 
     const ToggleError = () => {

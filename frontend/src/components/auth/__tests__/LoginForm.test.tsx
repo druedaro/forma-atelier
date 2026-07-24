@@ -19,7 +19,7 @@ vi.mock('../../../lib/store/authStore', async (importOriginal) => {
   };
 });
 
-describe('[MUST] LoginForm', () => {
+describe('LoginForm', () => {
   beforeEach(() => {
     Object.defineProperty(window, 'location', {
       writable: true,
@@ -27,30 +27,30 @@ describe('[MUST] LoginForm', () => {
     });
   });
 
-  it('[M1] renders email and password fields on login tab', () => {
+  it('renders email and password fields on the login tab', () => {
     render(<LoginForm />);
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
     expect(screen.getByLabelText('Contraseña')).toBeInTheDocument();
   });
 
-  it('[M2] renders Iniciar Sesión and Crear Cuenta tabs', () => {
+  it('renders Sign In and Create Account tabs', () => {
     render(<LoginForm />);
     const buttons = screen.getAllByRole('button', { name: /Iniciar Sesión/i });
     expect(buttons.length).toBeGreaterThanOrEqual(1);
     expect(screen.getByRole('button', { name: /Crear Cuenta/i })).toBeInTheDocument();
   });
 
-  it('[M3] renders Google sign-in button', () => {
+  it('renders the Google sign-in button', () => {
     render(<LoginForm />);
     expect(screen.getByRole('button', { name: /Continuar con Google/i })).toBeInTheDocument();
   });
 
-  it('[M4] renders Guest access button', () => {
+  it('renders the guest access button', () => {
     render(<LoginForm />);
     expect(screen.getByRole('button', { name: /Continuar como Invitado/i })).toBeInTheDocument();
   });
 
-  it('[M5] submits login form with email and password', async () => {
+  it('submits login form with email and password', async () => {
     const mockLogin = vi.fn().mockResolvedValue(undefined);
     vi.mocked(useAuthStore).mockReturnValue({
       login: mockLogin,
@@ -72,13 +72,13 @@ describe('[MUST] LoginForm', () => {
     });
   });
 
-  it('[S1] shows name field when switching to Crear Cuenta tab', () => {
+  it('shows the name field when switching to the Create Account tab', () => {
     render(<LoginForm />);
     fireEvent.click(screen.getByRole('button', { name: /Crear Cuenta/i }));
     expect(screen.getByLabelText('Nombre')).toBeInTheDocument();
   });
 
-  it('[S2] shows error message on failed login', async () => {
+  it('shows an error message on failed login', async () => {
     const mockLogin = vi.fn().mockRejectedValue(new Error('auth/invalid-credential'));
     vi.mocked(useAuthStore).mockReturnValue({
       login: mockLogin,

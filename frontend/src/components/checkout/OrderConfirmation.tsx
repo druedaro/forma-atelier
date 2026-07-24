@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { getOrder } from '../../lib/api/orders';
 import type { Order } from '../../lib/types';
 
-// ─── Skeleton loader ─────────────────────────────────────────────────────────
 function Skeleton({ className = '' }: { className?: string }) {
   return (
     <div
@@ -12,7 +11,6 @@ function Skeleton({ className = '' }: { className?: string }) {
   );
 }
 
-// ─── Main component ───────────────────────────────────────────────────────────
 export function OrderConfirmation() {
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);

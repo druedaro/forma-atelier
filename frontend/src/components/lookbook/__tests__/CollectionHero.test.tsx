@@ -13,26 +13,27 @@ const mockCollection = {
   description: 'Test',
   season: 'Spring',
   hero_image: 'hero.jpg',
-  looks: ['l1']
+  looks: ['l1'],
 };
 
 describe('CollectionHero', () => {
-  it('renders correctly', () => {
+  it('renders the collection name and season label', () => {
     render(<CollectionHero collection={mockCollection as any} />);
     expect(screen.getByText('Spring 2026')).toBeInTheDocument();
     expect(screen.getByText('Spring Collection')).toBeInTheDocument();
+  });
 
+  it('renders the hero image with the correct src', () => {
+    render(<CollectionHero collection={mockCollection as any} />);
     const img = screen.getByAltText('Spring 2026');
     expect(img).toHaveAttribute('src', 'hero.jpg');
   });
 
-  it('scrolls down when CTA is clicked', () => {
+  it('scrolls down when the CTA button is clicked', () => {
     window.scrollBy = vi.fn();
     render(<CollectionHero collection={mockCollection as any} />);
-
     const btn = screen.getByText('Scroll to explore').closest('button');
     btn?.click();
-
     expect(window.scrollBy).toHaveBeenCalledWith({ top: window.innerHeight, behavior: 'smooth' });
   });
 });

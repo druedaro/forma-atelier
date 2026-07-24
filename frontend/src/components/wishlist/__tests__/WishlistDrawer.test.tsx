@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { WishlistDrawer } from '../WishlistDrawer';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useWishlistStore } from '../../../lib/store/wishlistStore';
@@ -26,19 +26,19 @@ const mockProducts: Product[] = [
   },
 ];
 
-describe('[MUST] WishlistDrawer', () => {
+describe('WishlistDrawer', () => {
   beforeEach(async () => {
     const { getWishlistProducts } = await import('../../../lib/api/wishlist');
     vi.mocked(getWishlistProducts).mockResolvedValue(mockProducts);
     useWishlistStore.setState({ isWishlistOpen: true, items: ['1'], isLoading: false });
   });
 
-  it('[M1] renders drawer header when open', () => {
+  it('renders the drawer header when open', () => {
     render(<WishlistDrawer />);
     expect(screen.getByText(/Wishlist/i)).toBeInTheDocument();
   });
 
-  it('[M2] renders empty state when no items', async () => {
+  it('renders the empty state message when there are no items', async () => {
     const { getWishlistProducts } = await import('../../../lib/api/wishlist');
     vi.mocked(getWishlistProducts).mockResolvedValue([]);
     useWishlistStore.setState({ items: [], isWishlistOpen: true });
@@ -48,13 +48,13 @@ describe('[MUST] WishlistDrawer', () => {
     });
   });
 
-  it('[M3] does not render when closed', () => {
+  it('does not render anything when the drawer is closed', () => {
     useWishlistStore.setState({ isWishlistOpen: false });
     const { container } = render(<WishlistDrawer />);
     expect(container.firstChild).toBeNull();
   });
 
-  it('[S1] shows product price when loaded', async () => {
+  it('displays the product price when items are loaded', async () => {
     render(<WishlistDrawer />);
     await waitFor(() => {
       expect(screen.getByText(/1850/)).toBeInTheDocument();

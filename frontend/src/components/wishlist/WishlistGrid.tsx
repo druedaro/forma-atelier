@@ -22,6 +22,7 @@ export function WishlistGrid() {
 
     if (!isLoggedIn) {
       setIsLoading(false);
+      setProducts([]);
       return;
     }
 
@@ -29,7 +30,12 @@ export function WishlistGrid() {
     getWishlistProducts()
       .then(setProducts)
       .finally(() => setIsLoading(false));
-  }, [isLoggedIn, items, mounted]); 
+  }, [isLoggedIn, mounted]);
+
+  useEffect(() => {
+    if (!mounted || !isLoggedIn || products.length === 0) return;
+    setProducts(prev => prev.filter(p => items.includes(p.id)));
+  }, [items]);
 
   if (!mounted || isLoading) {
     return (

@@ -1,28 +1,35 @@
 import type { APIRoute } from 'astro';
 import Stripe from 'stripe';
 
-// This is an Astro API Route — portable across Vercel, Netlify, Node.js, etc.
-// Change the adapter in astro.config.mjs to switch platforms (single line).
 export const prerender = false;
 
-const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY ?? '', {
-  apiVersion: '2026-06-24.dahlia' as any,
-});
-
 export const POST: APIRoute = async ({ request }) => {
+  const secretKey = import.meta.env.STRIPE_SECRET_KEY ?? '';
+
+  if (!secretKey) {
+    console.error('[Stripe] STRIPE_SECRET_KEY is not set in environment variables');
+    return new Response(
+      JSON.stringify({ error: 'Stripe secret key is not configured' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  const stripe = new Stripe(secretKey);
+
   try {
     const body = await request.json();
     const { amount } = body;
 
-    if (!amount || typeof amount !== 'number' || amount < 50) {
+    const amountNum = Number(amount);
+    if (!amountNum || amountNum < 50) {
       return new Response(
-        JSON.stringify({ error: 'Invalid amount (minimum 5 €)' }),
+        JSON.stringify({ error: 'Invalid amount (minimum 0.50 €)' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(amount), 
+      amount: Math.round(amountNum),
       currency: 'eur',
       automatic_payment_methods: { enabled: true },
     });
@@ -34,7 +41,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (err: any) {
     console.error('[Stripe] Error creating payment intent:', err?.message);
     return new Response(
-      JSON.stringify({ error: 'Payment intent creation failed' }),
+      JSON.stringify({ error: 'Payment intent creation failed', detail: err?.message }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

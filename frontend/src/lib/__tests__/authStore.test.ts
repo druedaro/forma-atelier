@@ -32,20 +32,20 @@ const mockGuestUser = {
   isAnonymous: true,
 };
 
-describe('[MUST] authStore', () => {
+describe('authStore', () => {
   beforeEach(() => {
     useAuthStore.setState({ user: null, token: null, isLoggedIn: false });
     vi.clearAllMocks();
   });
 
-  it('[M1] initial state is unauthenticated', () => {
+  it('initial state is unauthenticated', () => {
     const state = useAuthStore.getState();
     expect(state.user).toBeNull();
     expect(state.isLoggedIn).toBe(false);
     expect(state.token).toBeNull();
   });
 
-  it('[M2] login() sets user and isLoggedIn on success', async () => {
+  it('login() sets user and isLoggedIn to true on success', async () => {
     const { signInWithEmailAndPassword } = await import('firebase/auth');
     vi.mocked(signInWithEmailAndPassword).mockResolvedValueOnce({ user: mockUser } as any);
 
@@ -59,7 +59,7 @@ describe('[MUST] authStore', () => {
     expect(state.user?.name).toBe('Test User');
   });
 
-  it('[M3] login() throws on invalid credentials', async () => {
+  it('login() throws on invalid credentials', async () => {
     const { signInWithEmailAndPassword } = await import('firebase/auth');
     vi.mocked(signInWithEmailAndPassword).mockRejectedValueOnce(
       new Error('auth/invalid-credential')
@@ -72,7 +72,7 @@ describe('[MUST] authStore', () => {
     expect(useAuthStore.getState().isLoggedIn).toBe(false);
   });
 
-  it('[M4] register() creates user with name and sets isLoggedIn', async () => {
+  it('register() creates a user with a display name and sets isLoggedIn', async () => {
     const { createUserWithEmailAndPassword, updateProfile } = await import('firebase/auth');
     vi.mocked(createUserWithEmailAndPassword).mockResolvedValueOnce({ user: mockUser } as any);
     vi.mocked(updateProfile).mockResolvedValueOnce(undefined);
@@ -85,7 +85,7 @@ describe('[MUST] authStore', () => {
     expect(updateProfile).toHaveBeenCalledWith(mockUser, { displayName: 'New User' });
   });
 
-  it('[M5] logout() clears user state', async () => {
+  it('logout() clears the user state', async () => {
     const { signOut } = await import('firebase/auth');
     vi.mocked(signOut).mockResolvedValueOnce(undefined);
 
@@ -97,7 +97,7 @@ describe('[MUST] authStore', () => {
     expect(state.isLoggedIn).toBe(false);
   });
 
-  it('[M6] loginWithGoogle() sets user on success', async () => {
+  it('loginWithGoogle() sets user on success', async () => {
     const { signInWithPopup } = await import('firebase/auth');
     vi.mocked(signInWithPopup).mockResolvedValueOnce({ user: mockUser } as any);
 
@@ -109,7 +109,7 @@ describe('[MUST] authStore', () => {
     expect(useAuthStore.getState().user?.email).toBe('test@forma.es');
   });
 
-  it('[M7] loginAsGuest() sets isGuest flag', async () => {
+  it('loginAsGuest() sets the isGuest flag on the user', async () => {
     const { signInAnonymously } = await import('firebase/auth');
     vi.mocked(signInAnonymously).mockResolvedValueOnce({ user: mockGuestUser } as any);
 

@@ -36,49 +36,49 @@ const mockProduct = {
   care: ['Lavado en seco'],
 };
 
-describe('[MUST] ProductDetail', () => {
-  it('[M1] renders product name and price', () => {
+describe('ProductDetail', () => {
+  it('renders the product name and price', () => {
     render(<ProductDetail product={mockProduct as any} />);
     expect(screen.getByText('Detailed Product')).toBeInTheDocument();
     expect(screen.getByText(/150 €/)).toBeInTheDocument();
   });
 
-  it('[M2] renders product description', () => {
+  it('renders the product description', () => {
     render(<ProductDetail product={mockProduct as any} />);
     expect(screen.getByText('A detailed test product')).toBeInTheDocument();
   });
 
-  it('[M3] renders Material field when provided', () => {
+  it('renders the Material field when provided', () => {
     render(<ProductDetail product={mockProduct as any} />);
     expect(screen.getByText(/Material: Silk/)).toBeInTheDocument();
   });
 
-  it('[M4] submit button is disabled when no size selected', () => {
+  it('disables the submit button when no size is selected', () => {
     render(<ProductDetail product={mockProduct as any} />);
     const btn = screen.getByRole('button', { name: /Selecciona una talla/i });
     expect(btn).toBeDisabled();
   });
 
-  it('[M5] selecting a size enables the add to cart button', () => {
+  it('enables the add-to-cart button after a size is selected', () => {
     render(<ProductDetail product={mockProduct as any} />);
     fireEvent.click(screen.getByText('M'));
     expect(screen.getByRole('button', { name: /Añadir a la cesta/i })).toBeEnabled();
   });
 
-  it('[S1] renders size buttons for all available sizes', () => {
+  it('renders size buttons for all available sizes', () => {
     render(<ProductDetail product={mockProduct as any} />);
     expect(screen.getByText('S')).toBeInTheDocument();
     expect(screen.getByText('M')).toBeInTheDocument();
     expect(screen.getByText('L')).toBeInTheDocument();
   });
 
-  it('[S2] renders product images', () => {
+  it('renders at least one product image', () => {
     render(<ProductDetail product={mockProduct as any} />);
     const images = screen.getAllByRole('img');
     expect(images.length).toBeGreaterThan(0);
   });
 
-  it('[C1] shows Agotado button when product is unavailable', () => {
+  it('shows a disabled "Agotado" button when the product is unavailable', () => {
     const unavailable = { ...mockProduct, available: false };
     render(<ProductDetail product={unavailable as any} />);
     expect(screen.getByRole('button', { name: /Agotado/i })).toBeDisabled();

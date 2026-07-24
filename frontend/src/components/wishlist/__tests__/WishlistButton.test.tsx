@@ -19,14 +19,13 @@ describe('WishlistButton', () => {
     });
   });
 
-  it('renders correctly', () => {
+  it('renders the add-to-wishlist button', () => {
     render(<WishlistButton productId="123" />);
-
     const btn = screen.getByRole('button', { name: 'Añadir a favoritos' });
     expect(btn).toBeInTheDocument();
   });
 
-  it('redirects to login if not authenticated', async () => {
+  it('redirects to /login when the user is not authenticated', async () => {
     useAuthStore.setState({ isLoggedIn: false });
     render(<WishlistButton productId="123" />);
 
@@ -37,22 +36,16 @@ describe('WishlistButton', () => {
     expect(useWishlistStore.getState().items).not.toContain('123');
   });
 
-  it('adds item to wishlist if authenticated', () => {
+  it('adds the item to the wishlist when authenticated', () => {
     render(<WishlistButton productId="123" />);
-
-    const btn = screen.getByRole('button', { name: 'Añadir a favoritos' });
-    fireEvent.click(btn);
-
+    fireEvent.click(screen.getByRole('button', { name: 'Añadir a favoritos' }));
     expect(useWishlistStore.getState().items).toContain('123');
   });
 
-  it('removes item from wishlist if already added', () => {
+  it('removes the item from the wishlist when it is already added', () => {
     useWishlistStore.setState({ items: ['123'] });
     render(<WishlistButton productId="123" />);
-
-    const btn = screen.getByRole('button', { name: 'Quitar de favoritos' });
-    fireEvent.click(btn);
-
+    fireEvent.click(screen.getByRole('button', { name: 'Quitar de favoritos' }));
     expect(useWishlistStore.getState().items).not.toContain('123');
   });
 });
