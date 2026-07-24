@@ -113,7 +113,7 @@ export function CreativeHero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 font-body text-xs tracking-widest uppercase text-[#0A0A0A]">
+      <div className="absolute bottom-8 w-full text-center z-30 font-body text-xs tracking-[0.2em] uppercase text-[#0A0A0A]">
         Scroll para explorar
       </div>
     </section>
