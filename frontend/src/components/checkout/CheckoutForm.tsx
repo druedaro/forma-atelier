@@ -85,6 +85,7 @@ function CheckoutInner({ form, onChange, items, total, shipping, grandTotal }: I
               line1: form.address,
               city: form.city,
               postal_code: form.zip,
+              state: '',
               country: 'ES',
             },
           },
