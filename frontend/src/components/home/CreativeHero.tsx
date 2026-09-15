@@ -92,24 +92,22 @@ export function CreativeHero() {
       </div>
 
       <div className="relative z-20 flex flex-col items-center justify-center h-full pointer-events-none mix-blend-difference text-white">
-        <div className="overflow-hidden">
-          <h1 
-            ref={text1Ref}
-            className="font-display text-[15vw] md:text-[12vw] leading-[0.8] uppercase font-light tracking-widest text-center"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Forma
-          </h1>
-        </div>
-        <div className="overflow-hidden mt-4">
-          <h1 
-            ref={text2Ref}
-            className="font-display text-[15vw] md:text-[12vw] leading-[0.8] uppercase font-light tracking-widest text-center italic"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Atelier
-          </h1>
-        </div>
+        <h1 
+          className="font-display text-[15vw] md:text-[12vw] leading-[0.8] uppercase font-light tracking-widest text-center"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          <span className="block overflow-hidden">
+            <span ref={text1Ref} className="block">
+              Forma
+            </span>
+          </span>
+      
+          <span className="block overflow-hidden mt-4">
+            <span ref={text2Ref} className="block italic">
+              Atelier
+            </span>
+          </span>
+        </h1>
       </div>
 
       <div className="absolute bottom-8 w-full text-center z-30 font-body text-xs tracking-[0.2em] uppercase text-[#0A0A0A]">
