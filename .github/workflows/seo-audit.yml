@@ -19,7 +19,7 @@ jobs:
 
       - name: Install & Build SEO Lint
         run: |
-          npm ci
+          npm install
           npm run build
 
       - name: Run SEO Lint
