@@ -22,11 +22,15 @@ if (!look) {
 }
 
 const campaignProducts = mockProducts.filter(p => look.products.includes(p.id));
+
+const campaignDescription = look.manifesto
+  ? (look.manifesto.length > 155 ? `${look.manifesto.slice(0, 152)}...` : look.manifesto)
+  : `Campaña editorial ${look.title} de Forma Atelier Barcelona. Exploración arquitectónica de la silueta contemporánea.`;
 ---
 
 <BaseLayout 
   title={`FORMA ATELIER | ${look.title}`}
-  description={look.manifesto.length > 155 ? `${look.manifesto.slice(0, 152)}...` : look.manifesto}
+  description={campaignDescription}
   image={look.image}
 >
   <main class="min-h-screen bg-ivory">
