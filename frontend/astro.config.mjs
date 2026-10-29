@@ -8,13 +8,16 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
+import { fileURLToPath } from 'node:url';
+
 function criticalCssIntegration() {
   return {
     name: 'critical-css',
     hooks: {
       'astro:build:done': async ({ dir }) => {
+        const clientPath = fileURLToPath(dir);
         const critters = new Critters({
-          path: dir.pathname,
+          path: clientPath,
           publicPath: '/',
           preload: 'swap',
           inlineFonts: false,
@@ -30,7 +33,7 @@ function criticalCssIntegration() {
             else if (entry.endsWith('.html')) htmlFiles.push(full);
           }
         };
-        scanDir(dir.pathname);
+        scanDir(clientPath);
 
         for (const file of htmlFiles) {
           try {

@@ -35,7 +35,7 @@ export function CartPageContent() {
       <div className="lg:col-span-8 flex flex-col gap-8">
         {items.map((item) => (
           <div key={item.id} className="flex gap-6 lg:gap-8 pb-8 border-b border-[#E8DDD0] last:border-b-0">
-            <a href={`/products/${item.product.id}`} className="w-32 lg:w-48 aspect-[3/4] bg-smoke flex-shrink-0 block group">
+            <a href={`/products/${item.product.slug || item.product.id}`} className="w-32 lg:w-48 aspect-[3/4] bg-smoke flex-shrink-0 block group">
               <img 
                 src={item.product.images[0]} 
                 alt={item.product.name} 
@@ -46,7 +46,7 @@ export function CartPageContent() {
             <div className="flex-1 flex flex-col justify-between py-2">
               <div className="flex flex-col gap-2">
                 <div className="flex justify-between items-start gap-4">
-                  <a href={`/products/${item.product.id}`} className="hover:opacity-70 transition-opacity">
+                  <a href={`/products/${item.product.slug || item.product.id}`} className="hover:opacity-70 transition-opacity">
                     <h3 className="font-display text-base md:text-lg uppercase tracking-widest text-noir">{item.product.name}</h3>
                   </a>
                   <button 

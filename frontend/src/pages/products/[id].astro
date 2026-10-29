@@ -10,10 +10,21 @@ export async function getStaticPaths() {
     products = mockProducts;
   }
 
-  return products.map((product) => ({
-    params: { id: product.slug }, 
-    props: { product },
-  }));
+  const paths = [];
+  for (const product of products) {
+    paths.push({
+      params: { id: product.slug }, 
+      props: { product },
+    });
+    if (product.id && product.id !== product.slug) {
+      paths.push({
+        params: { id: product.id },
+        props: { product },
+      });
+    }
+  }
+
+  return paths;
 }
 
 const { id } = Astro.params;

@@ -21,35 +21,44 @@ import { Button } from '../components/ui/Button';
 
       <Divider className="mb-16" />
 
-      <div id="form-success" class="hidden bg-[#F5F0EA] border border-gold text-noir p-6 mb-8 text-center font-body text-sm tracking-wide">
+      <div id="form-success" class="hidden bg-[#F5F0EA] border border-gold text-noir p-6 mb-8 text-center font-body text-sm tracking-wide" role="status">
         Gracias por tu mensaje. Nos pondremos en contacto contigo lo antes posible.
+      </div>
+
+      <div id="form-error" class="hidden bg-[#F5F0EA] border border-[#A65B5B] text-noir p-6 mb-8 text-center font-body text-sm tracking-wide" role="alert">
+        Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde o escríbenos directamente.
       </div>
 
       <form id="contact-form" class="flex flex-col gap-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="flex flex-col gap-2">
-            <label class="font-body text-[10px] uppercase tracking-widest text-stone">Nombre completo</label>
+            <label for="contact-name" class="font-body text-[10px] uppercase tracking-widest text-stone">Nombre completo</label>
             <input 
+              id="contact-name"
               type="text"
               name="name" 
               required
+              autocomplete="name"
               class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
             />
           </div>
           <div class="flex flex-col gap-2">
-            <label class="font-body text-[10px] uppercase tracking-widest text-stone">Email</label>
+            <label for="contact-email" class="font-body text-[10px] uppercase tracking-widest text-stone">Email</label>
             <input 
+              id="contact-email"
               type="email"
               name="email" 
               required
+              autocomplete="email"
               class="border-b-[0.5px] border-linen bg-transparent pb-2 font-body text-sm text-noir focus:outline-none focus:border-gold transition-colors rounded-none"
             />
           </div>
         </div>
 
         <div class="flex flex-col gap-2">
-          <label class="font-body text-[10px] uppercase tracking-widest text-stone">Asunto</label>
+          <label for="contact-subject" class="font-body text-[10px] uppercase tracking-widest text-stone">Asunto</label>
           <input 
+            id="contact-subject"
             type="text"
             name="subject" 
             required
@@ -58,8 +67,9 @@ import { Button } from '../components/ui/Button';
         </div>
 
         <div class="flex flex-col gap-2">
-          <label class="font-body text-[10px] uppercase tracking-widest text-stone">Mensaje</label>
+          <label for="contact-message" class="font-body text-[10px] uppercase tracking-widest text-stone">Mensaje</label>
           <textarea 
+            id="contact-message"
             name="message" 
             required
             rows={5}
@@ -79,11 +89,15 @@ import { Button } from '../components/ui/Button';
   import { db } from '../lib/firebase';
   import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-  const form = document.getElementById('contact-form') as HTMLFormElement;
-  const successMsg = document.getElementById('form-success');
-  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
-  
-  if (form) {
+  function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const successMsg = document.getElementById('form-success');
+    const errorMsg = document.getElementById('form-error');
+    const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+    
+    if (!form || form.dataset.initialized === 'true') return;
+    form.dataset.initialized = 'true';
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
@@ -92,10 +106,12 @@ import { Button } from '../components/ui/Button';
         submitBtn.textContent = 'Enviando...';
       }
 
+      if (successMsg) successMsg.classList.add('hidden');
+      if (errorMsg) errorMsg.classList.add('hidden');
+
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
       
-      // Basic sanitization to prevent XSS injection in any future processing
       const sanitize = (str: string) => {
         const div = document.createElement('div');
         div.textContent = str;
@@ -121,6 +137,9 @@ import { Button } from '../components/ui/Button';
         form.reset();
       } catch (error) {
         console.error('Error enviando mensaje:', error);
+        if (errorMsg) {
+          errorMsg.classList.remove('hidden');
+        }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -129,4 +148,7 @@ import { Button } from '../components/ui/Button';
       }
     });
   }
+
+  document.addEventListener('astro:page-load', initContactForm);
+  initContactForm();
 </script>
