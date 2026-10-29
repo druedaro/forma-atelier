@@ -6,24 +6,24 @@ on:
   pull_request:
 
 jobs:
-  seo-lint:
+  seo:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Install & Build SEO Lint
+      - name: Install & Build
         run: |
+          cd frontend
           npm install
           npm run build
 
       - name: Run SEO Lint
         uses: druedaro/seo-lint@main
         with:
-          dir: 'dist'
+          dir: 'frontend/dist'
           ignore: 'assets/*'
