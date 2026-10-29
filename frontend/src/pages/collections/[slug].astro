@@ -35,7 +35,11 @@ if (!collection) {
 }
 ---
 
-<BaseLayout title={`FORMA ATELIER | ${collection.name}`}>
+<BaseLayout 
+  title={`FORMA ATELIER | ${collection.name}`}
+  description={collection.description}
+  image={collection.hero_image}
+>
   <main>
     <CollectionHero collection={collection as any} client:load />
 

@@ -25,5 +25,5 @@ jobs:
       - name: Run SEO Lint
         uses: druedaro/seo-lint@main
         with:
-          dir: 'frontend/dist'
+          dir: 'frontend/dist/client'
           ignore: 'assets/*'
